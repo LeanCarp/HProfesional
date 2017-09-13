@@ -11,9 +11,23 @@ class CrearNadador extends CI_Controller {
 		$this->load->model('nadador_model');
 	}
 
+	public function Index(){
+		$data['titulo']= 'Pagina Principal para la clase nadador';
+	$this->load->view('Plantilla/Headers',$data); // Permite cargar múltiples vistas. En este caso se cargó el head.
+	$this->load->view('Nadador/Index'); // Permite cargar múltiples vistas. En este caso se cargó el head.	
+	$this->load->view('Plantilla/Footer');
+	}
+
 	function nuevo(){
+<<<<<<< HEAD
 	//$this->load->view('headers'); // Permite cargar múltiples vistas. En este caso se cargó el head.
 	//$this->load->view('insertarNadador'); // Permite cargar múltiples vistas. En este caso se cargó el head.
+=======
+		$data['titulo']= 'Pagina Principal para agregar un nadador';
+	$this->load->view('Plantilla/Headers',$data); // Permite cargar múltiples vistas. En este caso se cargó el head.
+	$this->load->view('Nadador/insertarNadador'); // Permite cargar múltiples vistas. En este caso se cargó el head.	
+	$this->load->view('Plantilla/Footer');
+>>>>>>> bda31a0de98fb81dcb92416dad0b23a5d231fa07
 	}
 
 	function obtenerTodos(){
