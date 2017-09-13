@@ -1,0 +1,44 @@
+.nav-arriba{
+	padding: 5px;
+	margin-left: 170px;
+}
+
+.div-top{
+	background: black;
+}
+
+.nav-link{
+	color:white;
+}
+
+.nav-izq{
+	padding: 0;
+	background: #3D8BCD;
+}
+
+.nav-izq-link:hover{
+	color:black;
+}
+
+.container{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.contenido-principal{
+	padding: 40px;
+}
+
+.datos-profesor{
+
+}
+
+.datos-profesor-item{
+	padding: 10px;
+	margin-left: 30px;
+}
+
+.prox-eventos{
+	
+}
