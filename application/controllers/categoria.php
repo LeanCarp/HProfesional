@@ -15,7 +15,13 @@ class Categoria extends CI_Controller {
 		$crud->set_language('spanish');
 		$crud->set_table('categoria');
 		$crud->columns('Nombre', 'EdadMinima', 'EdadMaxima');
-		$crud->fields('EdadMinima', 'EdadMaxima', 'Nombre');
+		$crud->fields('Nombre','EdadMinima', 'EdadMaxima');
+		$crud->display_as('EdadMinima','Edad Mínima');
+		$crud->display_as('EdadMaxima','Edad Máxima');
+		$crud->field_type('EdadMinima','dropdown',
+								array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25'));
+		$crud->field_type('EdadMaxima','dropdown',
+								array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25'));
 		//$crud->unset_add();
 		//$crud->unset_delete();
 		//$crud->unset_read();

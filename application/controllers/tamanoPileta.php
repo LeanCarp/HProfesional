@@ -30,6 +30,7 @@ class TamanoPileta extends CI_Controller {
     	$output = $crud->render();
 		$this->load->view('headers');
 		$this->load->view('tamanoPileta', $output);
+		
 	}
 
 }

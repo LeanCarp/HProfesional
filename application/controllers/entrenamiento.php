@@ -23,6 +23,7 @@ class Entrenamiento extends CI_Controller {
 		$crud->unset_export();
 		$crud->unset_print();
 		$crud->set_relation('TipoEntrenamientoID','tipoEntrenamiento','Nombre');
+		$crud->display_as('TipoEntrenamientoID','Tipo');
 		//$crud->unset_add();
 		//$crud->unset_operations();
 

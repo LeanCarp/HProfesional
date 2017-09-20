@@ -16,12 +16,27 @@ class Prueba extends CI_Controller {
 		$crud->set_table('prueba');
 		$crud->columns('TiempoMin', 'Masculino');
 		$crud->fields('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'TamañoPiletaID', 'DistanciaID', 'EstiloID', 'EjercicioID', 'CampeonatoID');
-		$crud->set_relation('CategoriaID','categoria','{ID} ({Nombre})');
-		$crud->set_relation('TamañoPiletaID','tamañopileta','{ID} ({Tamaño})');
-		$crud->set_relation('DistanciaID','distanciatotal','{ID} ({Distancia})');
-		$crud->set_relation('EstiloID','estilo','{ID} ({Nombre})');
-		$crud->set_relation('EjercicioID','ejercicio','{ID} ({TiempoTotal})');
-		$crud->set_relation('CampeonatoID','campeonato','{ID} ({Nombre})');
+		$crud->set_relation('CategoriaID','categoria','{Nombre}');
+		$crud->set_relation('TamañoPiletaID','tamañopileta','{Tamaño}');
+		$crud->set_relation('DistanciaID','distanciatotal','{Distancia}');
+		$crud->set_relation('EstiloID','estilo','{Nombre}');
+		$crud->set_relation('EjercicioID','ejercicio','{TiempoTotal}');
+		$crud->set_relation('CampeonatoID','campeonato','{Nombre}');
+		
+		$crud->display_as('Masculino','Sexo');
+		$crud->field_type('Masculino','true_false',
+       						 array('1' => 'Masculino', '0' => 'Femenino'));
+		$crud->display_as('CantidadSeries','N° Serie');
+		$crud->field_type('CantidadSeries','dropdown',
+								array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'));
+		$crud->display_as('TiempoMin','Tiempo Mínimo');
+		$crud->display_as('CategoriaID','Categoria');
+		$crud->display_as('TamañoPiletaID','Tamaño de pileta');
+		$crud->display_as('EstiloID','Estilo');
+		$crud->display_as('DistanciaID','Distancia');
+		$crud->display_as('EjercicioID','Ejercicio');
+		$crud->display_as('CampeonatoID','Campeonato');
+
 		//$crud->unset_add();
 		//$crud->unset_delete();
 		//$crud->unset_read();

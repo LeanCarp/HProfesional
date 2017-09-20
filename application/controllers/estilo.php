@@ -14,8 +14,13 @@ class Estilo extends CI_Controller {
 		$crud = new grocery_CRUD();
 		$crud->set_language('spanish');
 		$crud->set_table('estilo');
-		$crud->columns('Nombre');
+		$crud->columns('Nombre','Entrenamiento');
 		$crud->fields('Nombre', 'Entrenamiento');
+
+		$crud->display_as('Entrenamiento','Tipo');
+
+		$crud->field_type('Entrenamiento','true_false',
+       						 array('1' => 'Oficial', '0' => 'Entrenamiento'));
 		//$crud->unset_add();
 		//$crud->unset_delete();
 		//$crud->unset_read();

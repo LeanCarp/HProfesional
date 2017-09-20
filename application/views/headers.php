@@ -34,28 +34,28 @@
 		<div class="nav-izq col-md-3">
 			<ul class="nav flex-column">
 			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>index.php/entrenamiento">Entrenamientos</a>
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>entrenamiento">Entrenamientos</a>
 			  </li>
 			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>index.php/nadador">Nadadores</a>
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>nadador">Nadadores</a>
 			  </li>
 			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>index.php/campeonato">Campeonatos</a>
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>campeonato">Campeonatos</a>
 			  </li>
 			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>index.php/categoria">Categorías</a>
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>categoria">Categorías</a>
 			  </li>
 			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>index.php/estilo">Estilo</a>
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>estilo">Estilo</a>
 			  </li>
 			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>index.php/tamanoPileta">Tamaño de pileta</a>
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>tamanoPileta">Tamaño de pileta</a>
 			  </li>
 			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>index.php/distancia">Distancia</a>
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>distancia">Distancia</a>
 			  </li>
 			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="#">Marcas</a>
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>prueba">Marcas</a>
 			  </li>
 			</ul>
 		</div>

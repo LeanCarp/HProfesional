@@ -16,7 +16,7 @@ class Campeonato extends CI_Controller {
 		$crud->set_table('campeonato');
 		$crud->set_subject('campeonato');
 		$crud->columns('Fecha', 'Nombre');
-		$crud->fields('CalendarioID', 'Fecha', 'Nombre', 'TipoCampeonatoID');
+		$crud->fields('Fecha', 'Nombre', 'TipoCampeonatoID');
 		//$crud->unset_add();
 		//$crud->unset_delete();
 		//$crud->unset_read();
@@ -24,7 +24,8 @@ class Campeonato extends CI_Controller {
 		$crud->unset_export();
 		$crud->unset_print();
 		$crud->set_relation('TipoCampeonatoID','tipocampeonato','Tipo');
-		$crud->set_relation('CalendarioID','calendario','ID');
+		$crud->display_as('TipoCampeonatoID','Tipo');
+
 		//$crud->unset_add();
 		//$crud->unset_operations();
 

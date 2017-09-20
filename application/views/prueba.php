@@ -6,7 +6,7 @@
 		<?php endforeach; ?>
 
 		<div class="">
-			<h2>Gestión de Pruebas:</h2>
+			<h2>Marcas:</h2>
 			<div class="">	
 				<?php echo $output; ?>
 			</div>
