@@ -11,7 +11,7 @@
 	<div class="div-top">
 		<ul class="nav nav-arriba">
 		  <li class="nav-item">
-		    <a class="nav-link" href="<?php echo base_url(); ?>index.php/crearNadador/obtenerTodos">Inicio</a>
+		    <a class="nav-link" href="<?php echo base_url(); ?>#">Inicio</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="#">Planificación</a>
@@ -26,7 +26,7 @@
 		    <a class="nav-link" href="#">Configuración</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="#">Salir</a>
+		    <a class="nav-link" href="<?php echo base_url(); ?>auth/logout">Salir</a>
 		  </li>
 		</ul>
 	</div>
