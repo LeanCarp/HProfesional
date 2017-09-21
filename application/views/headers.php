@@ -11,7 +11,7 @@
 	<div class="div-top">
 		<ul class="nav nav-arriba">
 		  <li class="nav-item">
-		    <a class="nav-link" href="<?php echo base_url(); ?>#">Inicio</a>
+		    <a class="nav-link" href="<?php echo base_url(); ?>">Inicio</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="#">Planificación</a>

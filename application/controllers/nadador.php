@@ -5,39 +5,49 @@ class Nadador extends CI_Controller {
 		parent::__construct(); /*Ejecuta el constructor del padre*/
 		//$this->load->helper('mihelper'); // Primero busca en helper de Application, sino va a System.
 		$this->load->database();
-		$this->load->library('grocery_crud');
+		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
 		$this->load->model('nadador_model');
 	}
 
 	function index(){
-		/*$this->load->view('headers');
-		$result = $this->nadador_model->getAll();
-		return $result;*/
-		/*foreach ($result as $nadador)
+
+		if (!$this->ion_auth->logged_in())
 		{
-			echo $nadador->DNI;
-		}*/
-		$crud = new grocery_CRUD();
-		$crud->set_language('spanish');
-		$crud->set_table('nadador');
-		$crud->columns('DNI', 'Apellido', 'Nombre');
-		$crud->fields('DNI', 'Apellido', 'Nombre', 'FechaNacimiento');
-		//$crud->unset_add();
-		//$crud->unset_delete();
-		//$crud->unset_read();
-		$crud->unset_edit_fields('DNI');
-		$crud->unset_export();
-		$crud->unset_print();
-		//$crud->unset_add();
-		//$crud->unset_operations();
+			redirect('auth/login');
+		}
+        else
+	        {
+			/*$this->load->view('headers');
+			$result = $this->nadador_model->getAll();
+			return $result;*/
+			/*foreach ($result as $nadador)
+			{
+				echo $nadador->DNI;
+			}*/
+			$crud = new grocery_CRUD();
+			$crud->set_language('spanish');
+			$crud->set_table('nadador');
+			$crud->columns('DNI', 'Apellido', 'Nombre', 'Sexo');
+			$crud->fields('DNI', 'Apellido', 'Nombre', 'FechaNacimiento','Sexo');
+			$crud->field_type('Sexo','true_false',
+	       						 array('1' => 'Masculino', '0' => 'Femenino'));
+			//$crud->unset_add();
+			//$crud->unset_delete();
+			//$crud->unset_read();
+			$crud->unset_edit_fields('DNI');
+			$crud->unset_export();
+			$crud->unset_print();
+			//$crud->unset_add();
+			//$crud->unset_operations();
 
 
 
-		/* Generamos la tabla */
-    	$output = $crud->render();
-    	$this->load->view('headers', $output);
-    	$this->load->view('nadador', $output);
+			/* Generamos la tabla */
+	    	$output = $crud->render();
+	    	$this->load->view('headers', $output);
+	    	$this->load->view('nadador', $output);
+	    }
 	}
 }
