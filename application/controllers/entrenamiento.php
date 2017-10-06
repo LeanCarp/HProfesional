@@ -28,8 +28,9 @@ class Entrenamiento extends CI_Controller {
 			//$crud->unset_edit_fields('DNI');
 			$crud->unset_export();
 			$crud->unset_print();
-			$crud->set_relation('TipoEntrenamientoID','tipoEntrenamiento','Nombre');
+			$crud->set_relation('TipoEntrenamientoID','tipoentrenamiento','{Nombre}');
 			$crud->display_as('TipoEntrenamientoID','Tipo');
+			//$crud->display_as('TipoEntrenamientoID','Tipo');
 			//$crud->unset_add();
 			//$crud->unset_operations();
 

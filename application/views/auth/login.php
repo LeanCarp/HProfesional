@@ -1,29 +1,33 @@
-<h1><?php echo lang('login_heading');?></h1>
-<p><?php echo lang('login_subheading');?></p>
+<html>
+<head>
+  <title>Iniciar sesión</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/styles.css">
+</head>
+<body class="login-body">
+  <div class="col-md-4 login-container">
+      <h1 style="text-align:center">Iniciar sesión</h1>
+      <p>Por favor, inicie sesión con su email/usuario y contraseña.</p>
+      <?php echo form_open("auth/login");?>
+      <div class="row">
 
-<div id="infoMessage"><?php echo $message;?></div>
+        <div class="col"><?php echo lang('login_identity_label', 'identity');?></div>
+        <div class="col"><?php echo form_input($identity);?></div>
+        <div class="w-100"></div>
+        <div class="col"><?php echo lang('login_password_label', 'password');?></div>
+        <div class="col"><?php echo form_input($password);?></div>
+      </div>
 
-<?php echo form_open("auth/login");?>
+      <div class="row login-opciones">
+        <div class="col"><?php echo form_submit('submit', 'Ingresar');?></div>
+        <div class="col"><?php echo 'Recordar';?>
+           <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?></div>    
+                 <?php echo form_close();?>
+      </div>
 
-  <p>
-    <?php echo lang('login_identity_label', 'identity');?>
-    <?php echo form_input($identity);?>
-  </p>
+      <p><a class="row login-opciones login-container" href="forgot_password"><?php echo '¿Olvidaste tu contraseña?';?></a></p>
+    
 
-  <p>
-    <?php echo lang('login_password_label', 'password');?>
-    <?php echo form_input($password);?>
-  </p>
-
-  <p>
-    <?php echo lang('login_remember_label', 'remember');?>
-    <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
-  </p>
-
-
-  <p><?php echo form_submit('submit', lang('login_submit_btn'));?></p>
-  
-
-<?php echo form_close();?>
-
-<p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
+  </div>
+</body>
+</html>

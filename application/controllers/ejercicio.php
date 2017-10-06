@@ -22,7 +22,7 @@ class Ejercicio extends CI_Controller {
 			$crud->set_table('ejercicio');
 			$crud->columns('TiempoTotal');
 			$crud->fields('TiempoTotal', 'EntrenamientoID');
-			$crud->set_relation('EntrenamientoID','entrenamiento','ID');
+			//$crud->set_relation('EntrenamientoID','entrenamiento','ID');
 			//$crud->unset_add();
 			//$crud->unset_delete();
 			//$crud->unset_read();

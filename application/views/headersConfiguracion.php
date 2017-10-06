@@ -33,17 +33,24 @@
 	<div class="container row">
 		<div class="nav-izq col-md-3">
 			<ul class="nav flex-column">
-			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>entrenamiento">Entrenamientos</a>
 			  </li>
 			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>nadador">Nadadores</a>
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>categoria">Categorías</a>
 			  </li>
 			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>campeonato">Campeonatos</a>
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>estilo">Estilo</a>
 			  </li>
 			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>prueba">Prueba</a>
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>tamanoPileta">Tamaño de pileta</a>
+			  </li>
+			  <li class="nav-item nav-izq-item">
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>distancia">Distancia</a>
+			  </li>
+			  <li class="nav-item nav-izq-item">
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>tipoEntrenamiento">Tipo de entrenamiento</a>
+			  </li>
+			  <li class="nav-item nav-izq-item">
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>tipoCampeonato">Tipo de campeonato</a>
 			  </li>
 			</ul>
 		</div>

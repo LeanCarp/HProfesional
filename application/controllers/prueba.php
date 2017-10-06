@@ -26,7 +26,7 @@ class Prueba extends CI_Controller {
 			$crud->set_relation('TamañoPiletaID','tamañopileta','{Tamaño}');
 			$crud->set_relation('DistanciaID','distanciatotal','{Distancia}');
 			$crud->set_relation('EstiloID','estilo','{Nombre}');
-			$crud->set_relation('EjercicioID','ejercicio','{TiempoTotal}');
+			//$crud->set_relation('EjercicioID','ejercicio','{TiempoTotal}');
 			$crud->set_relation('CampeonatoID','campeonato','{Nombre}');
 			
 			$crud->display_as('Masculino','Sexo');

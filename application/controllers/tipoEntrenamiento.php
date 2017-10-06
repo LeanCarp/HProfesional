@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Distancia extends CI_Controller {
+class TipoEntrenamiento extends CI_Controller {
 	function __construct(){
 		parent::__construct(); /*Ejecuta el constructor del padre*/
 		//$this->load->helper('mihelper'); // Primero busca en helper de Application, sino va a System.
@@ -19,15 +19,17 @@ class Distancia extends CI_Controller {
         {
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
-			$crud->set_table('distanciatotal');
-			$crud->columns('Distancia');
-			$crud->fields('Distancia');
+			$crud->set_table('tipoentrenamiento');
+			$crud->columns('Nombre');
+			$crud->fields('Nombre');
 			//$crud->unset_add();
 			//$crud->unset_delete();
 			//$crud->unset_read();
 			//$crud->unset_edit_fields('DNI');
 			$crud->unset_export();
 			$crud->unset_print();
+			//$crud->set_relation('TipoEntrenamientoID','tipoEntrenamiento','Nombre');
+			//$crud->display_as('TipoEntrenamientoID','Tipo');
 			//$crud->unset_add();
 			//$crud->unset_operations();
 
@@ -35,7 +37,7 @@ class Distancia extends CI_Controller {
 			/* Generamos la tabla */
 	    	$output = $crud->render();
 			$this->load->view('headersConfiguracion');
-			$this->load->view('distancia', $output);
+			$this->load->view('tipoEntrenamiento', $output);
 		}
 	}
 

@@ -17,7 +17,7 @@ class Campeonato extends CI_Controller {
 			redirect('auth/login');
 		}
         else
-        {
+        {     	
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('campeonato');
@@ -30,8 +30,9 @@ class Campeonato extends CI_Controller {
 			//$crud->unset_edit_fields('DNI');
 			$crud->unset_export();
 			$crud->unset_print();
+			//$crud->set_relation('EventoID','evento','Nombre');
 			$crud->set_relation('TipoCampeonatoID','tipocampeonato','Tipo');
-			$crud->display_as('TipoCampeonatoID','Tipo');
+			$crud->display_as('TipoCampeonatoID','Tipo'); 
 
 			//$crud->unset_add();
 			//$crud->unset_operations();
