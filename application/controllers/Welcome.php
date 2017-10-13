@@ -34,24 +34,16 @@ class Welcome extends CI_Controller {
 		}
         else
         {
-			//$this->load->view('inicio.php');
-			$crud = new grocery_CRUD();
-			$crud->set_language('spanish');
-			$crud->set_table('nadador');
-			$crud->columns('DNI', 'Apellido');
-			$crud->fields('Apellido');
-			//$crud->unset_delete();
-			//$crud->unset_read();
-			//$crud->unset_edit();
-			//$crud->unset_export();
-			//$crud->unset_print();
-			//$crud->unset_add();
-			$crud->unset_operations();
+			
+	    	$output = [];
 
+			$output['css_files'][] = base_url().'assets/fullcalendar.min.css';
+	    	$output['js_files'][] = base_url().'assets/jquery.min.js';
+          	$output['js_files'][] = base_url().'assets/moment-with-locales.min.js';	
+			$output['js_files'][] = base_url().'assets/fullcalendar.min.js';
+			$output['js_files'][] = base_url().'assets/fullcalendar-locale-es.js';
+			$output['js_files'][] = base_url().'assets/inicializarcalendar.js';
 
-
-			/* Generamos la tabla */
-	    	$output = $crud->render();
 	    	$this->load->view('headers', $output);
 	    	$this->load->view('inicio', $output);
 	    }
