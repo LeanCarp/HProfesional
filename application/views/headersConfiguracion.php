@@ -23,6 +23,9 @@
 		    <a class="nav-link" href="<?php echo base_url(); ?>index.php/cronometro">Cronómetro</a>
 		  </li>
 		  <li class="nav-item">
+		    <a class="nav-link" href="<?php echo base_url(); ?>index.php/asistencia">Asistencia</a>
+		  </li>
+		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>index.php/configuracion">Configuración</a>
 		  </li>
 		  <li class="nav-item">

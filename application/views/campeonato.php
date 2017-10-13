@@ -4,7 +4,6 @@
 		<?php foreach($js_files as $file): ?>
 		<script src="<?php echo $file; ?>"></script>
 		<?php endforeach; ?>
-
 		<div class="">
 			<h2>Gestión de Campeonatos:</h2>
 			<div class="">	

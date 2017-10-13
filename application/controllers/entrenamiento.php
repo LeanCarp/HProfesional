@@ -20,6 +20,7 @@ class Entrenamiento extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('entrenamiento');
+			$crud->add_action('<+>', '+','pruebaEntrenamiento/index');
 			$crud->columns('Fecha', 'Nombre');
 			$crud->fields('Fecha', 'Nombre', 'TipoEntrenamientoID');
 			//$crud->unset_add();
