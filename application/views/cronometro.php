@@ -55,13 +55,25 @@ function cronometro () {
 	}
 }
 
-function parcial (a) {
+function parcial () {
 	tiempoParcial.innerHTML = minutos.toString()+':'+segundos.toString()+':'+centesimas.toString();
+	input = document.getElementById("parcialito")
+	input.value = minutos.toString()+':'+segundos.toString()+':'+centesimas.toString();
 }
 
 function agregarDiv () {
 	var midiv = document.createElement("div");
 			midiv.className = 'box1';
+			midiv.setAttribute(onclick, "parcial();");
+			midiv.innerHTML = "00";
+	otrodiv = document.getElementById("competidores")
+	otrodiv.appendChild(midiv); // Lo pones en "body", si quieres ponerlo dentro de algún id en concreto usas document.getElementById('donde lo quiero poner').appendChild(midiv);
+}
+
+function agregarDiv () {
+	var midiv = document.createElement("div");
+			midiv.className = 'box1';
+			midiv.setAttribute(id, '');
 			midiv.setAttribute(onclick, "parcial();");
 			midiv.innerHTML = "00";
 	otrodiv = document.getElementById("competidores")
@@ -94,12 +106,21 @@ function agregarDiv () {
 				<input type="button" class="boton" id="parar" value="Detener &#8718;" onclick="parar();" disabled>
 				<input type="button" class="boton" id="continuar" value="Resumir &#8634;" onclick="inicio();" disabled>
 				<input type="button" class="boton" id="reinicio" value="Reiniciar &#8635;" onclick="reinicio();" disabled>
-				<input type="button" class="boton" id="parcial" value="Parcial &#8635;" onclick="parcial(this);">
 			</div>
 		</div>
+
+		<label>Nadadores: </label>
+		<select name="selectNadadores">
+			<?php foreach($nadadores->result() as $nadador) { ?>
+				<option value="<?= $nadador->DNI ?>"><?= $nadador->Nombre ?> <?= $nadador->Apellido ?></option>
+			<?php } ?>
+		</select>
+		<input type="button" class="btn-primary" id="agregarNadador" value="Agregar +" onclick="agregarNadador(selectNadadores);">
 		<div id="competidores">
 			<input type="button" class="boton" id="agregarParcial" value="Agregar +" onclick="agregarDiv();">
-			<div id="tiempoParcial" style="margin-top:60px;" class="box1" onclick="parcial()">00:00:00</div>
+			<div id="tiempoParcial" style="margin-top:60px;" class="box1" onclick="parcial()"></div>
+			<input type="text" id="parcialito" value="" onclick="parcial()" disabled>
+
 		</div>
 		
 	</div>

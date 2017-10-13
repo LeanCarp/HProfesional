@@ -11,39 +11,19 @@ class Cronometro extends CI_Controller {
 	}
 
 	function index(){
-		/*$this->load->view('headers');
-		$result = $this->nadador_model->getAll();
-		return $result;*/
-		/*foreach ($result as $nadador)
-		{
-			echo $nadador->DNI;
-		}*/
-		/*$crud = new grocery_CRUD();
-		$crud->set_language('spanish');
-		$crud->set_table('nadador');
-		$crud->columns('DNI', 'Apellido', 'Nombre');
-		$crud->fields('DNI', 'Apellido', 'Nombre', 'FechaNacimiento');
-		//$crud->unset_add();
-		//$crud->unset_delete();
-		//$crud->unset_read();
-		$crud->unset_edit_fields('DNI');
-		$crud->unset_export();
-		$crud->unset_print();
-		//$crud->unset_add();
-		//$crud->unset_operations();*/
-
-
-
-		/* Generamos la tabla */
-    	//$output = $crud->render();
     	if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
         else
         {
+	        $this->load->database();
+			$this->db->select('DNI, Apellido, Nombre');
+			$this->db->from('nadador');
+			$data['nadadores'] = $this->db->get();
+
 	    	$this->load->view('headers');
-	    	$this->load->view('cronometro');
+	    	$this->load->view('cronometro', $data);
 	    }
 	}
 
