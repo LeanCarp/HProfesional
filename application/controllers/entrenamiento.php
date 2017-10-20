@@ -20,19 +20,19 @@ class Entrenamiento extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('entrenamiento');
-			$crud->columns('Fecha', 'Nombre');
-			$crud->fields('Fecha', 'Nombre', 'TipoEntrenamientoID');
-			//$crud->unset_add();
-			//$crud->unset_delete();
-			//$crud->unset_read();
-			//$crud->unset_edit_fields('DNI');
+			$crud->columns('inicio','fin', 'nombre','color');
+			$crud->fields('inicio','fin', 'nombre', 'TipoEntrenamientoID','color');
+
 			$crud->unset_export();
 			$crud->unset_print();
-			$crud->set_relation('TipoEntrenamientoID','tipoentrenamiento','{Nombre}');
+			$crud->set_relation('TipoEntrenamientoID','tipoentrenamiento','{nombre}');
 			$crud->display_as('TipoEntrenamientoID','Tipo');
-			//$crud->display_as('TipoEntrenamientoID','Tipo');
-			//$crud->unset_add();
-			//$crud->unset_operations();
+			$crud->display_as('inicio','Fecha de Inicio');
+			$crud->display_as('fin','Fecha de Fin');
+			//$crud->field_type('color','color_pciker');
+			$crud->field_type('color','dropdown',
+										array('blue' => 'azul', 'pink' => 'rosado','yellow' => 'amarillo' , 'black' => 'negro'));
+
 
 
 			/* Generamos la tabla */
