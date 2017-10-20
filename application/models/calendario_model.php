@@ -5,7 +5,7 @@ class calendario_model extends CI_Model{
 	function __contruct(){
 		parent::__construct();
 		//$this->load->database();
-	
+	}
 	//Funciones para el calendario de inicio.
 	public function get_events($start, $end)
 	{
