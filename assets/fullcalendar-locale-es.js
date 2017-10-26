@@ -12,6 +12,7 @@ $.fullCalendar.locale("es", {
 		nextYear:"año próximo",
 		year:"año",
 		
+		
 	},
 	allDayHtml: "Todo<br/>el día",
 	eventLimitText: "más",
