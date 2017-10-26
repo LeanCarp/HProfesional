@@ -22,9 +22,12 @@ class ListarAsistencia extends CI_Controller {
 			$crud->set_language('spanish');
 			$crud->set_table('asistencia');
 			$crud->set_subject('asistencia');
-			$crud->columns('Fecha', 'NadadorID');
-			$crud->fields('Fecha', 'NadadorID');
-			$crud->set_relation('NadadorID', 'nadador', '{Nombre}');
+			$crud->columns('Fecha', 'Mañana');
+			$crud->fields('Fecha', 'Mañana');
+			//$crud->set_relation('NadadorID', 'nadador', '{Nombre}');
+
+			$crud->unset_export();
+			$crud->unset_print();
 
 			$output = $crud->render();
 

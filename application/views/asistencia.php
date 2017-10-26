@@ -10,8 +10,7 @@
 }
 
 </style>
-	<?php echo form_open("listarAsistencia");  ?>
-	<?php echo form_submit('submit', 'Listar asistencia', 'class="btn-primary"'); ?>
+	<a style="padding:5px;" class="btn-primary" href="<?php echo base_url(); ?>listarAsistencia">Listar asistencia</a>
 	
 	<?php echo form_open("asistencia/Hacerlo");  ?>
 	<div class="selects">

@@ -22,6 +22,9 @@ class PruebaEntrenamiento extends CI_Controller {
 			$crud->set_language('spanish');
 			$crud->set_table('prueba');
 			$crud->columns('TiempoMin', 'Masculino');
+			// Agrega acción.
+			$crud->add_action('<>', '+','cronometro/Entrenamiento');
+			//
 			$crud->fields('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamañopiletaID', 'DistanciaID', 'EstiloID', 'EntrenamientoID');
 			$crud->set_relation('CategoriaID','categoria','{Nombre}');
 			$crud->set_relation('tamañopiletaID','tamañopileta','{Tamaño}');

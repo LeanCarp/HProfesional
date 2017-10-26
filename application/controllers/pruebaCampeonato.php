@@ -21,6 +21,9 @@ class PruebaCampeonato extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('prueba');
+			// Agrega acción.
+			$crud->add_action('<>', '+','cronometro/Campeonato');
+			//
 			$crud->columns('TiempoMin', 'Masculino');
 			$crud->fields('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamañopiletaID', 'DistanciaID', 'EstiloID', 'CampeonatoID');
 			$crud->set_relation('CategoriaID','categoria','{Nombre}');
