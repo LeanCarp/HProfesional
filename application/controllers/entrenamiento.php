@@ -47,4 +47,5 @@ class Entrenamiento extends CI_Controller {
 		}
 	}
 
+
 }
