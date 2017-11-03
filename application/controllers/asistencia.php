@@ -29,6 +29,7 @@ class Asistencia extends CI_Controller {
 			$this->db->from('entrenamiento');
 			// $this->db->where('');
 			$data['records'] = $this->db->get();
+			
 			$this->load->view('headers');
 			$this->load->view('asistencia', $data);
 		}
@@ -41,18 +42,21 @@ class Asistencia extends CI_Controller {
 		$fecha = $this->input->post('fecha');
 		$nadadores = $this->input->post('checkeds');
 
-
-
 		/////// ESTO LE CORRESPONDE AL MODELLLLLL
 		$this->load->database();
-		foreach ($nadadores as $nadador)
+
+		$data = array('Mañana' => $turno, 'Fecha' => $fecha, 'EntrenamientoID' => $entrenamiento, 'CampeonatoID' => null);
+		$this->db->insert('asistencia', $data);
+		$insert_id = $this->db->insert_id();
+
+ 		foreach ($nadadores as $nadador)
 		{
-			$data = array('Mañana' => $turno, 'Fecha' => $fecha, 'Presente' => 1, 'EntrenamientoID' => $entrenamiento, 'NadadorID' => $nadador);
-			$this->db->insert('asistencia', $data);
+			$data = array('AsistenciaID' => $insert_id, 'NadadorID' => $nadador);
+			$this->db->insert('lineaasistencia', $data);
 		}
 		/////////////////////////////////////////
-
-		$this->index();
+		echo "lo hizo";
+		//$this->index();
 	}
 
 

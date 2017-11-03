@@ -24,13 +24,31 @@ class prueba_model extends CI_Model{
 		$this->db->from('prueba');
 		$this->db->where('ID', $id);
 		$query = $this->db->get();
-		return $query->result();
+		return $query;
 	}
 
 	function getAll(){
 		$this->load->database();
 		$query = $this->db->get('prueba');
 		return $query->result();
+	}
+
+	function getPruebaEntrenamiento($id){
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('prueba');
+		$this->db->where('EntrenamientoID', $id);
+		$query = $this->db->get();
+		return $query;
+	}
+
+	function getPruebaCampeonato($id){
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('prueba');
+		$this->db->where('CampeonatoID', $id);
+		$query = $this->db->get();
+		return $query;
 	}
 
 
