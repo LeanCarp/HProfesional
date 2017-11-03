@@ -19,11 +19,6 @@ class calendario_model extends CI_Model{
 		$this->load->database();
 		$this->db->select('*');
 		$query = $this->db->get("entrenamiento");
-		/*foreach($query->result() as $r) 
-		{
-			$r->nombre="E: ".$r->nombre;
-		}*/
-
 		return $query->result();
 	}
 

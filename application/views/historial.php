@@ -6,7 +6,7 @@
 		<?php endforeach; ?>
 			
 			
-		<div class="nadadores" style="margin-top: 150px;">
+		<div class="nadadores" style="margin-top: 10px;">
 				<label>Nadadores: </label>
 				<select name="selectNadadores" id="selectNadadores">
 					<?php foreach($nadadores->result() as $nadador) { ?>
@@ -16,7 +16,7 @@
 			</div>
 
 
-		<div id="calendarioHistorial"></div>
+		<div id="calendarioHistorial" style="margin-top: 20px;"></div>
 	    </div>
 </body>
 </html>
