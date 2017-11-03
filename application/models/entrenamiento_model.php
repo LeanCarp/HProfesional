@@ -34,6 +34,21 @@ class entrenamiento_model extends CI_Model{
 	}
 
 
+	public function getEntrenamientosUsuario($idUsuario)
+	{
+		$this->load->database();
+		$this->db->select('EntrenamientoID,Fecha, nombre,color');
+		//$this->db->select('*');
+		$this->db->from('entrenamiento a'); 
+		$this->db->join('asistencia b', 'b.EntrenamientoID=a.ID', 'left');
+		$this->db->join('lineaasistencia c', 'c.AsistenciaID=b.ID', 'left');
+		$this->db->where('c.NadadorID',$idUsuario);
+		$this->db->order_by('b.fecha','asc');         
+		$query = $this->db->get(); 
+		return $query->result();
+
+	}
+	
 
 }
 

@@ -48,6 +48,9 @@
 			  <li class="nav-item nav-izq-item">
 			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>campeonato">Campeonatos</a>
 			  </li>
+				<li class="nav-item nav-izq-item">
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>historial">Historial de entrenamientos</a>
+			  </li>
 			</ul>
 		</div>
 		<div class="col-md-9 contenido-principal">

@@ -9,13 +9,33 @@ class calendario_model extends CI_Model{
 	//Funciones para el calendario de inicio.
 	public function get_events($start, $end)
 	{
-		$this->load->database();
-		$this->db->select('*');
-		$query = $this->db->get("entrenamiento");
+		//return $this->obtenerEntrenamientos();
+		$query=array_merge($this->obtenerEntrenamientos(),$this->obtenerCampeonatos());
 		return $query;
 	}
 
+	function obtenerEntrenamientos()
+	{
+		$this->load->database();
+		$this->db->select('*');
+		$query = $this->db->get("entrenamiento");
+		/*foreach($query->result() as $r) 
+		{
+			$r->nombre="E: ".$r->nombre;
+		}*/
 
+		return $query->result();
+	}
+
+	function obtenerCampeonatos()
+	{
+		$this->load->database();
+		$this->db->select('*');
+		$query = $this->db->get("campeonato");
+		return $query->result();
+	}
+
+	
 
 }
 

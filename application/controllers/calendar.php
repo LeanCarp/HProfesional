@@ -4,6 +4,7 @@ class calendar extends CI_Controller {
 
     public function get_events()
     {
+        //$this->load->model('entrenamiento_model');
         $this->load->model('calendario_model');
         // Our Start and End Dates
         $start = $this->input->get("start");
@@ -20,18 +21,25 @@ class calendar extends CI_Controller {
         $events = $this->calendario_model->get_events($start_format, $end_format);
         $data_events = array();
    
-        foreach($events->result() as $r) {
-   
+        foreach($events as $r) {
+            if (array_key_exists('TipoEntrenamientoID', $r) )
+            {
+                $r->nombre="E: ". $r->nombre;
+            }
+            else
+            {
+                $r->nombre="C: ". $r->nombre;
+            }
+                       
             $data_events[] = array(
                 "id" => $r->ID,
                 "title" => $r->nombre,
-                //"description" => $r->description,
                 "end" => $r->fin,
                 "start" => $r->inicio,
                 "color"=>$r->color
             );
         }
-   
+  
         echo json_encode(array("events" => $data_events));
         exit();
     }
