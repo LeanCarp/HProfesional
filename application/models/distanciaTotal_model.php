@@ -24,13 +24,13 @@ class distanciaTotal_model extends CI_Model{
 		$this->db->from('distanciatotal');
 		$this->db->where('ID', $id);
 		$query = $this->db->get();
-		return $query->result();
+		return $query;
 	}
 
 	function getAll(){
 		$this->load->database();
 		$query = $this->db->get('distanciatotal');
-		return $query->result();
+		return $query;
 	}
 
 

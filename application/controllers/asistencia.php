@@ -29,6 +29,7 @@ class Asistencia extends CI_Controller {
 			$this->db->from('entrenamiento');
 			// $this->db->where('');
 			$data['records'] = $this->db->get();
+			
 			$this->load->view('headers');
 			$this->load->view('asistencia', $data);
 		}

@@ -31,7 +31,7 @@ class nadador_model extends CI_Model{
 	function getAll(){
 		$this->load->database();
 		$query = $this->db->get('nadador');
-		return $query->result();
+		return $query;
 	}
 
 	/*function obtenerCursos(){

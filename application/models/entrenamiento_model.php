@@ -30,7 +30,7 @@ class entrenamiento_model extends CI_Model{
 	function getAll(){
 		$this->load->database();
 		$query = $this->db->get('entrenamiento');
-		return $query->result();
+		return $query;
 	}
 
 

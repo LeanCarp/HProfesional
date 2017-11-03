@@ -5,8 +5,18 @@ class Cronometro extends CI_Controller {
 		parent::__construct(); /*Ejecuta el constructor del padre*/
 		//$this->load->helper('mihelper'); // Primero busca en helper de Application, sino va a System.
 		$this->load->database();
+		$this->load->model('prueba_model');
+		$this->load->model('distanciaTotal_model');
+		$this->load->model('tamanoPileta_model');
+		$this->load->model('entrenamiento_model');
+		$this->load->model('campeonato_model');
+		$this->load->model('nadador_model');
+		$this->load->model('categoria_model');
+		$this->load->model('estilo_model');
+		
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
+		$this->load->helper('date');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
 	}
 
@@ -17,58 +27,68 @@ class Cronometro extends CI_Controller {
 		}
         else
         {
-			//$idPrueba = $this->input->post('selectPrueba');
-
-			$this->load->database();
-			$this->db->select('DNI, Apellido, Nombre');
-			$this->db->from('nadador');
-			$data['nadadores'] = $this->db->get();
+			$data['estilos'] = $this->estilo_model->getAll();
+			$data['distancias'] = $this->distanciaTotal_model->getAll();
+			$data['piletas'] = $this->tamanoPileta_model->getAll();
+			$data['categorias'] = $this->categoria_model->getAll();
+			$data['entrenamientos'] = $this->entrenamiento_model->getAll();
+			$data['nadadores'] = $this->nadador_model->getAll();
 
 	    	$this->load->view('headers');
 	    	$this->load->view('cronometro', $data);
-	    }
+		}
 	}
 
-	function Campeonato(){
+	function Campeonato($ident){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
-		else
-		{
-			$idPrueba = $this->uri->segment(3);
-
-			$this->load->database();
+        else
+        {
+			$data['idPrueba'] = $ident;
+			$data['cantParciales'] = $this->cantidadParciales($ident);
+			$data['nadadores'] = $this->nadador_model->getAll();
 			
-			$this->db->select('tamañopiletaID, DistanciaID');
-			$this->db->from('prueba');
-			$this->db->where('ID', $idPrueba);
-			$prueba = $this->db->get();
-			$prueba = $prueba->row();
-
-			$this->db->select('Distancia');
-			$this->db->from('distanciatotal');
-			$this->db->where('ID', $prueba->DistanciaID);
-			$distancia = $this->db->get();
-			$distancia = $distancia->row();
-
-			$this->db->select('Tamaño');
-			$this->db->from('tamañopileta');
-			$this->db->where('ID', $prueba->tamañopiletaID);
-			$tamañoPileta = $this->db->get();
-			$tamañoPileta = $tamañoPileta->row();
-	
-
-			$cantidadParciales = $distancia->Distancia/$tamañoPileta->Tamaño;
-
-			$this->load->database();
-			$this->db->select('DNI, Apellido, Nombre');
-			$this->db->from('nadador');
-			$data['nadadores'] = $this->db->get();
 
 			$this->load->view('headers');
-	    	$this->load->view('cronometro', $data);
+	    	$this->load->view('cronometroCampeonato', $data);
+	    }
+	}
+
+	function guardarCampeonato(){
+		$inputs = $this->input->post('inputFinal', true);
+		$idPrueba = $this->input->post('inputPrueba');
+		$cantParciales = $this->input->post('cantidadParciales');
+
+
+		foreach ($inputs as $input)
+		{
+			$valor = explode(",", $input);
+			if (empty($valor[0]))
+			{
+				$data['mensaje'] = "Uno o más resultados están incompletos";
+			}
+			else
+			{
+				$fechaHoy = date("Y-m-d");
+				$data = array('PruebaID' => $idPrueba, 'DNI' => $valor[0], 'Fecha' => $fechaHoy);
+				$this->db->insert('resultado', $data);
+				$idResultado = $this->db->insert_id();
+
+				$cantParciales = count($valor)-1;
+
+				for ($i=1; $i<=$cantParciales; $i++)
+				{
+				$data = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
+				$this->db->insert('parcial', $data);
+				}
+				$data['mensaje'] =  "Perfecto";
+			}
 		}
+
+		$this->load->view('headers');
+		$this->load->view('mensaje', $data);
 	}
 
 	function cronometroConfig(){
@@ -86,19 +106,27 @@ class Cronometro extends CI_Controller {
 	public function llenarEventos()
 	{
 		$eventoSeleccionado = $this->input->post('eventoSeleccionado');
-		//echo '<option value="0">'. $eventoSeleccionado .'</option>';
-		if($eventoSeleccionado <> 0) {
-			$this->load->database();
-			$this->db->select('ID, Nombre');
-			$this->db->from('entrenamiento');
-			$campeonatos = $this->db->get();
+		if ($eventoSeleccionado <> 0)
+		{
+			if($eventoSeleccionado == 2) 
+			{
+				$eventos = $this->entrenamiento_model->getAll();
+			}
+			else if ($eventoSeleccionado == 1)
+			{
+				$eventos = $this->campeonato_model->getAll();
+			}
+
+			// Valor por defecto.
+			echo '<option value="0">Seleccione entrenamiento/campeonato</option>';
 			
-            echo '<option value="0">Seleccione entrenamiento/campeonato</option>';
-            foreach($campeonatos->result() as $fila){
-				echo '<option value="'. $fila->ID .'">'. $fila->Nombre .'</option>';
-            } 
-		} 
-		else {
+			foreach($eventos->result() as $fila)
+			{
+				echo '<option value="'. $fila->ID .'">'. $fila->nombre .'</option>';
+			} 
+		}
+		else 
+		{
             echo '<option value="0">Seleccione entrenamiento/campeonato</option>';
         }
 	}
@@ -106,88 +134,140 @@ class Cronometro extends CI_Controller {
 	public function llenarPruebas()
 	{
 		$eventoSeleccionado = $this->input->post('eventoSeleccionado');
-		//echo '<option value="0">'. $eventoSeleccionado .'</option>';
-		if($eventoSeleccionado <> 0) {
-			$this->load->database();
-			$this->db->select('ID, DistanciaID');
-			$this->db->from('prueba');
-			$this->db->where('EntrenamientoID', $eventoSeleccionado);
-			$pruebas = $this->db->get();
-			
-            echo '<option value="0">Seleccione una prueba</option>';
-            foreach($pruebas->result() as $fila){
+		$eventoSeleccionado2 = $this->input->post('eventoSeleccionado2');
+
+		if($eventoSeleccionado <> 0) 
+		{
+			if ($eventoSeleccionado2 == 1)
+			{
+				$pruebas = $this->prueba_model->getPruebaCampeonato($eventoSeleccionado);
+			}
+			else
+			{
+				$pruebas = $this->prueba_model->getPruebaEntrenamiento($eventoSeleccionado);
+			}
+			// Valor por defecto.
+			echo '<option value="0">Seleccione una prueba</option>';
+
+			foreach($pruebas->result() as $fila)
+			{
 				echo '<option value="'. $fila->ID .'">'. $fila->ID .' '. $fila->DistanciaID .'</option>';
-            } 
-		} 
-		else {
-            echo '<option value="0">Seleccione una prueba</option>';
-        }
+			}
+		}
+		else
+		{
+			echo '<option value="0">Seleccione una prueba</option>';
+		}
 	}
 
-	public function cantidadParciales()
+	/* public function cantidadParciales()
 	{
 		$eventoSeleccionado = $this->input->post('eventoSeleccionado');
-		//echo '<option value="0">'. $eventoSeleccionado .'</option>';
-		if($eventoSeleccionado <> 0) {
-			$this->load->database();
 
-			$this->db->select('tamañopiletaID, DistanciaID');
-			$this->db->from('prueba');
-			$this->db->where('ID', $eventoSeleccionado);
-			$prueba = $this->db->get();
+		if($eventoSeleccionado <> 0) {
+			$prueba = $this->prueba_model->getById($eventoSeleccionado);
 			$prueba = $prueba->row();
 
-			$this->db->select('Distancia');
-			$this->db->from('distanciatotal');
-			$this->db->where('ID', $prueba->DistanciaID);
-			$distancia = $this->db->get();
+			$distancia = $this->distanciaTotal_model->getById($prueba->DistanciaID);
 			$distancia = $distancia->row();
 
-			$this->db->select('Tamaño');
-			$this->db->from('tamañopileta');
-			$this->db->where('ID', $prueba->tamañopiletaID);
-			$tamañoPileta = $this->db->get();
+			$tamañoPileta = $this->tamanoPileta_model->getById($prueba->tamañopiletaID);
 			$tamañoPileta = $tamañoPileta->row();
 	
-
 			$cantidadParciales = $distancia->Distancia/$tamañoPileta->Tamaño;
-			//echo '<input value="'. $cantidadParciales .'">';
-			//echo '<option value="0">'. $cantidadParciales .'</option>';
 			echo $cantidadParciales;
-			//echo '<option value="'. $cantidadParciales .'">'. $cantidadParciales .'</option>';
 		} 
-		else {
-            echo '<option value="0">Seleccione una prueba</option>';
+		else 
+		{
+            echo '0';
+        }
+	} */
+
+	public function cantidadParciales($idPrueba)
+	{
+		if($idPrueba <> 0) {
+			$prueba = $this->prueba_model->getById($idPrueba);
+			$prueba = $prueba->row();
+
+			$distancia = $this->distanciaTotal_model->getById($prueba->DistanciaID);
+			$distancia = $distancia->row();
+
+			$tamañoPileta = $this->tamanoPileta_model->getById($prueba->tamañopiletaID);
+			$tamañoPileta = $tamañoPileta->row();
+	
+			$cantidadParciales = $distancia->Distancia/$tamañoPileta->Tamaño;
+			return $cantidadParciales;
+		} 
+		else 
+		{
+            return 0;
         }
 	}
 
-	public function Hacerlo(){
-		$inputs = $this->input->post('inputFinal', true); 
-		$idPrueba = $this->input->post('inputPrueba');
-
-		//echo $inputs[0];
-
-		/////// ESTO LE CORRESPONDE AL MODELLLLLL
-		$this->load->database();
-		foreach ($inputs as $input)
+	public function guardarEntrenamiento(){
+		$inputs = $this->input->post('inputFinal', true);
+		$entrenamiento = $this->input->post('inputEntrenamiento');
+		$sexo = $this->input->post('inputSexo');
+		if ($sexo == 1)
 		{
-			$valor = explode(",", $input);
-			
-			$cantParciales = count($valor)-1;
-			echo $cantParciales;
-
-			/* for (i=1; i <= $cantParciaes; i++)
-			{
-				
-			} */
-			//echo $input;
-			/* $data = array('Mañana' => $turno, 'Fecha' => $fecha, 'Presente' => 1, 'EntrenamientoID' => $entrenamiento, 'NadadorID' => $nadador);
-			$this->db->insert('asistencia', $data); */
+			$sexo = 1;
 		}
-		/////////////////////////////////////////
+		else if ($sexo == 2)
+		{
+			$sexo = 0;
+		}
+		$series = $this->input->post('inputSerie');
+		$categoria = $this->input->post('inputCategoria');
+		$pileta = $this->input->post('inputPileta');
+		$distancia = $this->input->post('inputDistancia');
+		$estilo = $this->input->post('inputEstilo');
+		if ($entrenamiento == 0 || $sexo == 0 || $series == 0 || $categoria == 0 || $pileta == 0 || $distancia == 0 || $estilo == 0)
+		{
+			$data['mensaje'] = "Debe configurar de manera completa el entrenamiento";
+			$this->load->view('headers');
+			$this->load->view('mensajeCorrecto', $data);
+			//$this->load->view('cronometro');
+		}
+		else
+		{
+			$data = array('Masculino' => $sexo, 'CantidadSeries' => $series, 'CategoriaID' => $categoria, 
+			'DistanciaID' => $distancia, 'EstiloID' => $estilo, 'EntrenamientoID' => $entrenamiento, 'tamañopiletaID' => $pileta);
+			$this->db->insert('prueba', $data);
+			$idPrueba = $this->db->insert_id();
+
+			foreach ($inputs as $input)
+			{
+				$valor = explode(",", $input);
+				$fechaHoy = date("Y-m-d");
+				$data = array('PruebaID' => $idPrueba, 'DNI' => $valor[0], 'Fecha' => $fechaHoy);
+				$this->db->insert('resultado', $data);
+				$idResultado = $this->db->insert_id();
+				
+				$cantParciales = count($valor)-1;
+
+				for ($i=1; $i<=$cantParciales; $i++)
+				{
+					$parcial = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
+					$this->db->insert('parcial', $parcial);
+					/* if (empty($valor[$i]))
+					{
+						$data = array('ResultadoID' => $idResultado, 'Tiempo' => "00:00:00");
+						$this->db->insert('parcial', $data);
+					}
+					else
+					{
+						$data = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
+						$this->db->insert('parcial', $data);
+					} */
+				}
+			}
+
+			$this->load->view('headers');
+			//$this->load->view('mensajeCorrecto');
+		}
 	}
 
-	public function insercionManual(){
+/* 	public function insercionManual(){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
@@ -211,12 +291,10 @@ class Cronometro extends CI_Controller {
 			//$crud->unset_operations();
 
 
-			/* Generamos la tabla */
 	    	$output = $crud->render();
 			$this->load->view('headers');
 			$this->load->view('cronometroManual', $output);
-		}
 
-	}
+	} */
 
 }

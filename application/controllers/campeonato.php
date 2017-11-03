@@ -23,8 +23,8 @@ class Campeonato extends CI_Controller {
 			$crud->set_table('campeonato');
 			$crud->add_action('<+>', '+','pruebaCampeonato/index');
 			$crud->set_subject('campeonato');
-			$crud->columns('Fecha', 'Nombre');
-			$crud->fields('Fecha', 'Nombre', 'TipoCampeonatoID');
+			$crud->columns('inicio', 'fin', 'nombre');
+			$crud->fields('inicio', 'fin', 'nombre', 'TipoCampeonatoID');
 			//$crud->unset_add();
 			//$crud->unset_delete();
 			//$crud->unset_read();
@@ -33,7 +33,10 @@ class Campeonato extends CI_Controller {
 			$crud->unset_print();
 			//$crud->set_relation('EventoID','evento','Nombre');
 			$crud->set_relation('TipoCampeonatoID','tipocampeonato','Tipo');
-			$crud->display_as('TipoCampeonatoID','Tipo'); 
+			$crud->display_as('TipoCampeonatoID','Tipo');
+			$crud->display_as('inicio','Fecha inicio');
+			$crud->display_as('fin','Fecha fin');
+			$crud->display_as('nombre','Título');
 
 			//$crud->unset_add();
 			//$crud->unset_operations();

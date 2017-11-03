@@ -10,20 +10,21 @@ class PruebaCampeonato extends CI_Controller {
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
 	}
 
-	function index(){
+	function index($ident){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
         else
         {
-        	$ident = $this->uri->segment(3);
+        	//$ident = $this->uri->segment(3);
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('prueba');
 			// Agrega acción.
 			$crud->add_action('<>', '+','cronometro/Campeonato');
 			//
+			$crud->where('CampeonatoID', $ident);
 			$crud->columns('TiempoMin', 'Masculino');
 			$crud->fields('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamañopiletaID', 'DistanciaID', 'EstiloID', 'CampeonatoID');
 			$crud->set_relation('CategoriaID','categoria','{Nombre}');
