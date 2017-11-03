@@ -27,7 +27,13 @@ class historial extends CI_Controller {
           	$output['js_files'][] = base_url().'assets/moment-with-locales.min.js';	
 			$output['js_files'][] = base_url().'assets/fullcalendar.min.js';
 			$output['js_files'][] = base_url().'assets/fullcalendar-locale-es.js';
-			$output['js_files'][] = base_url().'assets/inicializarcalendar.js';
+            $output['js_files'][] = base_url().'assets/inicializarcalendarHistorial.js';
+            
+
+            $this->load->database();
+			$this->db->select('DNI, Apellido, Nombre');
+			$this->db->from('nadador');
+			$output['nadadores'] = $this->db->get();
 
 	    	$this->load->view('headers', $output);
 	    	$this->load->view('historial', $output);
@@ -35,14 +41,16 @@ class historial extends CI_Controller {
 	}
 
 
-	public function get_events()
+
+    public function get_eventsSeleccion()
     {
         $this->load->model('entrenamiento_model');
-
-		// Our Start and End Dates
+       
+        // Our Start, ID and End Dates
         $start = $this->input->get("start");
         $end = $this->input->get("end");
-        
+        $idPrueba = $this->input->get('id');
+
         $startdt = new DateTime('now'); // setup a local datetime
         $startdt->setTimestamp($start); // Set the date based on timestamp
         $start_format = $startdt->format('Y-m-d H:i:s');
@@ -50,11 +58,11 @@ class historial extends CI_Controller {
         $enddt = new DateTime('now'); // setup a local datetime
         $enddt->setTimestamp($end); // Set the date based on timestamp
         $end_format = $enddt->format('Y-m-d H:i:s');
+       
+       $events = $this->entrenamiento_model->getEntrenamientosUsuario($idPrueba);
         
-        $events = $this->entrenamiento_model->getEntrenamientosUsuario(38570363);
-        $data_events = array();
-
-
+       $data_events = array();
+   
         foreach($events as $r) {
             
                      $data_events[] = array(  
@@ -65,9 +73,8 @@ class historial extends CI_Controller {
                          "start" => $r->Fecha,
                          "color"=>$r->color
                      );
-                 }   
+                 }
         echo json_encode(array("events" => $data_events));
-        exit();
-    }
-    
+        exit();    
+    }  
 }

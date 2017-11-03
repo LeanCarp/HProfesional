@@ -23,12 +23,18 @@ class Campeonato extends CI_Controller {
 			$crud->set_table('campeonato');
 			$crud->add_action('<+>', '+','pruebaCampeonato/index');
 			$crud->set_subject('campeonato');
-			$crud->columns('Fecha', 'Nombre');
-			$crud->fields('Fecha', 'Nombre', 'TipoCampeonatoID');
+			$crud->columns('inicio','fin', 'Nombre', 'color');
+			$crud->fields('inicio','fin',  'Nombre','TipoCampeonatoID', 'color');
 			//$crud->unset_add();
 			//$crud->unset_delete();
 			//$crud->unset_read();
 			//$crud->unset_edit_fields('DNI');
+			$crud->display_as('inicio','Fecha de Inicio');
+			$crud->display_as('fin','Fecha de Fin');
+			$crud->field_type('color','dropdown',
+										array('blue' => 'azul', 'pink' => 'rosado','yellow' => 'amarillo' , 'black' => 'negro'));
+
+
 			$crud->unset_export();
 			$crud->unset_print();
 			//$crud->set_relation('EventoID','evento','Nombre');

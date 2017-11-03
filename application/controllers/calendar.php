@@ -4,8 +4,8 @@ class calendar extends CI_Controller {
 
     public function get_events()
     {
-        $this->load->model('entrenamiento_model');
-        //$this->load->model('calendario_model');
+        //$this->load->model('entrenamiento_model');
+        $this->load->model('calendario_model');
         // Our Start and End Dates
         $start = $this->input->get("start");
         $end = $this->input->get("end");
@@ -18,34 +18,28 @@ class calendar extends CI_Controller {
         $enddt->setTimestamp($end); // Set the date based on timestamp
         $end_format = $enddt->format('Y-m-d H:i:s');
         
-        $events = $this->entrenamiento_model->getEntrenamientosUsuario(38570363);
-       // $events = $this->calendario_model->get_events($start_format, $end_format);
+        $events = $this->calendario_model->get_events($start_format, $end_format);
         $data_events = array();
-   /*
-        foreach($events->result() as $r) {
    
+        foreach($events as $r) {
+            if (array_key_exists('TipoEntrenamientoID', $r) )
+            {
+                $r->nombre="E: ". $r->nombre;
+            }
+            else
+            {
+                $r->nombre="C: ". $r->nombre;
+            }
+                       
             $data_events[] = array(
                 "id" => $r->ID,
                 "title" => $r->nombre,
-                //"description" => $r->description,
                 "end" => $r->fin,
                 "start" => $r->inicio,
                 "color"=>$r->color
             );
-        }*/
-
-        foreach($events as $r) {
-            
-                     $data_events[] = array(  
-                        "id" => $r->EntrenamientoID,                     
-                         "title" => $r->nombre,
-                         //"description" => $r->description,
-                         "end" => $r->Fecha,
-                         "start" => $r->Fecha,
-                         "color"=>$r->color
-                     );
-                 }
-       // var_dump($data_events);         
+        }
+  
         echo json_encode(array("events" => $data_events));
         exit();
     }
