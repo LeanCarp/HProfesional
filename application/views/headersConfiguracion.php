@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" >
 	<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/styles.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Habilitación Profesional</title>
 	<meta charset="utf-8">
 
-	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="<?= base_url(); ?>assets/js/jquery-1.11.1.min.js"></script>
 <script>
 
 $(document).ready(function () {
