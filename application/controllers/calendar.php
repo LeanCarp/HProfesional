@@ -39,7 +39,7 @@ class calendar extends CI_Controller {
                 "color"=>$r->color
             );
         }
-  
+        //var_dump(json_encode(array("events" => $data_events)));
         echo json_encode(array("events" => $data_events));
         exit();
     }

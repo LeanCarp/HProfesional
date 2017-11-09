@@ -23,20 +23,45 @@ function realizarProceso(){
 }
 </script>
 
+<style>
+	.contenedor{
+		display: flex;
+	}
+
+	.btnFiltrar{
+		margin-left: 5px;
+	}
+
+@media screen and (max-width:800px){
+	.contenedor{
+		flex-direction: column;
+		margin-left: 0px;
+	}
+}
+</style>
 
 
 
 		<?php echo form_open("listarAsistencia/Hacerlo");  ?>
-		<label>Fecha: </label> <input id="fecha" name="fecha" type="date">
 
-		<label>Turno: </label>
-		<select name="selectTurno" id="selectTurno">
-			<option value="0">Mañana</option>
-			<option value="1">Tarde</option>
-		</select>
+		<div class="contenedor">
+			<div>
+				<label>Fecha: </label> <input id="fecha" name="fecha" type="date">
+			</div>
+			
+			<div>
+				<label>Turno: </label>
+				<select name="selectTurno" id="selectTurno">
+					<option value="0">Mañana</option>
+					<option value="1">Tarde</option>
+				</select>
+			</div>
 
-		<input type="button" class="" id="Filtrar" value="Filtrar" onclick="realizarProceso()">
-
+			<div>
+				<input type="button" class="btnFiltrar" id="Filtrar" value="Filtrar" onclick="realizarProceso()">
+			</div>
+		</div>
+		
 		<div id="output" style="margin-top: 25px;">
 
 		</div>

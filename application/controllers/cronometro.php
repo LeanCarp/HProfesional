@@ -67,7 +67,8 @@ class Cronometro extends CI_Controller {
 			$valor = explode(",", $input);
 			if (empty($valor[0]))
 			{
-				$data['mensaje'] = "Uno o más resultados están incompletos";
+				$data['mensaje'] = "Hubo algún resultado erróneo";
+				$this->db->delete('prueba', array('id' => $idPrueba));
 			}
 			else
 			{
@@ -83,7 +84,7 @@ class Cronometro extends CI_Controller {
 				$data = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
 				$this->db->insert('parcial', $data);
 				}
-				$data['mensaje'] =  "Perfecto";
+				$data['mensaje'] = "Parciales guardados correctamente";
 			}
 		}
 
@@ -225,7 +226,7 @@ class Cronometro extends CI_Controller {
 		{
 			$data['mensaje'] = "Debe configurar de manera completa el entrenamiento";
 			$this->load->view('headers');
-			$this->load->view('mensajeCorrecto', $data);
+			$this->load->view('mensaje', $data);
 			//$this->load->view('cronometro');
 		}
 		else
@@ -239,31 +240,40 @@ class Cronometro extends CI_Controller {
 			{
 				$valor = explode(",", $input);
 				$fechaHoy = date("Y-m-d");
-				$data = array('PruebaID' => $idPrueba, 'DNI' => $valor[0], 'Fecha' => $fechaHoy);
-				$this->db->insert('resultado', $data);
-				$idResultado = $this->db->insert_id();
-				
-				$cantParciales = count($valor)-1;
-
-				for ($i=1; $i<=$cantParciales; $i++)
+				if (empty($valor[0]))
 				{
-					$parcial = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
-					$this->db->insert('parcial', $parcial);
-					/* if (empty($valor[$i]))
+					$data['mensaje'] = "Hubo algún resultado erróneo";
+					$this->db->delete('prueba', array('id' => $idPrueba));
+				}
+				else
+				{
+					$data = array('PruebaID' => $idPrueba, 'DNI' => $valor[0], 'Fecha' => $fechaHoy);
+					$this->db->insert('resultado', $data);
+					$idResultado = $this->db->insert_id();
+					
+					$cantParciales = count($valor)-1;
+	
+					for ($i=1; $i<=$cantParciales; $i++)
 					{
-						$data = array('ResultadoID' => $idResultado, 'Tiempo' => "00:00:00");
-						$this->db->insert('parcial', $data);
+						/* $parcial = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
+						$this->db->insert('parcial', $parcial); */
+						if (empty($valor[$i]))
+						{
+							$data = array('ResultadoID' => $idResultado, 'Tiempo' => "00:00:00");
+							$this->db->insert('parcial', $data);
+						}
+						else
+						{
+							$data = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
+							$this->db->insert('parcial', $data);
+						}
 					}
-					else
-					{
-						$data = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
-						$this->db->insert('parcial', $data);
-					} */
+					$data['mensaje'] = "Parciales guardados correctamente";
 				}
 			}
-
+			
 			$this->load->view('headers');
-			//$this->load->view('mensajeCorrecto');
+			$this->load->view('mensaje', $data);
 		}
 	}
 

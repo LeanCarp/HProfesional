@@ -9,6 +9,11 @@ html, body, .contenido-principal{
 	padding: 5px;
 }
 
+.row{
+	margin: 0;
+	min-height: 100vh;
+}
+
 .div-top{
 	background: black;
 }
@@ -27,7 +32,7 @@ html, body, .contenido-principal{
 }
 
 .nav-izq-link:hover{
-	color:black;
+	color:#3D8BCD;
 }
 
 .container{

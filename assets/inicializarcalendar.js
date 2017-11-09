@@ -18,7 +18,7 @@ $(document).ready(function() {
             {
                 events: function(start, end, timezone, callback) {
                     $.ajax({
-                    url: 'http://localhost/HProfesional/calendar/get_events',
+                    url: 'http://localhost/HProfesional/HP/calendar/get_events',
                     dataType: 'json',
                     data: {
                     // our hypothetical feed requires UNIX timestamps

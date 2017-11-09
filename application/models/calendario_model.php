@@ -9,7 +9,7 @@ class calendario_model extends CI_Model{
 	//Funciones para el calendario de inicio.
 	public function get_events($start, $end)
 	{
-		//return $this->obtenerEntrenamientos();
+		//$ $this->obtenerEntrenamientos();
 		$query=array_merge($this->obtenerEntrenamientos(),$this->obtenerCampeonatos());
 		return $query;
 	}

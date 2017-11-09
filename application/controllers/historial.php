@@ -77,4 +77,11 @@ class historial extends CI_Controller {
         echo json_encode(array("events" => $data_events));
         exit();    
     }  
+
+    function prueba()
+    {
+        $this->load->model('calendario_model');
+        $prueba=$this->calendario_model->obtenerEntrenamientos();
+        var_dump($prueba);
+    }
 }

@@ -23,13 +23,8 @@ class Campeonato extends CI_Controller {
 			$crud->set_table('campeonato');
 			$crud->add_action('<+>', '+','pruebaCampeonato/index');
 			$crud->set_subject('campeonato');
-<<<<<<< HEAD
-			$crud->columns('inicio', 'fin', 'nombre');
-			$crud->fields('inicio', 'fin', 'nombre', 'TipoCampeonatoID');
-=======
-			$crud->columns('inicio','fin', 'Nombre', 'color');
-			$crud->fields('inicio','fin',  'Nombre','TipoCampeonatoID', 'color');
->>>>>>> f83ef38bfd1918e56b4dfc88de539f06ad517a7f
+			$crud->columns('inicio','fin', 'nombre', 'color');
+			$crud->fields('inicio','fin',  'nombre','TipoCampeonatoID', 'color');
 			//$crud->unset_add();
 			//$crud->unset_delete();
 			//$crud->unset_read();
