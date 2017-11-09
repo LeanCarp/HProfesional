@@ -41,12 +41,28 @@ var contador = 1;
 			}
 	});
 
-/* 	$(document).scroll(function() {
-			$(".div-top").animate({
-				left: '-100%'
-			});
-			contador = 1;
-	}); */
+	$( window ).resize(function() {
+  if ($(window).width() > 800) {
+				/* $(".div-top").animate({
+					left: '0'
+				});
+				$(".nav-izq").animate({
+					left: '0'
+				}); */
+				$(".div-top").css({'left':'0'});
+				$(".nav-izq").css({'left':'0'});
+				contador = 0;
+  }
+  else {
+				contador = 1;
+				$(".div-top").animate({
+					left: '-100%'
+				});
+				$(".nav-izq").animate({
+					left: '-100%'
+				});
+  } 
+});
 
 });
 
@@ -56,6 +72,10 @@ var contador = 1;
 
 .menu-bar{
 	display: none;
+}
+
+.tamaño{
+	min-height: 100vh;
 }
 
 @media screen and (max-width:800px){
@@ -80,7 +100,7 @@ var contador = 1;
 		margin-top:297px;
 		left: -100%;
 		position: absolute;
-		z-index: 4;
+		z-index: 3;
 		width: 80%;
 		height: 100%;
 	}
@@ -116,6 +136,16 @@ var contador = 1;
 		z-index: 1;
 	}
 }
+
+@media screen and (min-width: 800px) {
+    .nav-izq{
+			left: 0px;
+		}
+
+		.div-top{
+			left: 0px;
+		}
+}
 </style>
 
 <body>
@@ -148,21 +178,21 @@ var contador = 1;
 		  </li>
 		</ul>
 	</div>
-	<div class="row">
+	<div class="row tamaño">
 		<div class="nav-izq col-md-3"> <!-- col-md-3 -->
 			<ul class="nav flex-column">
-			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>nadador">Nadadores</a>
-			  </li>
-			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>entrenamiento">Entrenamientos</a>
-			  </li>
-			  <li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>campeonato">Campeonatos</a>
-			  </li>
 				<li class="nav-item nav-izq-item">
-			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>historial">Historial de entrenamientos</a>
-			  </li>
+					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>nadador">Nadadores</a>
+				</li>
+				<li class="nav-item nav-izq-item">
+					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>entrenamiento">Entrenamientos</a>
+				</li>
+				<li class="nav-item nav-izq-item">
+					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>campeonato">Campeonatos</a>
+				</li>
+				<li class="nav-item nav-izq-item">
+					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>historial">Historial de entrenamientos</a>
+				</li>
 			</ul>
-		</div>
+		</div>		
 		<div class="col-md-9 contenido-principal">
