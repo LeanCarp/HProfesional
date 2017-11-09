@@ -27,6 +27,7 @@ function inicio () {
 			document.getElementById("parar").disabled = false;
 			document.getElementById("continuar").disabled = true;
 			document.getElementById("reinicio").disabled = false;
+			document.getElementById("limpiar").disabled = false;
 		}
 	}
 	else
@@ -54,12 +55,12 @@ function reinicio () {
 	document.getElementById("continuar").disabled = true;
 	document.getElementById("reinicio").disabled = true;
 
-	$("#competidores div").each(
+	$("#competidores div input").each(
 		function () {
-			divPadre = document.getElementById("competidores");
-			eliminarNadador(this.lastChild);
-		}
-	)
+			if (this.type != "button"){
+				this.value = "";
+			}
+	});
 }
 function cronometro () {
 	if (centesimas < 99) {
@@ -88,6 +89,17 @@ function cronometro () {
 	}
 }
 
+function limpiar() {
+	$("#competidores div").each(
+		function () {
+			divPadre = document.getElementById("competidores");
+			eliminarNadador(this.lastChild);
+		}
+	)
+
+	//reinicio();
+}
+
 function inputar(e) {
 	var cantParciales = document.getElementById("cantidadParciales").value;
 	//var inputResultado = document.getElementById(e.id.substring(0, e.id.length-1)+0);
@@ -113,8 +125,6 @@ function inputarFinal(e, f) {
 
 	var inputResultado = document.getElementById(String(e+0));
 	inputResultado.value = inputFinal;
-
-	console.log(inputFinal);
 }
 
 function eliminarNadador(input) {
@@ -197,6 +207,7 @@ function agregarNadador() {
 			var inputParcial = document.createElement("input");
 			inputParcial.setAttribute('name', 'inputs[]');
 			inputParcial.setAttribute('id', pro+i);
+			//inputParcial.setAttribute('value', '0:0:0');
 			console.log(inputParcial.id);
 			inputParcial.readOnly  = true;
 			inputParcial.setAttribute('onclick', 'inputar(this);');
@@ -216,6 +227,14 @@ function agregarNadador() {
 		alert("¡Debe configurar el entrenamiento!");
 	}
 }
+
+$(document).on('change','#selectPileta',function(){
+	limpiar();
+});
+
+$(document).on('change','#selectDistancia',function(){
+	limpiar();
+});
 
 $(document).ready(function() {                       
                 $("#selectEntrenamiento").change(function() {
@@ -259,7 +278,7 @@ $(document).ready(function() {
 						valor = $("#selectPileta option:selected").val()
 						$("#inputPileta").val(valor)
                         });
-                    });             
+					});       
                 });
 
 $(document).ready(function() {                       
@@ -268,7 +287,7 @@ $(document).ready(function() {
 						valor = $("#selectDistancia option:selected").val()
 						$("#inputDistancia").val(valor)
                         });
-                    });             
+					}); 
                 });
 
 $(document).ready(function() {                       
