@@ -8,9 +8,9 @@
 		<div class="datos-profesor">
 				<h2>Mis datos:</h2>
 				<div class="datos-profesor-item">
-					<h6>PROFESOR, Profesor</h6>
-					<h6>CLUB, Localidad</h6>
-					<h6>Nadadores activos: XX</h6>
+					<h6>Cuba, Juan Pablo</h6>
+					<h6>Club Neptunia, Gualeguaychú</h6>
+					<h6>Nadadores activos:  <?php echo $activos ?> </h6>
 				</div>
 		</div>
 <!-- 		<div class="prox-eventos">

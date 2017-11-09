@@ -51,9 +51,5 @@ class Nadador extends CI_Controller {
 	    }
 	}
 
-	function activos()
-	{
-		$this->load->model('nadador_model');
-		return  $this->nadador_model->getAllActivos();
-	}
+
 }
