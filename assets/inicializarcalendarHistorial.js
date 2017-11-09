@@ -18,7 +18,7 @@ $(document).ready(function() {
             {
                 events: function(start, end, timezone, callback) {
                     $.ajax({
-                    url: 'http://localhost/HProfesional/HP/historial/get_eventsSeleccion',
+                    url: 'historial/get_eventsSeleccion',
                     dataType: 'json',
                     cache: false,
                     lazyFetching:true,

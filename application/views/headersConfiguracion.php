@@ -187,6 +187,12 @@ margin:auto;
 			  <li class="nav-item nav-izq-item">
 			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>tipoCampeonato">Tipo de campeonato</a>
 			  </li>
+				<li class="nav-item nav-izq-item">
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>club">Clubes</a>
+			  </li>
+				<li class="nav-item nav-izq-item">
+			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>localidad">Localidades</a>
+			  </li>
 			</ul>
 		</div>
 		<div class="col-md-9 contenido-principal">

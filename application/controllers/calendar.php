@@ -24,11 +24,14 @@ class calendar extends CI_Controller {
         foreach($events as $r) {
             if (array_key_exists('TipoEntrenamientoID', $r) )
             {
+                //Si es entrenamiento se agrega una "E" al nombre
                 $r->nombre="E: ". $r->nombre;
             }
             else
             {
-                $r->nombre="C: ". $r->nombre;
+                //Si es campeonato se agrega una "C" al nombre
+                //Se agrega "Nombre" que es el nombre del club. "nombre" es el nombre del campeonato.
+                $r->nombre="C: ". $r->nombre. " en ". $r->Nombre;
             }
                        
             $data_events[] = array(
@@ -39,7 +42,6 @@ class calendar extends CI_Controller {
                 "color"=>$r->color
             );
         }
-        //var_dump(json_encode(array("events" => $data_events)));
         echo json_encode(array("events" => $data_events));
         exit();
     }
