@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class TipoCampeonato extends CI_Controller {
+class localidad extends CI_Controller {
 	function __construct(){
 		parent::__construct(); /*Ejecuta el constructor del padre*/
 		//$this->load->helper('mihelper'); // Primero busca en helper de Application, sino va a System.
@@ -19,17 +19,17 @@ class TipoCampeonato extends CI_Controller {
         {
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
-			$crud->set_table('tipocampeonato');
-			$crud->columns('Tipo');
-			$crud->fields('Tipo');
-
+			$crud->set_table('localidad');
+			$crud->columns('Ciudad');
+            $crud->fields('Ciudad');
+            
 			$crud->unset_export();
 			$crud->unset_print();
 
 			/* Generamos la tabla */
 	    	$output = $crud->render();
 			$this->load->view('headersConfiguracion');
-			$this->load->view('tipoCampeonato', $output);
+			$this->load->view('localidad', $output);
 		}
 	}
 

@@ -34,9 +34,9 @@ class Welcome extends CI_Controller {
 		}
         else
         {
-			
+		
 	    	$output = [];
-
+			$output['activos']=$this->activos();
 			$output['css_files'][] = base_url().'assets/fullcalendar.min.css';
 	    	$output['js_files'][] = base_url().'assets/jquery.min.js';
           	$output['js_files'][] = base_url().'assets/moment-with-locales.min.js';	
@@ -48,4 +48,11 @@ class Welcome extends CI_Controller {
 	    	$this->load->view('inicio', $output);
 	    }
 	}
+
+	function activos()
+	{
+		$this->load->model('nadador_model');
+		return $this->nadador_model->getAllActivos();
+	}
+
 }

@@ -26,10 +26,12 @@ class calendario_model extends CI_Model{
 	{
 		$this->load->database();
 		$this->db->select('*');
-		$query = $this->db->get("campeonato");
+		$this->db->from('campeonato a'); 
+		$this->db->join('club b', 'b.ID=a.ClubID', 'left');
+		$query = $this->db->get();
 		return $query->result();
 	}
-
+	
 	
 
 }

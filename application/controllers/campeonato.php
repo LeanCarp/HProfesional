@@ -23,30 +23,24 @@ class Campeonato extends CI_Controller {
 			$crud->set_table('campeonato');
 			$crud->add_action('<+>', '+','pruebaCampeonato/index');
 			$crud->set_subject('campeonato');
-			$crud->columns('inicio','fin', 'nombre', 'color');
-			$crud->fields('inicio','fin',  'nombre','TipoCampeonatoID', 'color');
-			//$crud->unset_add();
-			//$crud->unset_delete();
-			//$crud->unset_read();
-			//$crud->unset_edit_fields('DNI');
+			$crud->columns('nombre','ClubID','inicio','fin', 'color');
+			$crud->fields('ClubID','nombre','inicio','fin',  'TipoCampeonatoID', 'color');
+
 			$crud->display_as('inicio','Fecha de Inicio');
 			$crud->display_as('fin','Fecha de Fin');
 			$crud->field_type('color','dropdown',
 										array('blue' => 'azul', 'pink' => 'rosado','yellow' => 'amarillo' , 'black' => 'negro'));
 
-
 			$crud->unset_export();
 			$crud->unset_print();
-			//$crud->set_relation('EventoID','evento','Nombre');
+
 			$crud->set_relation('TipoCampeonatoID','tipocampeonato','Tipo');
+			$crud->set_relation('ClubID','club','Nombre');
 			$crud->display_as('TipoCampeonatoID','Tipo');
 			$crud->display_as('inicio','Fecha inicio');
 			$crud->display_as('fin','Fecha fin');
 			$crud->display_as('nombre','Título');
-
-			//$crud->unset_add();
-			//$crud->unset_operations();
-
+			$crud->display_as('ClubID','Club');
 
 			/* Generamos la tabla */
 	    	$output = $crud->render();
