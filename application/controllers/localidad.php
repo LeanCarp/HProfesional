@@ -27,9 +27,13 @@ class localidad extends CI_Controller {
 			$crud->unset_print();
 
 			/* Generamos la tabla */
-	    	$output = $crud->render();
+			$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']="Localidades";
+
+
 			$this->load->view('headersConfiguracion');
-			$this->load->view('localidad', $output);
+			$this->load->view('gestion', $output);
 		}
 	}
 

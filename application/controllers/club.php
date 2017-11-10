@@ -30,9 +30,13 @@ class club extends CI_Controller {
 			$crud->unset_print();
 
 			/* Generamos la tabla */
-	    	$output = $crud->render();
+			$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']="Clubes";
+
+
 			$this->load->view('headersConfiguracion');
-			$this->load->view('club', $output);
+			$this->load->view('gestion', $output);
 		}
 	}
 

@@ -31,11 +31,14 @@ class Distancia extends CI_Controller {
 			//$crud->unset_add();
 			//$crud->unset_operations();
 
-
 			/* Generamos la tabla */
-	    	$output = $crud->render();
+			$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']="Distancias";
+
+
 			$this->load->view('headersConfiguracion');
-			$this->load->view('distancia', $output);
+			$this->load->view('gestion', $output);
 		}
 	}
 

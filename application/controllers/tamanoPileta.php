@@ -33,9 +33,13 @@ class TamanoPileta extends CI_Controller {
 
 
 			/* Generamos la tabla */
-	    	$output = $crud->render();
+			$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']="Tamaños de piletas";
+
+
 			$this->load->view('headersConfiguracion');
-			$this->load->view('tamanoPileta', $output);
+			$this->load->view('gestion', $output);
 		}
 
 	}

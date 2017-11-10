@@ -39,9 +39,14 @@ class Categoria extends CI_Controller {
 
 
 			/* Generamos la tabla */
-	    	$output = $crud->render();
+			$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']="Categorias";
+
+
 			$this->load->view('headersConfiguracion');
-			$this->load->view('categoria', $output);
+			$this->load->view('gestion', $output);
+
 		}
 	}
 

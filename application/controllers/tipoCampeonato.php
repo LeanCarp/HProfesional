@@ -26,10 +26,15 @@ class TipoCampeonato extends CI_Controller {
 			$crud->unset_export();
 			$crud->unset_print();
 
+			
 			/* Generamos la tabla */
-	    	$output = $crud->render();
+			$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']="Tipo de Campeonatos";
+
+
 			$this->load->view('headersConfiguracion');
-			$this->load->view('tipoCampeonato', $output);
+			$this->load->view('gestion', $output);
 		}
 	}
 

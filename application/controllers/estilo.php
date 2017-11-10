@@ -39,9 +39,13 @@ class Estilo extends CI_Controller {
 
 
 			/* Generamos la tabla */
-	    	$output = $crud->render();
+			$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']="Estilos";
+
+
 			$this->load->view('headersConfiguracion');
-			$this->load->view('estilo', $output);
+			$this->load->view('gestion', $output);
 		}
 	}
 

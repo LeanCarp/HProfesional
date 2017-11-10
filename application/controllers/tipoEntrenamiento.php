@@ -35,9 +35,13 @@ class TipoEntrenamiento extends CI_Controller {
 
 
 			/* Generamos la tabla */
-	    	$output = $crud->render();
+			$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']="Tipo de Entrenamientos";
+
+
 			$this->load->view('headersConfiguracion');
-			$this->load->view('tipoEntrenamiento', $output);
+			$this->load->view('gestion', $output);
 		}
 	}
 

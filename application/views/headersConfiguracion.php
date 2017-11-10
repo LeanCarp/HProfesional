@@ -146,19 +146,16 @@ margin:auto;
 		    <a class="nav-link" href="<?php echo base_url(); ?>">Inicio</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="#">Planificación</a>
-		  </li>
-		  <li class="nav-item">
 		    <a class="nav-link" href="#">Usuario</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="<?php echo base_url(); ?>index.php/cronometro">Cronómetro</a>
+		    <a class="nav-link" href="<?php echo base_url(); ?>cronometro">Cronómetro</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="<?php echo base_url(); ?>index.php/asistencia">Asistencia</a>
+		    <a class="nav-link" href="<?php echo base_url(); ?>asistencia">Asistencia</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="<?php echo base_url(); ?>index.php/configuracion">Configuración</a>
+		    <a class="nav-link" href="<?php echo base_url(); ?>configuracion">Configuración</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>auth/logout">Salir</a>
