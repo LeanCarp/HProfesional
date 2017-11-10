@@ -33,7 +33,30 @@ $(document).ready(function() {
                     });
                 }
             },
-        ]
+            
+        ],
+        eventClick: function(calEvent, jsEvent, view) {
+
+            //Si es un campeonato
+            if(calEvent.title.charAt(0)=='C') 
+            {
+                window.location.href = 'campeonato/index/edit/'+  calEvent.id;
+            }
+            //Si es un entrenamiento
+            else
+            {
+                window.location.href = 'entrenamiento/index/edit/'+  calEvent.id;
+            }
+
+            //Codigo de prueba de la documentacion
+             /*    
+                    alert('Event: ' + calEvent.title);
+                    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                    alert('View: ' + view.name);           
+                    // change the border color just for fun
+                    $(this).css('border-color', 'red');
+            */
+                }
         
         // put your options and callbacks here
     })

@@ -25,7 +25,7 @@ class calendario_model extends CI_Model{
 	function obtenerCampeonatos()
 	{
 		$this->load->database();
-		$this->db->select('*');
+		$this->db->select('a.ID, a.nombre, a.fin, a.inicio, b.Nombre, a.color');
 		$this->db->from('campeonato a'); 
 		$this->db->join('club b', 'b.ID=a.ClubID', 'left');
 		$query = $this->db->get();

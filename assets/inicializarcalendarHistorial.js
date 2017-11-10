@@ -40,7 +40,11 @@ $(document).ready(function() {
 
                 }
             },
-        ]
+        ],
+        eventClick: function(calEvent, jsEvent, view) {
+            
+            window.location.href = 'entrenamiento/index/edit/'+  calEvent.id;
+        }
         
                 // put your options and callbacks here
     })
