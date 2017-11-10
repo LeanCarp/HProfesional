@@ -1,6 +1,16 @@
+html, body, .contenido-principal{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 auto;
+}
+
 .nav-arriba {
 	padding: 5px;
-	margin-left: 170px;
+}
+
+.row{
+	margin: 0;
 }
 
 .div-top{
@@ -13,6 +23,7 @@
 
 .nav-izq{
 	padding: 0;
+	background: black;
 }
 
 .nav-izq-item{
@@ -20,21 +31,18 @@
 }
 
 .nav-izq-link:hover{
-	color:black;
+	color:#3D8BCD;
 }
 
 .container{
 	margin: 0;
 	padding: 0;
 	width: 100%;
+	min-height: 100%;
 }
 
 .contenido-principal{
-	padding: 40px;
-}
-
-.datos-profesor{
-
+	margin-top: 30px;
 }
 
 .datos-profesor-item{
@@ -60,7 +68,6 @@
 .botones
 {
 	display: flex;
-	margin-top: 20px;
 }
 .boton{
 	margin: 3px;
@@ -75,7 +82,7 @@
 	border-radius: 5px;
 	font-family: Helvetica;
 	cursor: pointer;
-	background: black;
+	background: #5f5a58;
 }
 .boton:active{
 	background: white;
@@ -84,3 +91,30 @@
 .boton:hover{
 	box-shadow: 0px 0px 14px black;
 }
+
+.botonesCronometro{
+	margin: 3px;
+	cursor: pointer;
+	font-size: 20px;
+}
+
+.botonesCronometro:disabled{
+	background: #5f5a58;
+	border: 0px;
+}
+
+.login-opciones{
+	padding: 10px;
+}
+
+.login-body{
+	background: black;
+}
+
+.login-container{
+	background: #3D8BCD;
+	color: white;
+	text-decoration: none;
+	margin: auto;
+}
+

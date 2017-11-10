@@ -6,34 +6,33 @@ class calendario_model extends CI_Model{
 		parent::__construct();
 		//$this->load->database();
 	}
-
-	function crearCalendario($data){
-		$this->load->database();
-		$this->db->insert('calendario', $data);
+	//Funciones para el calendario de inicio.
+	public function get_events($start, $end)
+	{
+		//$ $this->obtenerEntrenamientos();
+		$query=array_merge($this->obtenerEntrenamientos(),$this->obtenerCampeonatos());
+		return $query;
 	}
 
-	function eliminarCalendario($id){
-		$this->load->database();
-		$this->db->where('ID', $id);
-		$this->db->delete('calendario');
-	}
-
-	function getByID($id){
+	function obtenerEntrenamientos()
+	{
 		$this->load->database();
 		$this->db->select('*');
-		$this->db->from('calendario');
-		$this->db->where('ID', $id);
+		$query = $this->db->get("entrenamiento");
+		return $query->result();
+	}
+
+	function obtenerCampeonatos()
+	{
+		$this->load->database();
+		$this->db->select('a.ID, a.nombre, a.fin, a.inicio, b.Nombre, a.color');
+		$this->db->from('campeonato a'); 
+		$this->db->join('club b', 'b.ID=a.ClubID', 'left');
 		$query = $this->db->get();
 		return $query->result();
 	}
-
-	function getAll(){
-		$this->load->database();
-		$query = $this->db->get('calendario');
-		return $query->result();
-	}
-
-
+	
+	
 
 }
 

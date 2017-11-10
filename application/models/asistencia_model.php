@@ -33,6 +33,16 @@ class asistencia_model extends CI_Model{
 		return $query->result();
 	}
 
+	function getAsistenciaPorFechaYTurno($fecha, $turno){
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('asistencia');
+		$this->db->where('Fecha', $fecha);
+		$this->db->where('Mañana', $turno);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 
 
 }

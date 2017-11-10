@@ -30,7 +30,7 @@ class estilo_model extends CI_Model{
 	function getAll(){
 		$this->load->database();
 		$query = $this->db->get('estilo');
-		return $query->result();
+		return $query;
 	}
 
 

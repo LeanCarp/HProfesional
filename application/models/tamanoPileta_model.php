@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class tamañoPileta_model extends CI_Model{
+class tamanoPileta_model extends CI_Model{
 	function __contruct(){
 		parent::__construct();
 		//$this->load->database();
@@ -24,13 +24,13 @@ class tamañoPileta_model extends CI_Model{
 		$this->db->from('tamañopileta');
 		$this->db->where('ID', $id);
 		$query = $this->db->get();
-		return $query->result();
+		return $query;
 	}
 
 	function getAll(){
 		$this->load->database();
 		$query = $this->db->get('tamañopileta');
-		return $query->result();
+		return $query;
 	}
 
 

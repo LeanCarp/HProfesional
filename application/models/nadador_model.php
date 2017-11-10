@@ -34,12 +34,13 @@ class nadador_model extends CI_Model{
 		return $query->result();
 	}
 
-	/*function obtenerCursos(){
+	function getAllActivos(){
 		$this->load->database();
-		$query = $this->db->get('cursos');
-		if($query->num_rows() > 0) return $query;
-		else return false;
-	}*/
+		$this->db->where('activo', true);
+		$query = $this->db->get('nadador');
+		return count($query->result());
+	}
+
 
 }
 
