@@ -37,7 +37,7 @@ class nadador_model extends CI_Model{
 	function getAllActivos(){
 		$this->load->database();
 		$this->db->where('activo', true);
-		$query = $this->db->count_all('nadador');
+		$query = $this->db->count_all_results('nadador');
 		return $query;
 	}
 
