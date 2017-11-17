@@ -20,17 +20,6 @@ class ListarAsistencia extends CI_Controller {
 		}
         else
         {
-			/* $crud = new grocery_CRUD();
-			$crud->set_language('spanish');
-			$crud->set_table('asistencia');
-			$crud->set_subject('asistencia');
-			$crud->columns('Fecha', 'Mañana');
-			$crud->fields('Fecha', 'Mañana');
-
-			$crud->unset_export();
-			$crud->unset_print();
-
-			$output = $crud->render(); */
 
 			$this->load->view('headers');
 			$this->load->view('listarAsistencia');
