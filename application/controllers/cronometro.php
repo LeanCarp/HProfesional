@@ -161,29 +161,6 @@ class Cronometro extends CI_Controller {
 		}
 	}
 
-	/* public function cantidadParciales()
-	{
-		$eventoSeleccionado = $this->input->post('eventoSeleccionado');
-
-		if($eventoSeleccionado <> 0) {
-			$prueba = $this->prueba_model->getById($eventoSeleccionado);
-			$prueba = $prueba->row();
-
-			$distancia = $this->distanciaTotal_model->getById($prueba->DistanciaID);
-			$distancia = $distancia->row();
-
-			$tamañoPileta = $this->tamanoPileta_model->getById($prueba->tamañopiletaID);
-			$tamañoPileta = $tamañoPileta->row();
-	
-			$cantidadParciales = $distancia->Distancia/$tamañoPileta->Tamaño;
-			echo $cantidadParciales;
-		} 
-		else 
-		{
-            echo '0';
-        }
-	} */
-
 	public function cantidadParciales($idPrueba)
 	{
 		if($idPrueba <> 0) {
@@ -232,7 +209,7 @@ class Cronometro extends CI_Controller {
 		else
 		{
 			$data = array('Masculino' => $sexo, 'CantidadSeries' => $series, 'CategoriaID' => $categoria, 
-			'DistanciaID' => $distancia, 'EstiloID' => $estilo, 'EntrenamientoID' => $entrenamiento, 'tamañopiletaID' => $pileta);
+			'DistanciaID' => $distancia, 'EstiloID' => $estilo, 'EntrenamientoID' => $entrenamiento, 'tamaniopiletaID' => $pileta);
 			$this->db->insert('prueba', $data);
 			$idPrueba = $this->db->insert_id();
 
@@ -255,9 +232,9 @@ class Cronometro extends CI_Controller {
 	
 					for ($i=1; $i<=$cantParciales; $i++)
 					{
-						/* $parcial = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
-						$this->db->insert('parcial', $parcial); */
-						if (empty($valor[$i]))
+						$parcial = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
+						$this->db->insert('parcial', $parcial);
+						/* if (empty($valor[$i]))
 						{
 							$data = array('ResultadoID' => $idResultado, 'Tiempo' => "00:00:00");
 							$this->db->insert('parcial', $data);
@@ -266,7 +243,7 @@ class Cronometro extends CI_Controller {
 						{
 							$data = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
 							$this->db->insert('parcial', $data);
-						}
+						} */
 					}
 					$data['mensaje'] = "Parciales guardados correctamente";
 				}

@@ -115,7 +115,7 @@
 						<select id="selectPileta" name="selectPileta">
 						<option value="0">Tamaño de pileta</option>
 						<?php foreach($piletas->result() as $pileta) { ?>
-								<option value="<?= $pileta->ID ?>"><?= $pileta->Tamaño ?></option>
+								<option value="<?= $pileta->ID ?>"><?= $pileta->Tamanio ?></option>
 							<?php } ?>
 						</select>
 

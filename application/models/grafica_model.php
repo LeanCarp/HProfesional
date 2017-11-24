@@ -6,20 +6,6 @@ class grafica_model extends CI_Model{
 		parent::__construct();
 		//$this->load->database();
 	}
-	//Funciones para el calendario de inicio.
-	public function get_events($start, $end)
-	{
-		$query=array_merge($this->obtenerEntrenamientos(),$this->obtenerCampeonatos());
-		return $query;
-	}
-
-	function obtenerEntrenamientos()
-	{
-		$this->load->database();
-		$this->db->select('*');
-		$query = $this->db->get("entrenamiento");
-		return $query->result();
-	}
 
 	function obtenerResultados($fromHere, $toHere,$idNadador,$distancia,$tamañoPileta)
 	{
@@ -32,7 +18,8 @@ class grafica_model extends CI_Model{
         $this->db->join('prueba c', 'a.PruebaID=c.ID');
         $this->db->join('distanciatotal d', 'c.DistanciaID=d.ID');
         $this->db->join('tamaniopileta e', 'c.tamaniopiletaID=e.ID');
-     //   $this->db->where('a.DNI', $idNadador);
+		//$this->db->where('a.ID', 10); // Un invento.
+		$this->db->where('a.DNI', $idNadador);
       	$this->db->where('d.Distancia', $distancia);
         $this->db->where('e.Tamanio', $tamañoPileta);
         $this->db->where('a.fecha >=', $fromHere);

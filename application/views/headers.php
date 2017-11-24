@@ -82,7 +82,7 @@ var contador = 1;
 	.div-top{
 		left: -100%;
 		position: absolute;
-		z-index: 3;
+		z-index: 6;
 		width: 80%;
 	}
 
@@ -97,10 +97,10 @@ var contador = 1;
 	}
 
 	.nav-izq{
-		margin-top:297px;
+		margin-top:254px;
 		left: -100%;
 		position: absolute;
-		z-index: 3;
+		z-index: 6;
 		width: 80%;
 		height: 100%;
 	}
@@ -188,7 +188,13 @@ var contador = 1;
 					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>campeonato">Campeonatos</a>
 				</li>
 				<li class="nav-item nav-izq-item">
+					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>grafica">Gráficas</a>
+				</li>
+				<li class="nav-item nav-izq-item">
 					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>historial">Historial de entrenamientos</a>
+				</li>
+				<li class="nav-item nav-izq-item">
+					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>mejoresMarcas">Marcas (en desarrollo)</a>
 				</li>
 			</ul>
 		</div>		
