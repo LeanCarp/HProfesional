@@ -28,7 +28,7 @@ class PruebaCampeonato extends CI_Controller {
 			$crud->columns('TiempoMin', 'Masculino');
 			$crud->fields('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamañopiletaID', 'DistanciaID', 'EstiloID', 'CampeonatoID');
 			$crud->set_relation('CategoriaID','categoria','{Nombre}');
-			$crud->set_relation('tamañopiletaID','tamañopileta','{Tamaño}');
+			$crud->set_relation('tamaniopiletaID','tamaniopileta','{Tamanio}');
 			$crud->set_relation('DistanciaID','distanciatotal','{Distancia}');
 			$crud->set_relation('EstiloID','estilo','{Nombre}');
 			$crud->field_type('CampeonatoID', 'hidden', $ident);
@@ -54,11 +54,14 @@ class PruebaCampeonato extends CI_Controller {
 			//$crud->unset_add();
 			//$crud->unset_operations();
 
+			$this->load->model('campeonato_model');
+			$titulo=$this->campeonato_model->getNombre($ident);
 
-			/* Generamos la tabla */
-	    	$output = $crud->render();
+			$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']='pruebas del campeonato ' .$titulo;
 			$this->load->view('headers');
-			$this->load->view('prueba', $output);
+			$this->load->view('gestion', $output);
 		}
 	}
 

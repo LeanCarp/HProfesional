@@ -48,6 +48,17 @@ class entrenamiento_model extends CI_Model{
 		return $query->result();
 
 	}
+
+	public function getNombre($id)
+	{
+		$this->load->database();
+		$this->db->select('nombre');
+		$this->db->from('entrenamiento');
+		$this->db->where('entrenamiento.ID',$id);
+		$query = $this->db->get(); 
+		return $query->result()[0]->nombre;
+
+	}
 	
 
 }

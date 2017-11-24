@@ -45,9 +45,11 @@ class Nadador extends CI_Controller {
 
 
 			/* Generamos la tabla */
-	    	$output = $crud->render();
-	    	$this->load->view('headers', $output);
-	    	$this->load->view('nadador', $output);
+	    	$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']='Nadadores';
+			$this->load->view('headers');
+			$this->load->view('gestion', $output);
 	    }
 	}
 

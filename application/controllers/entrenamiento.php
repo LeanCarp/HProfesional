@@ -22,8 +22,11 @@ class Entrenamiento extends CI_Controller {
 			$crud->set_table('entrenamiento');
 			$crud->columns('inicio','fin', 'nombre','color');
 			$crud->fields('inicio','fin', 'nombre', 'TipoEntrenamientoID','color');
+			
+			//$nombreEntrenamiento=$crud->get_edit_field_value('Nombre');
 
 			$crud->add_action('<+>', '+','pruebaEntrenamiento/index');
+			$crud->set_subject('Nombre');
 			//$crud->unset_add();
 			//$crud->unset_delete();
 			//$crud->unset_read();
@@ -41,9 +44,11 @@ class Entrenamiento extends CI_Controller {
 
 
 			/* Generamos la tabla */
-	    	$output = $crud->render();
+	    	$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']='Entrenamientos';
 			$this->load->view('headers');
-			$this->load->view('entrenamiento', $output);
+			$this->load->view('gestion', $output);
 		}
 	}
 

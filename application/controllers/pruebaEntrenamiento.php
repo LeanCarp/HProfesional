@@ -10,13 +10,14 @@ class PruebaEntrenamiento extends CI_Controller {
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
 	}
 
-	function index(){
+	function index($idEntrenamiento){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
         else
         {
+			
         	$ident = $this->uri->segment(3);
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
@@ -24,11 +25,12 @@ class PruebaEntrenamiento extends CI_Controller {
 			$crud->columns('TiempoMin', 'Masculino');
 			// Agrega acción.
 			$crud->add_action('<>', '+','cronometro/Entrenamiento');
+			
 			//
 			$crud->where('EntrenamientoID', $ident);
 			$crud->fields('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamañopiletaID', 'DistanciaID', 'EstiloID', 'EntrenamientoID');
 			$crud->set_relation('CategoriaID','categoria','{Nombre}');
-			$crud->set_relation('tamañopiletaID','tamañopileta','{Tamaño}');
+			$crud->set_relation('tamaniopiletaID','tamaniopileta','{Tamanio}');
 			$crud->set_relation('DistanciaID','distanciatotal','{Distancia}');
 			$crud->set_relation('EstiloID','estilo','{Nombre}');
 			$crud->field_type('EntrenamientoID', 'hidden', $ident);
@@ -57,11 +59,14 @@ class PruebaEntrenamiento extends CI_Controller {
 			//$crud->unset_add();
 			//$crud->unset_operations();
 
+			$this->load->model('entrenamiento_model');
+			$titulo=$this->entrenamiento_model->getNombre($idEntrenamiento);
 
-			/* Generamos la tabla */
-	    	$output = $crud->render();
+			$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']='pruebas del entrenamiento ' .$titulo;
 			$this->load->view('headers');
-			$this->load->view('prueba', $output);
+			$this->load->view('gestion', $output);
 		}
 
 		function prueba($id){

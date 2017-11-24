@@ -42,10 +42,12 @@ class Campeonato extends CI_Controller {
 			$crud->display_as('nombre','Título');
 			$crud->display_as('ClubID','Club');
 
-			/* Generamos la tabla */
-	    	$output = $crud->render();
-			$this->load->view('headers');
-			$this->load->view('campeonato', $output);
+		/* Generamos la tabla */
+		$output = (array)$crud->render();
+		//Se carga el titulo a la vista.
+		$output['titulo']='Campeonatos';
+		$this->load->view('headers');
+		$this->load->view('gestion', $output);
 		}
 	}
 

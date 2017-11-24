@@ -34,9 +34,11 @@ class Ejercicio extends CI_Controller {
 
 
 			/* Generamos la tabla */
-	    	$output = $crud->render();
+	    	$output = (array)$crud->render();
+			//Se carga el titulo a la vista.
+			$output['titulo']='Ejercicios';
 			$this->load->view('headers');
-			$this->load->view('ejercicio', $output);
+			$this->load->view('gestion', $output);
 		}
 	}
 

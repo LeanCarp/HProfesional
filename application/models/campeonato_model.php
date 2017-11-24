@@ -34,6 +34,16 @@ class campeonato_model extends CI_Model{
 	}
 
 
+	public function getNombre($id)
+	{
+		$this->load->database();
+		$this->db->select('nombre');
+		$this->db->from('campeonato');
+		$this->db->where('campeonato.ID',$id);
+		$query = $this->db->get(); 
+		return $query->result()[0]->nombre;
+
+	}
 
 }
 
