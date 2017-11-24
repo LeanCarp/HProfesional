@@ -57,12 +57,16 @@ class Grafica extends CI_Controller {
 
 		$fromHere= new DateTime('2016-11-20');
 		$toHere= new DateTime('2019-11-20');
+
+		$estilo="Mariposa";
+		//$estilo = $this->input->post('estilo');
+		
 		//$fromHere= new DateTime($fromHere);
 		//$toHere= new DateTime($toHere);
 		//$distancia=100;
 		//$tamañoPileta=25;
 		//$id=38570363;
-		$events = $this->grafica_model->obtenerResultados($fromHere, $toHere, $id, $distancia, $tamañoPileta);
+		$events = $this->grafica_model->obtenerResultados($fromHere, $toHere, $id, $distancia, $tamañoPileta, $estilo);
 
 		if (count($events) == 0)
 		{

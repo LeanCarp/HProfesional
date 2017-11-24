@@ -45,10 +45,7 @@ class PruebaCampeonato extends CI_Controller {
 			$crud->display_as('EstiloID','Estilo');
 			$crud->display_as('DistanciaID','Distancia');
 
-			//$crud->unset_add();
-			//$crud->unset_delete();
-			//$crud->unset_read();
-			//$crud->unset_edit_fields('DNI');
+
 			$crud->unset_export();
 			$crud->unset_print();
 			//$crud->unset_add();
