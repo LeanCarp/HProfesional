@@ -7,7 +7,7 @@ class grafica_model extends CI_Model{
 		//$this->load->database();
 	}
 
-	function obtenerResultados($fromHere, $toHere,$idNadador,$distancia,$tamañoPileta)
+	function obtenerResultados($fromHere, $toHere,$idNadador,$distancia,$tamañoPileta,$estilo)
 	{
         $fromHere= $fromHere->format('Y-m-d');
         $toHere= $toHere->format('Y-m-d');
@@ -17,9 +17,11 @@ class grafica_model extends CI_Model{
         $this->db->join('parcial b', 'b.ResultadoID=a.ID');
         $this->db->join('prueba c', 'a.PruebaID=c.ID');
         $this->db->join('distanciatotal d', 'c.DistanciaID=d.ID');
-        $this->db->join('tamaniopileta e', 'c.tamaniopiletaID=e.ID');
-		//$this->db->where('a.ID', 10); // Un invento.
+		$this->db->join('tamaniopileta e', 'c.tamaniopiletaID=e.ID');
+		$this->db->join('estilo f', 'c.EstiloID=f.ID');
+		
 		$this->db->where('a.DNI', $idNadador);
+		$this->db->where('f.Nombre', $estilo);
       	$this->db->where('d.Distancia', $distancia);
         $this->db->where('e.Tamanio', $tamañoPileta);
         $this->db->where('a.fecha >=', $fromHere);

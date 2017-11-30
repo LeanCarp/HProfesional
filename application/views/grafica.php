@@ -1,47 +1,51 @@
 <script>
-
+    //graficado se usa para saber si ya se graficó o no, para controlar si dejar exportar a PDF o no.
+    var graficado=false;
 //var dataChart={"titulo":"Probando Graficas","datosParciales":[{"metros":25,"Resultado1":3.1},{"metros":50,"Resultado1":3.24},{"metros":75,"Resultado1":3.38},{"metros":100,"Resultado1":3.58}],"categoriasMetros":[{"field":"Resultado1","categoryField":"metros","name":"0-25"},{"field":"Resultado2","categoryField":"metros","name":"25-50"},{"field":"Resultado3","categoryField":"metros","name":"50-75"},{"field":"Resultado4","categoryField":"metros","name":"75-100"}]}
-var dataChart=null;
-function cargarGrafica()
-{
-    //var distancia = document.getElementById("selectDistancia").text;
-    var distancia = $("#selectDistancia option:selected").val();
-    var pileta = $("#selectTamañoPileta option:selected").val();
-    var nadador = $("#selectNadador option:selected").val();
-    var fecha1 =  $("#fecha1").val();
-    var fecha2 = $("#fecha2").val();
+    var dataChart=null;
+    function cargarGrafica()
+    {
+        //var distancia = document.getElementById("selectDistancia").text;
+        var distancia = $("#selectDistancia option:selected").val();
+        var pileta = $("#selectTamañoPileta option:selected").val();
+        var nadador = $("#selectNadador option:selected").val();
+        var fecha1 =  $("#fecha1").val();
+        var fecha2 = $("#fecha2").val();
 
-    var parametros = {
-				"distancia" : distancia,
-				"pileta" : pileta,
-                "nadador" : nadador,
-                "fecha1" : fecha1,
-                "fecha2" : fecha2,
-		};
+        var parametros = {
+                    "distancia" : distancia,
+                    "pileta" : pileta,
+                    "nadador" : nadador,
+                    "fecha1" : fecha1,
+                    "fecha2" : fecha2,
+            };
 
-    $.ajax({
-                    data: parametros,
-                    url: 'grafica/obtenerResultados',
-                    type:  'post',
-                    dataType: 'json',
-                    success: function(msg) {
-                         dataChart = msg;
-                         if ((typeof dataChart) == 'string')
-                         {
-                            $("#resultados").html(dataChart);
-                            $("#chart").hide();
-                         }
-                         else
-                         {
-                            $("#chart").show();
-                            createChart();
-                            $("#resultados").html("");
-                            
-                         }                   
-                    }
-    });
-                
-}
+        $.ajax({
+                        data: parametros,
+                        url: 'grafica/obtenerResultados',
+                        type:  'post',
+                        dataType: 'json',
+                        success: function(msg) {
+                            dataChart = msg;
+                            //Si hay algun dato, se habilita la var que permite exportar a pdf.
+                            if ((typeof dataChart) == 'string')
+                            {
+                                graficado=false;
+                                $("#resultados").html(dataChart);
+                                $("#chart").hide();
+                            }
+                            else
+                            {
+                                graficado=true;
+                                $("#chart").show();
+                                createChart();
+                                $("#resultados").html("");
+                                
+                            }                   
+                        }
+        });
+                    
+    }
 
     function createChart() {
         $("#chart").kendoChart({
@@ -91,6 +95,19 @@ function cargarGrafica()
             }
         });
     }
+     function pdfExport(idName,fileName){ 
+         if (graficado)
+         {
+            kendo.drawing.drawDOM($('#'+idName)).then(function (group) {
+                kendo.drawing.pdf.saveAs(group,fileName+'.pdf');
+            });
+         } 
+         else
+         {
+             alert ("Debe realizar un grafico antes de exportar");
+         }
+        
+      }
 
 </script>
 
@@ -117,7 +134,6 @@ function cargarGrafica()
 
 </style>
 
-<div id="example">
 
 <div class="selects">
 		<h2>Gestión de Gráficas:</h2>
@@ -148,12 +164,20 @@ function cargarGrafica()
             <!-- <?php echo form_submit('submit', 'Graficar', 'class="btn-primary"'); ?>
             <?php echo form_submit(['name'=> 'submit', 'value'=> 'Hacerlo']); ?>	 -->	
         </div>
-        <button onclick="cargarGrafica()">Graficar</button>
+        <button onclick="cargarGrafica()">Graficar</button> 
+
+
+        <button onclick="pdfExport('forExportPDF', 'newFile')">Exportar a PDF</button>
     </div>
 
-<div class="demo-section k-content wide">
-    <div id="chart"  style="background: center no-repeat url('../content/shared/styles/world-map.png');"></div>
-</div>
+    
+    <div id="forExportPDF">
+        <div class="demo-section k-content wide">
+            <div id="chart"></div>
+        </div>
+    </div>
+    
+
  
 
 <div id="resultados" style="margin-top: 30px; list-style: none"></div>
