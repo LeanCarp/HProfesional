@@ -124,6 +124,10 @@
         font-size: 13px;
     }
 
+    .selects label{
+        margin: 0;
+    }
+
     @media screen and (max-width:800px){
         .selects{
             display: flex;
@@ -167,7 +171,7 @@
         <button onclick="cargarGrafica()">Graficar</button> 
 
 
-        <button onclick="pdfExport('forExportPDF', 'newFile')">Exportar a PDF</button>
+        <button onclick="pdfExport('forExportPDF', 'newFile')" style="margin-top: 10px;">Exportar a PDF</button>
     </div>
 
     

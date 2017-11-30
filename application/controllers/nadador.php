@@ -23,7 +23,6 @@ class Nadador extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('nadador');
-<<<<<<< HEAD
 			$crud->columns('DNI', 'Apellido', 'Nombre', 'Sexo', 'FechaNacimiento','Edad','Categoria');
 			$crud->fields('DNI', 'Apellido', 'Nombre', 'FechaNacimiento','Sexo');
 			$crud->field_type('Sexo','true_false',
@@ -35,15 +34,6 @@ class Nadador extends CI_Controller {
 			$crud->callback_column('Edad' ,array($this,'obtenerEdad'));
 			$crud->callback_column('Categoria' ,array($this,'obtenerCategoria'));
 
-=======
-			$crud->columns('DNI', 'Apellido', 'Nombre', 'Sexo', 'FechaNacimiento');
-			$crud->fields('DNI', 'Apellido', 'Nombre', 'FechaNacimiento','Sexo');
-			$crud->field_type('Sexo','true_false',
-									array('1' => 'Masculino', '0' => 'Femenino'));
-			//$crud->unset_add();
-			//$crud->unset_delete();
-			//$crud->unset_read();
->>>>>>> origin/Develop
 			$crud->unset_edit_fields('DNI');
 			$crud->unset_export();
 			$crud->unset_print();
@@ -58,7 +48,6 @@ class Nadador extends CI_Controller {
 			$this->load->view('gestion', $output);
 		}
 	}
-<<<<<<< HEAD
 	public function obtenerEdad($value, $row)
 	{
 		return $this->CalculaEdad($row->FechaNacimiento);
@@ -73,8 +62,4 @@ class Nadador extends CI_Controller {
 		list($Y,$m,$d) = explode("-",$fecha);
 		return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
 	}
-
-
-=======
->>>>>>> origin/Develop
 }

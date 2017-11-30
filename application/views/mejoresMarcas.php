@@ -22,9 +22,17 @@ function realizarProceso(){
 }
 
 function obtenerMarcas(){
-                var select = $("#selectPrueba option:selected").val();
+                var selectEstilo = $("#selectEstilo option:selected").val();
+                var selectSexo = $("#selectSexo option:selected").val();
+                var selectCategoria = $("#selectCategoria option:selected").val();
+                var selectPileta = $("#selectPileta option:selected").val();
+                var selectDistancia = $("#selectDistancia option:selected").val();
 		var parametros = {
-				"select" : select
+				"selectEstilo" : selectEstilo,
+                                "selectSexo" : selectSexo,
+                                "selectCategoria" : selectCategoria,
+                                "selectPileta" : selectPileta,
+                                "selectDistancia" : selectDistancia
 		};
 
         $.ajax({
@@ -38,10 +46,44 @@ function obtenerMarcas(){
 }
 </script>
 
-                <select id="selectPrueba" name="selectPrueba">
-                <option value="1">Categoría</option>
-                <option value="2">Estilo</option>
-                <option value="3">Absoluto</option>
+                <!-- <select id="selectPrueba" name="selectPrueba">
+                        <option value="1">Categoría</option>
+                        <option value="2">Estilo</option>
+                        <option value="3">Absoluto</option>
+                </select> -->
+
+                <select id="selectEstilo" name="selectEstilo">
+                        <option value="0">Estilo</option>
+                        <?php foreach($estilos->result() as $estilo) { ?>
+                                <option value="<?= $estilo->ID ?>"><?= $estilo->Nombre ?></option>
+                        <?php } ?>
+                </select>                    
+
+                <select id="selectSexo" name="selectSexo">
+                        <option value="0">Sexo</option>
+                        <option value="1">Masculino</option>
+                        <option value="2">Femenino</option>
+                </select>            
+
+                <select id="selectCategoria" name="selectCategoria">
+                        <option value="0">Categoría</option>
+                        <?php foreach($categorias as $categoria) { ?>
+                                <option value="<?= $categoria->ID ?>"><?= $categoria->Nombre ?></option>
+                        <?php } ?>
+                </select>
+
+                <select id="selectPileta" name="selectPileta">
+                        <option value="0">Tamaño de pileta</option>
+                        <?php foreach($piletas->result() as $pileta) { ?>
+                                <option value="<?= $pileta->ID ?>"><?= $pileta->Tamanio ?></option>
+                        <?php } ?>
+                </select>
+
+                <select id="selectDistancia" name="selectDistancia">
+                        <option value="0">Distancia</option>
+                        <?php foreach($distancias->result() as $distancia) { ?>
+                                <option value="<?= $distancia->ID ?>"><?= $distancia->Distancia ?></option>
+                        <?php } ?>
                 </select>
 
                 <input type="button" class="btnFiltrar" id="Filtrar" value="Obtener marcas" onclick="obtenerMarcas()">

@@ -14,6 +14,8 @@ class MejoresMarcas extends CI_Controller {
 		$this->load->model('parcial_model');
 		$this->load->model('resultado_model');
 		$this->load->model('prueba_model');
+		$this->load->model('distanciaTotal_model');
+		$this->load->model('tamanoPileta_model');
 	}
 
 	function index(){
@@ -23,8 +25,11 @@ class MejoresMarcas extends CI_Controller {
 		}
         else
         {
-            $data['estilos'] = $this->estilo_model->getAll();
-            $data['categorias'] = $this->categoria_model->getAll();
+			$data['estilos'] = $this->estilo_model->getAll();
+			$data['distancias'] = $this->distanciaTotal_model->getAll();
+			$data['piletas'] = $this->tamanoPileta_model->getAll();
+			$data['categorias'] = $this->categoria_model->getAll();
+			$data['nadadores'] = $this->nadador_model->getAll();
 
 			$this->load->view('headers');
 			$this->load->view('mejoresMarcas', $data);
@@ -133,7 +138,11 @@ class MejoresMarcas extends CI_Controller {
 
 	function ObtenerMarcasPor()
 	{
-		$seleccionado = $this->input->post("select");
+		$selectEstilo = $this->input->post("selectEstilo");
+		$selectSexo = $this->input->post("selectSexo");
+		$selectCategoria = $this->input->post("selectCategoria");
+		$selectPileta = $this->input->post("selectPileta");
+		$selectEstilo = $this->input->post("selectEstilo");
 		
 		$nadadores = $this->nadador_model->getAll();
 
