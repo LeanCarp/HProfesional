@@ -141,13 +141,13 @@
 
 			<div id="contenedor">
 				<div class="cronometro">
-					<div class="reloj">
+					<div class="reloj row">
 						<!-- <div class="reloj" id="Horas">00</div> -->
 						<div class="" id="Minutos">00</div>
 						<div class="" id="Segundos">:00</div>
 						<div class="" id="Centesimas">:00</div>
 					</div>
-					<div class="botones">
+					<div class="botones row">
 						<input type="button" class="btn-success botonesCronometro" id="inicio" value="Comenzar &#9658;" onclick="inicio();">
 						<input type="button" class="btn-warning botonesCronometro" id="parar" value="Detener &#8718;" onclick="parar();" disabled>
 						<input type="button" class="btn-info botonesCronometro" id="continuar" value="Resumir &#8634;" onclick="inicio();" disabled>

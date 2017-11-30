@@ -18,29 +18,25 @@ class Nadador extends CI_Controller {
 			redirect('auth/login');
 		}
         else
-	        {
-			/*$this->load->view('headers');
-			$result = $this->nadador_model->getAll();
-			return $result;*/
-			/*foreach ($result as $nadador)
-			{
-				echo $nadador->DNI;
-			}*/
+	    {
+						
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('nadador');
-			$crud->columns('DNI', 'Apellido', 'Nombre', 'Sexo');
+			$crud->columns('DNI', 'Apellido', 'Nombre', 'Sexo', 'FechaNacimiento','Edad','Categoria');
 			$crud->fields('DNI', 'Apellido', 'Nombre', 'FechaNacimiento','Sexo');
 			$crud->field_type('Sexo','true_false',
-	       						 array('1' => 'Masculino', '0' => 'Femenino'));
-			//$crud->unset_add();
-			//$crud->unset_delete();
-			//$crud->unset_read();
+									array('1' => 'Masculino', '0' => 'Femenino'));
+									
+			$crud->display_as('FechaNacimiento','Fecha de Nacimiento');
+			$crud->field_type('FechaNacimiento', 'integer');
+			//$crud->callback_column ( 'Edad' ,  $this->CalculaEdad("1995-01-03")) ;
+			$crud->callback_column('Edad' ,array($this,'obtenerEdad'));
+			$crud->callback_column('Categoria' ,array($this,'obtenerCategoria'));
+
 			$crud->unset_edit_fields('DNI');
 			$crud->unset_export();
 			$crud->unset_print();
-			//$crud->unset_add();
-			//$crud->unset_operations();
 
 
 
@@ -51,6 +47,20 @@ class Nadador extends CI_Controller {
 			$this->load->view('headers');
 			$this->load->view('gestion', $output);
 	    }
+	}
+	public function obtenerEdad($value, $row)
+	{
+		return $this->CalculaEdad($row->FechaNacimiento);
+	}
+	public function obtenerCategoria($value, $row)
+	{
+		$this->load->model('categoria_model');
+		return $this->categoria_model->getByEdad($this->CalculaEdad($row->FechaNacimiento));
+	}
+
+	function CalculaEdad( $fecha ) {
+		list($Y,$m,$d) = explode("-",$fecha);
+		return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
 	}
 
 

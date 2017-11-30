@@ -33,6 +33,24 @@ class categoria_model extends CI_Model{
 		return $query;
 	}
 
+	function getByEdad($Edad){
+		$this->load->database();
+		$this->db->select('Nombre');
+		$this->db->from('categoria');
+		$this->db->where('EdadMinima <=', $Edad);
+		$this->db->where('EdadMaxima >=', $Edad);		
+		$query = $this->db->get();
+		if(count($query->result())>0 )
+		{
+			return $query->result()[0]->Nombre;
+		}
+		
+		else
+		{
+			return "sin definir";
+		}
+		
+	}
 
 
 }
