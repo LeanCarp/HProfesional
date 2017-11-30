@@ -22,20 +22,17 @@ class PruebaEntrenamiento extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('prueba');
-			$crud->columns('TiempoMin', 'Masculino');
+			$crud->columns('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID');
+			$crud->fields('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID', 'EntrenamientoID');
 			// Agrega acción.
 			$crud->add_action('<>', '+','cronometro/Entrenamiento');
-			
-			//
 			$crud->where('EntrenamientoID', $ident);
-			$crud->fields('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamañopiletaID', 'DistanciaID', 'EstiloID', 'EntrenamientoID');
 			$crud->set_relation('CategoriaID','categoria','{Nombre}');
 			$crud->set_relation('tamaniopiletaID','tamaniopileta','{Tamanio}');
 			$crud->set_relation('DistanciaID','distanciatotal','{Distancia}');
 			$crud->set_relation('EstiloID','estilo','{Nombre}');
 			$crud->field_type('EntrenamientoID', 'hidden', $ident);
-
-			// $crud->set_relation('EntrenamientoID','entrenamiento','{Nombre}');
+			$crud->field_type('CampeonatoID', 'hidden');
 			
 			$crud->display_as('Masculino','Sexo');
 			$crud->field_type('Masculino','true_false',
@@ -48,6 +45,7 @@ class PruebaEntrenamiento extends CI_Controller {
 			//$crud->display_as('TamañoPiletaID','Tamaño de pileta');
 			$crud->display_as('EstiloID','Estilo');
 			$crud->display_as('DistanciaID','Distancia');
+			$crud->display_as('tamaniopiletaID','Tamaño de pileta');
 			// $crud->display_as('EntrenamientoID','Entrenamiento');
 
 			//$crud->unset_add();

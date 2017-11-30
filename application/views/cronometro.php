@@ -31,7 +31,7 @@
 
 @media screen and (max-width:800px){
 	.nadadores{
-		margin-top: 110px;
+		margin-top: 130px;
 	}
 	.selects{
 	display: flex;
@@ -59,13 +59,17 @@
 
 	.botones
 	{
+		display: flex;
 		flex-direction: column;
+		-webkit-margin-before: 40px;
 	}
 
 	.botonesCronometro{
 		margin: 3px;
 		cursor: pointer;
 		font-size: 15px;
+		height: 25px;
+		
 	}
 
 	.box1{
@@ -106,7 +110,7 @@
 						<!-- <label>Categoría: </label> -->
 						<select id="selectCategoria" name="selectCategoria">
 						<option value="0">Categoría</option>
-						<?php foreach($categorias->result() as $categoria) { ?>
+						<?php foreach($categorias as $categoria) { ?>
 								<option value="<?= $categoria->ID ?>"><?= $categoria->Nombre ?></option>
 							<?php } ?>
 						</select>
@@ -147,12 +151,21 @@
 						<div class="" id="Segundos">:00</div>
 						<div class="" id="Centesimas">:00</div>
 					</div>
+<<<<<<< HEAD
 					<div class="botones row">
 						<input type="button" class="btn-success botonesCronometro" id="inicio" value="Comenzar &#9658;" onclick="inicio();">
 						<input type="button" class="btn-warning botonesCronometro" id="parar" value="Detener &#8718;" onclick="parar();" disabled>
 						<input type="button" class="btn-info botonesCronometro" id="continuar" value="Resumir &#8634;" onclick="inicio();" disabled>
 						<input type="button" class="btn-danger botonesCronometro" id="reinicio" value="Reiniciar &#8635;" onclick="reinicio();" disabled>
 						<input type="button" class="btn-danger botonesCronometro" id="limpiar" value="Limpiar" onclick="limpiar();">
+=======
+					<div class="botones">
+						<div><input type="button" class="btn-success botonesCronometro" id="inicio" value="Comenzar &#9658;" onclick="inicio();"></div>
+						<div><input type="button" class="btn-warning botonesCronometro" id="parar" value="Detener &#8718;" onclick="parar();" disabled></div>
+						<div><input type="button" class="btn-info botonesCronometro" id="continuar" value="Resumir &#8634;" onclick="inicio();" disabled></div>
+						<div><input type="button" class="btn-danger botonesCronometro" id="reinicio" value="Reiniciar &#8635;" onclick="reinicio();" disabled></div>
+						<div><input type="button" class="btn-danger botonesCronometro" id="limpiar" value="Limpiar" onclick="limpiar();"></div>
+>>>>>>> origin/Develop
 					</div>
 				</div>
 				

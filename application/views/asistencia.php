@@ -34,13 +34,13 @@
 		<div>
 			<label>Entrenamiento: </label>
 			<select name="selectEntrenamiento">
-				<?php foreach($records->result() as $row) { ?>
-					<option value="<?= $row->ID ?>"><?= $row->Nombre ?></option>
+				<?php foreach($entrenamientos->result() as $entrenamiento) { ?>
+					<option value="<?= $entrenamiento->ID ?>"><?= $entrenamiento->nombre ?></option>
 				<?php } ?>
 			</select>
 		</div>
 		<div>
-			<label>Fecha: </label> <input name="fecha" type="date">
+			<label>Fecha: </label> <input id="fecha" name="fecha" type="date" value="<?php echo date("Y-m-d");?>">
 		</div>
 		<div>
 			<label>Turno: </label>
@@ -52,22 +52,66 @@
 		</div> <!-- contenedor -->
 	</div> <!-- selects -->
 
-	<?php foreach($records2->result() as $row) { ?>
-	<li class="list-group-item li-contenido"><?= $row->DNI ?> | <?= $row->Apellido ?> <?= $row->Nombre ?> <input name="checkeds[]" type="checkbox" value="<?= $row->DNI ?>"></li>
-	<?php } ?>
+<script>
+	function seleccionarTodos()
+	{
+		if ($("#checkAll").prop('checked') )
+		{
+			$("#listaNadadores li input").each(
+			function () {
+			$(this).prop('checked', true);
+			});
+		}
+		else
+		{
+			$("#listaNadadores li input").each(
+			function () {
+			$(this).prop('checked', false);
+			});
+		}
+	}
+
+</script>
+	<div style="display: flex; flex-direction: column; align-items: right;">
+		<div><label> Seleccionar todos: </label> <input type="checkbox" id="checkAll" onclick="seleccionarTodos()"></div>
+	</div>
+
+	<div id="listaNadadores">
+		<?php foreach($nadadores as $nadador) { ?>
+		<li class="list-group-item li-contenido"><?= $nadador->DNI ?> | <?= $nadador->Apellido ?> <?= $nadador->Nombre ?> <input name="checkeds[]" type="checkbox" value="<?= $nadador->DNI ?>"></li>
+		<?php } ?>
+	</div>
+
 	<div style="margin-top: 20px;">
 	<input type="submit" value="Guardar" id="botonGuardar">
-	<script>
+
+	<script> /* Script que controla los datos antes de hacer un Submit */
 		$("#botonGuardar").click(function(event){
 		event.preventDefault();
+		var valido = false;
+		$("#listaNadadores li input").each(
+		function () {
+			if( $(this).prop('checked') ) {
+				valido = true;
+			}
+		});
 
-		alert("A tu casa");
-		console.log("a tu casa");
+		if ($("#fecha").val() == "")
+		{
+			valido = false;
+		}
 
-		$("#formAsistencia").submit();
+		if (valido)
+		{
+			$("#formAsistencia").submit();
+		}
+		else
+		{
+			alert("Datos incorrectos o selección vacía");
+		}
 		});
 	</script>
-		<!-- <?php echo form_submit('submit', 'Guardar', 'class="btn-primary"'); ?> -->
+
 	</div>
 		<?php echo form_close(); ?>
 </body>

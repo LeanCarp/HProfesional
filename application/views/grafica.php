@@ -157,8 +157,8 @@
                     <option value="<?= $row->Distancia ?>"><?= $row->Distancia?></option>
                 <?php } ?>
             </select>
-            <label>Fecha 1: </label> <input id="fecha1" name="fecha1" type="date">
-            <label>Fecha 2: </label> <input id="fecha2" name="fecha2" type="date">
+            <label>Fecha 1: </label> <input id="fecha1" name="fecha1" type="date" value="<?php echo date('2010-01-01'); ?>">
+            <label>Fecha 2: </label> <input id="fecha2" name="fecha2" type="date" value="<?php echo date('Y-m-d'); ?>">
 
             <div style="margin-top: 20px;">
             <!-- <?php echo form_submit('submit', 'Graficar', 'class="btn-primary"'); ?>
