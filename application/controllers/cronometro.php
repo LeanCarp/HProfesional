@@ -224,7 +224,7 @@ class Cronometro extends CI_Controller {
 				}
 				else
 				{
-					$data = array('PruebaID' => $idPrueba, 'DNI' => $valor[0], 'Fecha' => $fechaHoy);
+					$data = array('PruebaID' => $idPrueba, 'DNI' => $valor[0], 'Fecha' => $fechaHoy, 'TiempoTotal' => $this->calcularTotal($valor));
 					$this->db->insert('resultado', $data);
 					$idResultado = $this->db->insert_id();
 					
@@ -252,6 +252,36 @@ class Cronometro extends CI_Controller {
 			$this->load->view('headers');
 			$this->load->view('mensaje', $data);
 		}
+	}
+
+	function calcularTotal($parciales)
+	{
+		$total = 0;
+		for ($i=1; $i <= count($parciales)-1; $i++)
+		{
+			$tiempo = $this->timeToSeconds($parciales[$i]);
+			$total += $tiempo;
+		}
+		return $this->SecondsToTime($total);
+	}
+
+	function timeToSeconds($time) {
+		$valor = explode(":", $time);
+		return intval($valor[0]) * 60 + intval($valor[1]) + intval($valor[2]) * 0.01;
+	}
+
+	function SecondsToTime($seconds){
+		$result = $seconds / 60;
+		$min = floor($result);
+		if ($min < 10) {$min = '0'.$min; }
+		$result = ($result-$min) * 60;
+		$seg = floor($result);
+		if ($seg < 10) {$seg = '0'.$seg; }
+		$result = (($result-$seg) * 100);
+		$cent = ($result);
+		if ($cent < 10) {$cent = '0'.$cent; }
+		return $min.':'.$seg.':'.$cent;
+	
 	}
 
 /* 	public function insercionManual(){

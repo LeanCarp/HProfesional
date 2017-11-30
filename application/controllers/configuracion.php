@@ -12,30 +12,6 @@ class Configuracion extends CI_Controller {
 
 	function index(){
 		$this->load->view('headersConfiguracion');
-		// if (!$this->ion_auth->logged_in())
-		// {
-		// 	redirect('auth/login');
-		// }
-  //       else
-  //       {
-		// 	$crud = new grocery_CRUD();
-		// 	$crud->set_language('spanish');
-		// 	$crud->set_table('distanciatotal');
-		// 	$crud->columns('Distancia');
-		// 	$crud->fields('Distancia');
-		// 	//$crud->unset_add();
-		// 	//$crud->unset_delete();
-		// 	//$crud->unset_read();
-		// 	//$crud->unset_edit_fields('DNI');
-		// 	$crud->unset_export();
-		// 	$crud->unset_print();
-		// 	//$crud->unset_add();
-		// 	//$crud->unset_operations();
-
-
-		// 	/* Generamos la tabla */
-	 //    	$output = $crud->render();
-		// 	$this->load->view('headers');
-		// 	$this->load->view('distancia', $output);
+		$this->load->view('configuracion');
 		}
 	}

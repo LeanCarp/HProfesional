@@ -46,7 +46,7 @@ function realizarProceso(){
 
 		<div class="contenedor">
 			<div>
-				<label>Fecha: </label> <input id="fecha" name="fecha" type="date">
+				<label>Fecha: </label> <input id="fecha" name="fecha" type="date" value="<?php echo date("Y-m-d");?>">
 			</div>
 			
 			<div>

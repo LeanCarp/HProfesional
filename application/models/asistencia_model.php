@@ -4,12 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class asistencia_model extends CI_Model{
 	function __contruct(){
 		parent::__construct();
-		//$this->load->database();
+		$this->load->database();
 	}
 
-	function crearPrueba($data){
-		$this->load->database();
+	function insertarAsistencia($data){
 		$this->db->insert('asistencia', $data);
+		return $this->db->insert_id();
 	}
 
 	function eliminarPrueba($id){

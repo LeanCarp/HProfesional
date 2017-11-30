@@ -20,27 +20,33 @@ function realizarProceso(){
                 }
         });
 }
+
+function obtenerMarcas(){
+                var select = $("#selectPrueba option:selected").val();
+		var parametros = {
+				"select" : select
+		};
+
+        $.ajax({
+                data:  parametros,
+                url:   'mejoresMarcas/ObtenerMarcasPor',
+                type:  'post',
+                success:  function (response) {
+                        $("#output2").html(response);
+                }
+        });
+}
 </script>
 
-		<div class="contenedor">
-                        <select id="selectEstilo" name="selectEstilo">
-                        <option value="0">Estilo</option>
-                        <?php foreach($estilos->result() as $estilo) { ?>
-                                <option value="<?= $estilo->ID ?>"><?= $estilo->Nombre ?></option>
-                        <?php } ?>
-                        </select>
+                <select id="selectPrueba" name="selectPrueba">
+                <option value="1">Categoría</option>
+                <option value="2">Estilo</option>
+                <option value="3">Absoluto</option>
+                </select>
 
-                        <select id="selectCategoria" name="selectCategoria">
-                        <option value="0">Categoría</option>
-                        <?php foreach($categorias->result() as $categoria) { ?>
-                                        <option value="<?= $categoria->ID ?>"><?= $categoria->Nombre ?></option>
-                                <?php } ?>
-                        </select>
+                <input type="button" class="btnFiltrar" id="Filtrar" value="Obtener marcas" onclick="obtenerMarcas()">
 
-                        <input type="button" class="btnFiltrar" id="Filtrar" value="Filtrar" onclick="realizarProceso()">
-		</div>
-		
-		<div id="output" style="margin-top: 25px;"></div>
-	</div>
+                <div id="output2" style="margin-top: 25px;"></div>
+        </div>
 </body>
 </html>

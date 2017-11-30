@@ -29,10 +29,10 @@ class Nadador extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('nadador');
-			$crud->columns('DNI', 'Apellido', 'Nombre', 'Sexo');
+			$crud->columns('DNI', 'Apellido', 'Nombre', 'Sexo', 'FechaNacimiento');
 			$crud->fields('DNI', 'Apellido', 'Nombre', 'FechaNacimiento','Sexo');
 			$crud->field_type('Sexo','true_false',
-	       						 array('1' => 'Masculino', '0' => 'Femenino'));
+									array('1' => 'Masculino', '0' => 'Femenino'));
 			//$crud->unset_add();
 			//$crud->unset_delete();
 			//$crud->unset_read();
@@ -50,8 +50,6 @@ class Nadador extends CI_Controller {
 			$output['titulo']='Nadadores';
 			$this->load->view('headers');
 			$this->load->view('gestion', $output);
-	    }
+		}
 	}
-
-
 }
