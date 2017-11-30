@@ -53,12 +53,12 @@ html, body, .contenido-principal{
 .cronometro{
 	display: flex;
 	flex-direction: column;
-	width: 540px;
-	height: 115px;
+	/* width: 540px;
+	height: 115px; */
 }
 .reloj{
 	display: flex;
-	margin: auto;
+	margin: 0 auto;
 	/*float: left;*/
 	font-size: 80px;
 	/*	font-family: Courier,sans-serif;*/
@@ -68,6 +68,7 @@ html, body, .contenido-principal{
 .botones
 {
 	display: flex;
+	margin: 0 auto;
 }
 .boton{
 	margin: 3px;

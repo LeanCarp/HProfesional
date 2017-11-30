@@ -4,6 +4,9 @@
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <style type="text/css">
+.nadadores{
+	text-align: center;
+}
 .selects{
 	font-size: 14px;
 }
@@ -31,11 +34,11 @@
 
 @media screen and (max-width:800px){
 	.nadadores{
-		margin-top: 130px;
+		margin-top: 10px;
 	}
 	.selects{
-	display: flex;
-	flex-direction: column;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.competidores{
@@ -50,7 +53,7 @@
 	}
 
 	.reloj{
-		margin: 0 auto;
+		/* margin: 0 auto;
 		/*float: left;*/
 		font-size: 60px;
 		/*	font-family: Courier,sans-serif;*/
@@ -61,7 +64,7 @@
 	{
 		display: flex;
 		flex-direction: column;
-		-webkit-margin-before: 40px;
+		margin: 0;
 	}
 
 	.botonesCronometro{
@@ -76,6 +79,14 @@
 		margin-top: 5px;
 		font-size: 15px;
 	}
+
+	.selects select{
+		margin-bottom: 15px;
+	}
+
+	#inputSeries{
+		margin-bottom: 15px;
+	}
 }
 
 </style>
@@ -88,7 +99,7 @@
 			</div> -->	
 			<div class="configuracion">
 					<div class="selects">
-						<h3>Configuración del cronómetro:</h4>
+						<h3 style="text-align: center;">Configuración del cronómetro:</h4>
 						<!-- <label>Seleccione: </label> -->
 						<select id="selectEntrenamiento" name="selectEntrenamiento">
 							<option value="0">Entrenamiento</option>
@@ -143,7 +154,7 @@
 					</div>
 			</div>
 
-			<div id="contenedor">
+			<div id="contenedor col-md-9">
 				<div class="cronometro">
 					<div class="reloj row">
 						<!-- <div class="reloj" id="Horas">00</div> -->
@@ -151,21 +162,12 @@
 						<div class="" id="Segundos">:00</div>
 						<div class="" id="Centesimas">:00</div>
 					</div>
-<<<<<<< HEAD
 					<div class="botones row">
 						<input type="button" class="btn-success botonesCronometro" id="inicio" value="Comenzar &#9658;" onclick="inicio();">
 						<input type="button" class="btn-warning botonesCronometro" id="parar" value="Detener &#8718;" onclick="parar();" disabled>
 						<input type="button" class="btn-info botonesCronometro" id="continuar" value="Resumir &#8634;" onclick="inicio();" disabled>
 						<input type="button" class="btn-danger botonesCronometro" id="reinicio" value="Reiniciar &#8635;" onclick="reinicio();" disabled>
 						<input type="button" class="btn-danger botonesCronometro" id="limpiar" value="Limpiar" onclick="limpiar();">
-=======
-					<div class="botones">
-						<div><input type="button" class="btn-success botonesCronometro" id="inicio" value="Comenzar &#9658;" onclick="inicio();"></div>
-						<div><input type="button" class="btn-warning botonesCronometro" id="parar" value="Detener &#8718;" onclick="parar();" disabled></div>
-						<div><input type="button" class="btn-info botonesCronometro" id="continuar" value="Resumir &#8634;" onclick="inicio();" disabled></div>
-						<div><input type="button" class="btn-danger botonesCronometro" id="reinicio" value="Reiniciar &#8635;" onclick="reinicio();" disabled></div>
-						<div><input type="button" class="btn-danger botonesCronometro" id="limpiar" value="Limpiar" onclick="limpiar();"></div>
->>>>>>> origin/Develop
 					</div>
 				</div>
 				
