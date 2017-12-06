@@ -33,7 +33,7 @@ class resultado_model extends CI_Model{
 		return $query->result();
 	}
 
-	function obtenerResultadosPorNadadorYPrueba($id, $Estilo, $Sexo, $Categoria, $Pileta, $Distancia)
+	function obtenerResultadosPorNadadorYPruebaCampeonato($id, $Estilo, $Sexo, $Categoria, $Pileta, $Distancia)
 	{
 		$this->db->select('*');
 		$this->db->from('resultado a');
@@ -43,10 +43,29 @@ class resultado_model extends CI_Model{
 		$this->db->where('b.CategoriaID', $Categoria);
 		$this->db->where('b.tamaniopiletaID', $Pileta);
 		$this->db->where('b.DistanciaID', $Distancia);
+		$this->db->where('b.EntrenamientoID', null);
 		$this->db->where('a.DNI', $id);
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
+
+	function obtenerResultadosPorNadadorYPruebaEntrenamiento($id, $Estilo, $Sexo, $Categoria, $Pileta, $Distancia)
+	{
+		$this->db->select('*');
+		$this->db->from('resultado a');
+		$this->db->join('prueba b', 'a.PruebaID=b.ID');
+		$this->db->where('b.EstiloID', $Estilo);
+		$this->db->where('b.Masculino', $Sexo);
+		$this->db->where('b.CategoriaID', $Categoria);
+		$this->db->where('b.tamaniopiletaID', $Pileta);
+		$this->db->where('b.DistanciaID', $Distancia);
+		$this->db->where('b.CampeonatoID', null);
+		$this->db->where('a.DNI', $id);
+		$resultados = $this->db->get();
+		return $resultados->result();
+	}
+
+	
 	function obtenerResultadosPorCampeonato($idCampeonato)
 	{
 		$this->db->select('b.ID, c.Nombre, d.Distancia, e.Tamanio');
@@ -64,11 +83,12 @@ class resultado_model extends CI_Model{
 	{
 		$this->db->select('*');
         $this->db->from('resultado a');
-        $this->db->join('prueba b', 'b.ID=a.PruebaID');
+/*         $this->db->join('prueba b', 'b.ID=a.PruebaID');
         $this->db->where('b.CategoriaID', $prueba->CategoriaID);
         $this->db->where('b.EstiloID', $prueba->EstiloID);
         $this->db->where('b.tamanioPiletaID', $prueba->tamaniopiletaID);
-        $this->db->where('b.DistanciaID', $prueba->DistanciaID);
+		$this->db->where('b.DistanciaID', $prueba->DistanciaID); */
+		$this->db->where('a.PruebaID', $prueba->ID);
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}

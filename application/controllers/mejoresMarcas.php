@@ -46,15 +46,26 @@ class MejoresMarcas extends CI_Controller {
 		$selectPileta = $this->input->post("selectPileta");
 		$selectDistancia = $this->input->post("selectDistancia");
 		$selectListado = $this->input->post("selectListado");
+		$selectEvento = $this->input->post("selectEvento");
 		
 		$nadadores = $this->nadador_model->getAll();
 
 		if ($selectListado == 1)
 		{
+			$resultados;
 			foreach ($nadadores as $nadador)
 			{	
-				$resultados = $this->resultado_model->obtenerResultadosPorNadadorYPrueba($nadador->DNI, $selectEstilo, $selectSexo, $selectCategoria, $selectPileta, $selectDistancia);
-				echo '<li class="list-group-item li-contenido nombres">'.$nadador->Apellido.', '.$nadador->Nombre.'</li>';
+				if ($selectEvento == 1)
+				{
+					$resultados = $this->resultado_model->obtenerResultadosPorNadadorYPruebaEntrenamiento($nadador->DNI, $selectEstilo, $selectSexo, $selectCategoria, $selectPileta, $selectDistancia);
+					echo '<li class="list-group-item li-contenido nombres">'.$nadador->Apellido.', '.$nadador->Nombre.'</li>';
+				}
+				else
+				{
+					$resultados = $this->resultado_model->obtenerResultadosPorNadadorYPruebaCampeonato($nadador->DNI, $selectEstilo, $selectSexo, $selectCategoria, $selectPileta, $selectDistancia);
+					echo '<li class="list-group-item li-contenido nombres">'.$nadador->Apellido.', '.$nadador->Nombre.'</li>';
+				}
+
 				if (count($resultados) == 0)
 				{
 					echo '<li class="list-group-item li-contenido">No hay resultados</li>';
@@ -71,20 +82,43 @@ class MejoresMarcas extends CI_Controller {
 			$mejoresResultados = [];
 			foreach ($nadadores as $nadador)
 			{
-				$resultados = $this->resultado_model->obtenerResultadosPorNadadorYPrueba($nadador->DNI, $selectEstilo, $selectSexo, $selectCategoria, $selectPileta, $selectDistancia);
-				if (count($resultados) == 0)
+				if ($selectEvento == 1)
 				{
-					
+					$resultados = $this->resultado_model->obtenerResultadosPorNadadorYPruebaEntrenamiento($nadador->DNI, $selectEstilo, $selectSexo, $selectCategoria, $selectPileta, $selectDistancia);
+					if (count($resultados) == 0)
+					{
+						
+					}
+					else
+					{
+						$mejoresResultados[] = $this->obtenerMejorTiempo($resultados);
+					}
 				}
 				else
 				{
-					$mejoresResultados[] = $this->obtenerMejorTiempo($resultados);
+					$resultados = $this->resultado_model->obtenerResultadosPorNadadorYPruebaCampeonato($nadador->DNI, $selectEstilo, $selectSexo, $selectCategoria, $selectPileta, $selectDistancia);
+					if (count($resultados) == 0)
+					{
+						
+					}
+					else
+					{
+						$mejoresResultados[] = $this->obtenerMejorTiempo($resultados);
+					}
 				}
+
 			}
-			$record = $this->obtenerMejorTiempo($mejoresResultados);
-			$nadador = $this->nadador_model->getByID($record->DNI);
-			echo '<li class="list-group-item li-contenido nombres">'.$nadador[0]->Apellido.', '.$nadador[0]->Nombre.'</li>';
-			echo '<li class="list-group-item li-contenido">'.$record->TiempoTotal.'<a class="botonDetalle" href="mejoresMarcas/mostrar/'.$record->ID.'">></a></li>';
+			if (count($mejoresResultados) == 0)
+			{
+				echo '<li class="list-group-item li-contenido nombres">No hay récord</li>';
+			}
+			else
+			{
+				$record = $this->obtenerMejorTiempo($mejoresResultados);
+				$nadador = $this->nadador_model->getByID($record->DNI);
+				echo '<li class="list-group-item li-contenido nombres">'.$nadador[0]->Apellido.', '.$nadador[0]->Nombre.'</li>';
+				echo '<li class="list-group-item li-contenido">'.$record->TiempoTotal.'<a class="botonDetalle" href="mejoresMarcas/mostrar/'.$record->ID.'">></a></li>';
+			}		
 		}
 	}
 

@@ -24,7 +24,7 @@ function bloquearInputs(){
 
 $(document).ready(function() {                       
                 $("#selectListado").change(function() {
-                        if ($(this).val() != 0)
+                        if ($(this).val() != 0 && $('#selectEvento').val() != 0)
                         {
                                 desbloquearInputs();
                         }
@@ -33,7 +33,18 @@ $(document).ready(function() {
                                 bloquearInputs();
                         }        
                         });
-                    });
+
+                $("#selectEvento").change(function() {
+                        if ($(this).val() != 0 && $('#selectListado').val() != 0)
+                        {
+                                desbloquearInputs();
+                        }
+                        else
+                        {
+                                bloquearInputs();
+                        }        
+                        });
+                });
 
 function validarObtener(){
         var selectListado = $("#selectListado option:selected").val();
@@ -62,6 +73,7 @@ function obtenerMarcas(){
                         var selectCategoria = $("#selectCategoria option:selected").val();
                         var selectPileta = $("#selectPileta option:selected").val();
                         var selectDistancia = $("#selectDistancia option:selected").val();
+                        var selectEvento = $("#selectEvento option:selected").val();
 
                         var parametros = {
                                         "selectListado" : selectListado,
@@ -69,7 +81,8 @@ function obtenerMarcas(){
                                         "selectSexo" : selectSexo,
                                         "selectCategoria" : selectCategoria,
                                         "selectPileta" : selectPileta,
-                                        "selectDistancia" : selectDistancia
+                                        "selectDistancia" : selectDistancia,
+                                        "selectEvento" : selectEvento
                         };
 
                         $.ajax({
@@ -118,6 +131,11 @@ function obtenerMarcas(){
                         <option value="0">Seleccionar listado</option>
                         <option value="1">Absoluto</option>
                         <option value="2">Récord</option>
+                </select>
+                <select id="selectEvento" name="selectEvento">
+                        <option value="0">Seleccionar evento</option>
+                        <option value="1">Entrenamiento</option>
+                        <option value="2">Campeonato</option>
                 </select>
                 </div>
                 <select id="selectEstilo" name="selectEstilo" disabled>

@@ -56,42 +56,6 @@ class Cronometro extends CI_Controller {
 	    }
 	}
 
-	function guardarCampeonato(){
-		$inputs = $this->input->post('inputFinal', true);
-		$idPrueba = $this->input->post('inputPrueba');
-		$cantParciales = $this->input->post('cantidadParciales');
-
-
-		foreach ($inputs as $input)
-		{
-			$valor = explode(",", $input);
-			if (empty($valor[0]))
-			{
-				$data['mensaje'] = "Hubo algún resultado erróneo";
-				$this->db->delete('prueba', array('id' => $idPrueba));
-			}
-			else
-			{
-				$fechaHoy = date("Y-m-d");
-				$data = array('PruebaID' => $idPrueba, 'DNI' => $valor[0], 'Fecha' => $fechaHoy);
-				$this->db->insert('resultado', $data);
-				$idResultado = $this->db->insert_id();
-
-				$cantParciales = count($valor)-1;
-
-				for ($i=1; $i<=$cantParciales; $i++)
-				{
-				$data = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
-				$this->db->insert('parcial', $data);
-				}
-				$data['mensaje'] = "Parciales guardados correctamente";
-			}
-		}
-
-		$this->load->view('headers');
-		$this->load->view('mensaje', $data);
-	}
-
 	function cronometroConfig(){
 		if (!$this->ion_auth->logged_in())
 		{
@@ -180,6 +144,42 @@ class Cronometro extends CI_Controller {
 		{
             return 0;
         }
+	}
+
+	function guardarCampeonato(){
+		$inputs = $this->input->post('inputFinal', true);
+		$idPrueba = $this->input->post('inputPrueba');
+		$cantParciales = $this->input->post('cantidadParciales');
+
+
+		foreach ($inputs as $input)
+		{
+			$valor = explode(",", $input);
+			if (empty($valor[0]))
+			{
+				$data['mensaje'] = "Hubo algún resultado erróneo";
+				$this->db->delete('prueba', array('id' => $idPrueba));
+			}
+			else
+			{
+				$fechaHoy = date("Y-m-d");
+				$data = array('PruebaID' => $idPrueba, 'DNI' => $valor[0], 'Fecha' => $fechaHoy, 'TiempoTotal' => $this->calcularTotal($valor));
+				$this->db->insert('resultado', $data);
+				$idResultado = $this->db->insert_id();
+
+				$cantParciales = count($valor)-1;
+
+				for ($i=1; $i<=$cantParciales; $i++)
+				{
+					$data = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
+					$this->db->insert('parcial', $data);
+				}
+				$data['mensaje'] = "Parciales guardados correctamente";
+			}
+		}
+
+		$this->load->view('headers');
+		$this->load->view('mensaje', $data);
 	}
 
 	public function guardarEntrenamiento(){
