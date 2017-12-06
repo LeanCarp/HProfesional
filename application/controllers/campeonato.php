@@ -21,7 +21,10 @@ class Campeonato extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('campeonato');
-			$crud->add_action('<+>', '+','pruebaCampeonato/index');
+
+			//$crud->add_action('<+>', '+','pruebaCampeonato/index');
+			$crud->add_action('Pruebas', base_url().'assets/imgs/pruebaIcon.png', 'pruebaCampeonato/index');
+
 			$crud->set_subject('campeonato');
 			$crud->columns('nombre','ClubID','inicio','fin', 'color');
 			$crud->fields('ClubID','nombre','inicio','fin',  'TipoCampeonatoID', 'color');

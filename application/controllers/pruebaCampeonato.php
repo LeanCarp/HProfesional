@@ -17,12 +17,11 @@ class PruebaCampeonato extends CI_Controller {
 		}
         else
         {
-        	//$ident = $this->uri->segment(3);
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('prueba');
 			// Agrega acción.
-			$crud->add_action('<>', '+','cronometro/Campeonato');
+			$crud->add_action('Cronometrar', base_url().'assets/imgs/relojIcon.png', 'cronometro/Campeonato');
 			//
 			$crud->where('CampeonatoID', $ident);
 			$crud->columns('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID');

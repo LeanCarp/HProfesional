@@ -171,7 +171,7 @@ var contador = 1;
 		    <a class="nav-link" href="<?php echo base_url(); ?>configuracion">Configuración</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="<?php echo base_url(); ?>logout">Salir</a>
+		    <a class="nav-link" href="<?php echo base_url(); ?>Auth/logout">Salir</a>
 		  </li>
 		</ul>
 	</div>
@@ -194,7 +194,10 @@ var contador = 1;
 					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>historial">Historial de entrenamientos</a>
 				</li>
 				<li class="nav-item nav-izq-item">
-					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>mejoresMarcas">Marcas (en desarrollo)</a>
+					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>mejoresMarcas">Marcas</a>
+				</li>
+				<li class="nav-item nav-izq-item">
+					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>clasificacion">Clasificación</a>
 				</li>
 			</ul>
 		</div>		

@@ -25,7 +25,9 @@ class Entrenamiento extends CI_Controller {
 			
 			//$nombreEntrenamiento=$crud->get_edit_field_value('Nombre');
 
-			$crud->add_action('<+>', '+','pruebaEntrenamiento/index');
+			//$crud->add_action('<+>', '+','pruebaEntrenamiento/index');
+			$crud->add_action('Pruebas', base_url().'assets/imgs/pruebaIcon.png', 'pruebaEntrenamiento/index');
+
 			$crud->set_subject('Nombre');
 			//$crud->unset_add();
 			//$crud->unset_delete();

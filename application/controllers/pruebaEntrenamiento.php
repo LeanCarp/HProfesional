@@ -18,20 +18,20 @@ class PruebaEntrenamiento extends CI_Controller {
         else
         {
 			
-        	$ident = $this->uri->segment(3);
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('prueba');
 			$crud->columns('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID');
 			$crud->fields('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID', 'EntrenamientoID');
 			// Agrega acción.
-			$crud->add_action('<>', '+','cronometro/Entrenamiento');
-			$crud->where('EntrenamientoID', $ident);
+			//$crud->add_action('<>', '+','cronometro/Entrenamiento');
+
+			$crud->where('EntrenamientoID', $idEntrenamiento);
 			$crud->set_relation('CategoriaID','categoria','{Nombre}');
 			$crud->set_relation('tamaniopiletaID','tamaniopileta','{Tamanio}');
 			$crud->set_relation('DistanciaID','distanciatotal','{Distancia}');
 			$crud->set_relation('EstiloID','estilo','{Nombre}');
-			$crud->field_type('EntrenamientoID', 'hidden', $ident);
+			$crud->field_type('EntrenamientoID', 'hidden', $idEntrenamiento);
 			$crud->field_type('CampeonatoID', 'hidden');
 			
 			$crud->display_as('Masculino','Sexo');

@@ -193,7 +193,7 @@
 				<input id="inputDistancia" name="inputDistancia" value="0" type="text" hidden>
 				<input id="inputEstilo" name="inputEstilo" value="0" type="text" hidden>
 
-				<input id="botonGuardar" class="btn-primary" type="submit" value="Guardar" style="margin: 40px 0 20px;" disabled>
+				<input id="botonGuardar" class="btn-primary" type="submit" value="Guardar" style="margin: 40px 0 20px;" hidden>
 
 				<!-- <?php echo form_submit('submit', 'Guardar', 'class="btn-primary"'); ?> -->
 				<?php echo form_close();  ?>

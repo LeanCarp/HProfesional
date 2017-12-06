@@ -23,6 +23,7 @@
 
 .nadadores{
 	margin-top: 70px;
+	text-align: center;
 }
 
 @media screen and (max-width:800px){
@@ -87,6 +88,7 @@
 					<input type="button" class="btn-warning botonesCronometro" id="parar" value="Detener &#8718;" onclick="parar();" disabled>
 					<input type="button" class="btn-info botonesCronometro" id="continuar" value="Resumir &#8634;" onclick="inicio();" disabled>
 					<input type="button" class="btn-danger botonesCronometro" id="reinicio" value="Reiniciar &#8635;" onclick="reinicio();" disabled>
+					<input type="button" class="btn-danger botonesCronometro" id="limpiar" value="Limpiar" onclick="limpiar();">
 				</div>
 			</div>
 			

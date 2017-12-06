@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/styles.css">
 </head>
-<body class="login-body">
+<body class="login-body col-md-12">
   <div class="col-md-4 login-container">
       <h1 style="text-align:center">Iniciar sesión</h1>
       <p>Por favor, inicie sesión con su email/usuario y contraseña.</p>

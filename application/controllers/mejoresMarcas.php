@@ -16,6 +16,7 @@ class MejoresMarcas extends CI_Controller {
 		$this->load->model('prueba_model');
 		$this->load->model('distanciaTotal_model');
 		$this->load->model('tamanoPileta_model');
+		$this->load->model('parcial_model');
 	}
 
 	function index(){
@@ -37,266 +38,75 @@ class MejoresMarcas extends CI_Controller {
 
 	}
 
-	function obtenerMarcas(){
-		$categoria = $this->input->post("categoria");
-		$estilo = $this->input->post("estilo");
-		/* if (false)
-		{
-			echo '<li class="list-group-item li-contenido">Seleccione una fecha y un turno</li>';
-		}
-		else
-		{ */
-			$this->db->select('*');
-			$this->db->from('nadador');
-			$nadadores = $this->db->get();
-
-
-			foreach ($nadadores->result() as $nadador)
-			{
-
-				$this->db->select('*');
-				$this->db->from('resultado a');
-				$this->db->join('prueba b', 'b.ID = a.PruebaID');
-				$this->db->where('a.DNI', $nadador->DNI);
-				$this->db->where('b.CategoriaID', $categoria);
-				$this->db->where('b.EstiloID', $estilo);
-				$resultados = $this->db->get();
-
-				echo '<h4>'. $nadador->DNI .' | '. $nadador->Apellido .' '. $nadador->Nombre.'</h4>';
-				echo $resultados->num_rows();
-
-				if ($resultados->num_rows() == 0)
-				{
-					echo '<p>No hay resultados</p>';
-					echo '<br>';
-				}
-				else
-				{					
-					foreach ($resultados->result() as $resultado)
-					{
-						//var_dump($resultado);
-						
-	
-						$this->db->select('*');
-						$this->db->from('parcial a');
-						$this->db->where('a.ResultadoID', $resultado->ID);
-						$this->db->join('resultado b', 'a.ResultadoID=b.ID');
-						$this->db->join('prueba c', 'b.PruebaID=c.ID');
-						$this->db->where('c.CategoriaID', $categoria);
-						$this->db->where('c.EstiloID', $estilo);
-						echo $resultado->ID;
-						$parciales = $this->db->get();
-						if ($parciales->num_rows() == 0)
-						{
-							
-						}
-						else
-						{	
-							echo '<p>'.'Resultados de la fecha: '. $resultado->Fecha .'</p>';
-							foreach($parciales->result() as $parcial)
-							{
-								echo '<li class="list-group-item li-contenido">'. $parcial->Tiempo .'</li>';
-							}
-							echo '<br>';
-						}
-					}
-	
-					echo '<br>';
-				}
-			}
-
-
-			/* if (empty($data))
-			{
-				echo '<li class="list-group-item li-contenido">No se registraron asistencias</li>';
-			}
-			else
-			{
-				foreach ($data as $campo)
-				{
-					$this->load->database();
-					$this->db->from('lineaasistencia');
-					$this->db->where('AsistenciaID', $campo->ID);
-					$query = $this->db->get();
-					$query = $query->result();
-	
-					if (empty($query))
-					{
-						echo '<li class="list-group-item li-contenido">No se registraron asistencias</li>';
-					}
-					else
-					{
-						foreach($query as $row){
-							$query2 = $this->nadador_model->getByID($row->NadadorID);
-							echo '<li class="list-group-item li-contenido">'. $row->NadadorID .' | '. $query2[0]->Apellido .', '. $query2[0]->Nombre .' </li>';
-						}
-					}
-				}
-			} */
-		/* } */
-	}
-
 	function ObtenerMarcasPor()
 	{
 		$selectEstilo = $this->input->post("selectEstilo");
 		$selectSexo = $this->input->post("selectSexo");
 		$selectCategoria = $this->input->post("selectCategoria");
 		$selectPileta = $this->input->post("selectPileta");
-		$selectEstilo = $this->input->post("selectEstilo");
+		$selectDistancia = $this->input->post("selectDistancia");
+		$selectListado = $this->input->post("selectListado");
 		
 		$nadadores = $this->nadador_model->getAll();
 
-		switch($seleccionado)
+		if ($selectListado == 1)
 		{
-			case 1: // Categorías
-				$categorias = $this->categoria_model->getAll();
-
-				$this->obtenerMarcasPorCategoria($categorias, $nadadores);
-				break;
-			case 2: // Estilo
-				$estilos = $this->estilo_model->getAll();
-
-				$this->obtenerMarcasPorEstilo($estilos, $nadadores);
-				break;
-			case 3: // Absoluto
-				$this->obtenerMarcasAbsoluto($nadadores);
-				break;
-		}
-	}
-
-	function obtenerMarcasAbsoluto($nadadores)
-	{
-		echo "<h4>Mejores marcas absolutas: </h4>";
-
-		foreach ($nadadores as $nadador)
-		{
-			$mejorTiempo = "00:00:00";
-			$this->db->select('a.ID');
-			$this->db->from('resultado a');
-			$this->db->where('a.DNI', $nadador->DNI);
-			$resultados = $this->db->get();
-
-			$parciales = $this->obtenerUltimosParciales($resultados);
-
-			$mejorTiempo = $this->obtenerMejorTiempo($parciales);		
-			
-			if ($mejorTiempo != "00:00:00")
-			{
-				echo '<li class="list-group-item li-contenido">'.$nadador->Apellido.', '.$nadador->Nombre.'</li>';
-				echo '<li class="list-group-item li-contenido">'.$mejorTiempo.'</li>';
+			foreach ($nadadores as $nadador)
+			{	
+				$resultados = $this->resultado_model->obtenerResultadosPorNadadorYPrueba($nadador->DNI, $selectEstilo, $selectSexo, $selectCategoria, $selectPileta, $selectDistancia);
+				echo '<li class="list-group-item li-contenido nombres">'.$nadador->Apellido.', '.$nadador->Nombre.'</li>';
+				if (count($resultados) == 0)
+				{
+					echo '<li class="list-group-item li-contenido">No hay resultados</li>';
+				}
+				else
+				{
+					$resultado = $this->obtenerMejorTiempo($resultados);
+					echo '<li class="list-group-item li-contenido">'.$resultado->TiempoTotal.'<a class="botonDetalle" href="mejoresMarcas/mostrar/'.$resultado->ID.'">></a></li>';
+				}
 			}
 		}
-	}
-
-	function obtenerMarcasPorEstilo($estilos, $nadadores)
-	{
-		foreach ($estilos->result() as $estilo)
+		else
 		{
-			echo '<h4>Mejores marcas por estilo: '.$estilo->Nombre.'</h4>';
-
+			$mejoresResultados = [];
 			foreach ($nadadores as $nadador)
 			{
-				$mejorTiempo = "00:00:00";
-				/* foreach ($categorias as $categoria)
-				{ */
-				$this->db->select('a.ID, c.Nombre');
-				$this->db->from('resultado a');
-				$this->db->join('prueba b', 'b.ID=a.PruebaID', 'left');
-				$this->db->join('estilo c', 'c.ID=b.EstiloID', 'left');
-				$this->db->where('b.EstiloID', $estilo->ID);
-				$this->db->where('a.DNI', $nadador->DNI);
-				//$this->db->group_by('a.ID');
-				$resultados = $this->db->get();
-
-				$parciales = $this->obtenerUltimosParciales($resultados);
-
-				foreach ($parciales as $parcial)
+				$resultados = $this->resultado_model->obtenerResultadosPorNadadorYPrueba($nadador->DNI, $selectEstilo, $selectSexo, $selectCategoria, $selectPileta, $selectDistancia);
+				if (count($resultados) == 0)
 				{
-					echo '<li class="list-group-item li-contenido">'.$nadador->Apellido.', '.$nadador->Nombre.'</li>';
-					//echo '<li class="list-group-item li-contenido">'.$mejorTiempo[0].'<input type="submit" id="'.$mejorTiempo[1].'" value=">"></li>';
-					//echo '<li class="list-group-item li-contenido">'.$mejorTiempo[0].'<a href="mejoresMarcas/mostrar/'.$mejorTiempo[1].'">></a></li>';
-					echo '<li class="list-group-item li-contenido">'.$parcial[0].'<a href="mejoresMarcas/mostrar/'.$parcial[1].'">></a></li>';
+					
 				}
-
-				/* $mejorTiempo = $this->obtenerMejorTiempo($parciales);		
-				
-				if ($mejorTiempo != "00:00:00")
+				else
 				{
-					echo '<li class="list-group-item li-contenido">'.$nadador->Apellido.', '.$nadador->Nombre.'</li>';
-					//echo '<li class="list-group-item li-contenido">'.$mejorTiempo[0].'<input type="submit" id="'.$mejorTiempo[1].'" value=">"></li>';
-					echo '<li class="list-group-item li-contenido">'.$mejorTiempo[0].'<a href="mejoresMarcas/mostrar/'.$mejorTiempo[1].'">></a></li>';
-				} */
-			}
-		}
-	}
-
-	function obtenerMarcasPorCategoria($categorias, $nadadores)
-	{
-		foreach ($categorias as $categoria)
-		{
-			echo '<h4>Mejores marcas por estilo: '.$categoria->Nombre.'</h4>';
-
-			foreach ($nadadores as $nadador)
-			{
-				$mejorTiempo = "00:00:00";
-				/* foreach ($categorias as $categoria)
-				{ */
-				$this->db->select('a.ID, c.Nombre');
-				$this->db->from('resultado a');
-				$this->db->join('prueba b', 'b.ID=a.PruebaID', 'left');
-				$this->db->join('categoria c', 'c.ID=b.CategoriaID', 'left');
-				$this->db->where('b.CategoriaID', $categoria->ID);
-				$this->db->where('a.DNI', $nadador->DNI);
-				//$this->db->group_by('a.ID');
-				$resultados = $this->db->get();
-
-				$parciales = $this->obtenerUltimosParciales($resultados);
-
-				$mejorTiempo = $this->obtenerMejorTiempo($parciales);		
-				
-				if ($mejorTiempo != "00:00:00")
-				{
-					echo '<li class="list-group-item li-contenido">'.$nadador->Apellido.', '.$nadador->Nombre.'</li>';
-					echo '<li class="list-group-item li-contenido">'.$mejorTiempo.'</li>';
+					$mejoresResultados[] = $this->obtenerMejorTiempo($resultados);
 				}
-				
 			}
+			$record = $this->obtenerMejorTiempo($mejoresResultados);
+			$nadador = $this->nadador_model->getByID($record->DNI);
+			echo '<li class="list-group-item li-contenido nombres">'.$nadador[0]->Apellido.', '.$nadador[0]->Nombre.'</li>';
+			echo '<li class="list-group-item li-contenido">'.$record->TiempoTotal.'<a class="botonDetalle" href="mejoresMarcas/mostrar/'.$record->ID.'">></a></li>';
 		}
 	}
 
-	function obtenerMejorTiempo($parciales)
+	function obtenerMejorTiempo($resultados)
 	{
-		$mejorTiempo = ["00:00:00",0];
-		foreach ($parciales as $parcial)
+		$mejorResultado = $resultados[0];
+
+		foreach ($resultados as $resultado)
 		{
-			if (strtotime($mejorTiempo[0]) <= strtotime($parcial[0]))
+			if ($this->timeToSeconds($mejorResultado->TiempoTotal) >= $this->timeToSeconds($resultado->TiempoTotal))
 			{
-				$mejorTiempo = $parcial;
+				$mejorResultado = $resultado;
 			}
 		}
-
-		return $mejorTiempo;
+		return $mejorResultado;	
 	}
 
-	function obtenerUltimosParciales($resultados)
-	{
-		$ultimosParciales = [];
-		foreach ($resultados->result() as $resultado)
-		{
-			$this->db->select('*');
-			$this->db->from('parcial a');
-			$this->db->where('a.ResultadoID', $resultado->ID);
-			$parciales = $this->db->get();
-			$ultimo = ($parciales->num_rows()-1);
-			$parciales = $parciales->result();
-			if ($ultimo > 0)
-			{		
-				//$ultimosParciales[] = $parciales[$ultimo]->Tiempo;
-				$ultimosParciales[] = [$parciales[$ultimo]->Tiempo, $parciales[$ultimo]->ID];
-			}
-		}
-		return $ultimosParciales;
+	function timeToSeconds($time) {
+		$valor = explode(":", $time);
+		return intval($valor[0]) * 60 + intval($valor[1]) + intval($valor[2]) * 0.01;
 	}
+
 
 	function mostrar($ident)
 	{
@@ -306,27 +116,9 @@ class MejoresMarcas extends CI_Controller {
 
 		$nadador = $this->nadador_model->getByID($resultado[0]->DNI);
 
-		$this->load->database();
-		$this->db->select('*');
-		$this->db->from('parcial');
-		$this->db->where('ResultadoID', $parcial[0]->ResultadoID);
-		$parciales = $this->db->get()->result();
+		$parciales = $this->parcial_model->getParcialesPorResultado($parcial[0]->ResultadoID);
 
-		/* foreach ($parciales as $parcial)
-		{
-			echo $parcial->Tiempo;
-			echo '<br>';
-		} */
-
-		$this->load->database();
-		$this->db->select('b.Nombre, c.Nombre, d.Distancia, e.Tamanio, a.EntrenamientoID, a.CampeonatoID');
-		$this->db->from('prueba a');
-		$this->db->join('categoria b', 'b.ID=a.CategoriaID');
-		$this->db->join('estilo c', 'c.ID=a.EstiloID');
-		$this->db->join('distanciatotal d', 'd.ID=a.DistanciaID');
-		$this->db->join('tamaniopileta e', 'e.ID=a.tamaniopiletaID');
-		$this->db->where('a.ID', $resultado[0]->PruebaID);
-		$prueba = $this->db->get()->result();
+		$prueba = $this->prueba_model->getPruebaConDatos($resultado[0]->PruebaID);
 
 		$evento;
 		if ($prueba[0]->CampeonatoID == null)
@@ -348,21 +140,6 @@ class MejoresMarcas extends CI_Controller {
 
 		$this->load->view('headers');
 		$this->load->view('detalleMarca', $data);
-
-		/* foreach ($parciales2->result() as $parcial)
-		{
-			echo $parcial->Distancia;
-			echo '<br>';
-			echo $parcial->Nombre;
-			echo '<br>';
-			echo $parcial->Tamanio;
-			echo '<br>';
-		} */
-
-
-	
-		
-		
 	}
 
 }

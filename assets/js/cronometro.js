@@ -90,6 +90,7 @@ function cronometro () {
 }
 
 function limpiar() {
+	reinicio();
 	$("#competidores div").each(
 		function () {
 			divPadre = document.getElementById("competidores");
@@ -116,7 +117,6 @@ function SecondsToTime(seconds){
 	cent = Math.trunc(result);
 	if (cent < 10) {cent = '0'+cent.toString();}
 	return min.toString()+':'+seg.toString()+':'+Math.round(cent).toString();
-
 }
 
 function inputar(e) {
@@ -173,13 +173,12 @@ function inputarFinal(e, f) {
 
 	var inputResultado = document.getElementById(String(e+0));
 	inputResultado.value = inputFinal;
-	console.log(inputResultado);
 }
 
 function eliminarNadador(input) {
 	if ($("#competidores div").size() == 1)
 	{
-		document.getElementById("botonGuardar").disabled = true;
+		document.getElementById("botonGuardar").hidden = true;
 	}
 
 	divPadre = document.getElementById("competidores");
@@ -212,7 +211,8 @@ function agregarNadador() {
 
 	if (valido)
 	{
-		document.getElementById("botonGuardar").disabled = false;
+		//document.getElementById("botonGuardar").disabled = false;
+		document.getElementById("botonGuardar").hidden = false;
 		var idSeleccionado = document.getElementById("selectNadadores");
 
 		var cantParciales = document.getElementById("cantidadParciales").value;

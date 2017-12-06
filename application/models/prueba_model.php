@@ -50,6 +50,19 @@ class prueba_model extends CI_Model{
 		$query = $this->db->get();
 		return $query;
 	}
+
+	function getPruebaConDatos($pruebaId)
+	{
+		$this->db->select('b.Nombre, c.Nombre, d.Distancia, e.Tamanio, a.EntrenamientoID, a.CampeonatoID');
+		$this->db->from('prueba a');
+		$this->db->join('categoria b', 'b.ID=a.CategoriaID');
+		$this->db->join('estilo c', 'c.ID=a.EstiloID');
+		$this->db->join('distanciatotal d', 'd.ID=a.DistanciaID');
+		$this->db->join('tamaniopileta e', 'e.ID=a.tamaniopiletaID');
+		$this->db->where('a.ID', $pruebaId);
+		$prueba = $this->db->get();
+		return $prueba->result();
+	}
 }
 
 

@@ -170,10 +170,10 @@ class Cronometro extends CI_Controller {
 			$distancia = $this->distanciaTotal_model->getById($prueba->DistanciaID);
 			$distancia = $distancia->row();
 
-			$tamañoPileta = $this->tamanoPileta_model->getById($prueba->tamañopiletaID);
+			$tamañoPileta = $this->tamanoPileta_model->getById($prueba->tamaniopiletaID);
 			$tamañoPileta = $tamañoPileta->row();
 	
-			$cantidadParciales = $distancia->Distancia/$tamañoPileta->Tamaño;
+			$cantidadParciales = $distancia->Distancia/$tamañoPileta->Tamanio;
 			return $cantidadParciales;
 		} 
 		else 
