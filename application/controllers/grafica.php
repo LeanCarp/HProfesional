@@ -118,7 +118,7 @@ class Grafica extends CI_Controller {
 	public function InicializarArray($cantidadParciales,$tamañoPileta)
 	{
 		$ar=[];
-		$ar['titulo']="Probando Graficas";
+		$ar['titulo']="Marcas";
 		for ($i = 1; $i <= $cantidadParciales; $i++)
 		{
 
@@ -136,4 +136,29 @@ class Grafica extends CI_Controller {
 		return $ar;
 
 	}
+
+	public function formatoParaGrafica()
+    {
+		$fecha = $this->input->post('fecha');
+		$parciales = $this->input->post('parciales');
+		$tamanio = $this->input->post('tamanio');
+		
+
+		$datos=$this->InicializarArray(count($parciales),$tamanio);
+		
+		$datos['categoriasMetros'][0]["name"]=$fecha;
+		for ($i = 0; $i < count($parciales); $i++)
+		{		
+
+
+			$Tiempo=$this->timeToInteger($parciales[$i]['Tiempo']);		
+			$datos['datosParciales'][$i]["Resultado1"]=$Tiempo;
+	
+			
+		}
+
+		echo json_encode($datos);
+		exit();
+	}
+
 }
