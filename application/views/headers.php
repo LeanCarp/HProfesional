@@ -159,7 +159,7 @@ var contador = 1;
 		    <a class="nav-link" href="<?php echo base_url(); ?>">Inicio</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="#">Usuario</a>
+		    <a class="nav-link" href="<?php echo base_url(); ?>auth/change_password">Usuario</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>cronometro">Cronómetro</a>
@@ -172,6 +172,7 @@ var contador = 1;
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>Auth/logout">Salir</a>
+		    <a class="nav-link" href="<?php echo base_url(); ?>auth/logout">Salir</a>
 		  </li>
 		</ul>
 	</div>

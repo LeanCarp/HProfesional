@@ -8,10 +8,11 @@ class Auth extends CI_Controller {
 		$this->load->database();
 		$this->load->library(array('ion_auth','form_validation'));
 		$this->load->helper(array('url','language'));
-
+		
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
 		$this->lang->load('auth');
+
 	}
 
 	// redirect if needed, otherwise display the user list
@@ -110,6 +111,7 @@ class Auth extends CI_Controller {
 	// change password
 	public function change_password()
 	{
+
 		$this->form_validation->set_rules('old', $this->lang->line('change_password_validation_old_password_label'), 'required');
 		$this->form_validation->set_rules('new', $this->lang->line('change_password_validation_new_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
 		$this->form_validation->set_rules('new_confirm', $this->lang->line('change_password_validation_new_password_confirm_label'), 'required');
@@ -153,6 +155,7 @@ class Auth extends CI_Controller {
 			);
 
 			// render
+			$this->load->view('headers');
 			$this->_render_page('auth/change_password', $this->data);
 		}
 		else
