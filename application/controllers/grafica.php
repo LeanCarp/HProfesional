@@ -146,7 +146,7 @@ class Grafica extends CI_Controller {
 
 		$datos=$this->InicializarArray(count($parciales),$tamanio);
 		
-		$datos['categoriasMetros'][0]["name"]=$fecha;
+		$datos['categoriasMetros'][0]["name"]="";
 		for ($i = 0; $i < count($parciales); $i++)
 		{		
 

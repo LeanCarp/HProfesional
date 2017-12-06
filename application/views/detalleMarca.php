@@ -40,7 +40,7 @@ function cargarGrafica()
                         dataChart = msg;
                         //Si hay algun dato, se habilita la var que permite exportar a pdf.
                      
-                            
+                            $("#chart").css("height","20em");
                             createChart();
                             $("#chart").show();
                             $("#resultados").html("");
