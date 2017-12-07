@@ -79,16 +79,18 @@ class resultado_model extends CI_Model{
 		return $pruebas->result();
 	}
 
-	function obtenerResultadoPorPrueba($prueba)
+	function obtenerResultadoPorPruebaYNadador($prueba, $dni) // Para campeonatos
 	{
 		$this->db->select('*');
         $this->db->from('resultado a');
-/*         $this->db->join('prueba b', 'b.ID=a.PruebaID');
+        $this->db->join('prueba b', 'b.ID=a.PruebaID');
         $this->db->where('b.CategoriaID', $prueba->CategoriaID);
         $this->db->where('b.EstiloID', $prueba->EstiloID);
         $this->db->where('b.tamanioPiletaID', $prueba->tamaniopiletaID);
-		$this->db->where('b.DistanciaID', $prueba->DistanciaID); */
-		$this->db->where('a.PruebaID', $prueba->ID);
+		$this->db->where('b.DistanciaID', $prueba->DistanciaID);
+		$this->db->where('b.EntrenamientoID', null);
+		//$this->db->where('a.PruebaID', $prueba->ID);
+		$this->db->where('a.DNI', $dni);
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}

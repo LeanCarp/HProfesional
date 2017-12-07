@@ -53,11 +53,35 @@ class Clasificacion extends CI_Controller {
 
     function obtenerClasificados()
     {
-        $idPrueba = $this->input->post('idPrueba');
+        $idPrueba = $this->input->post("idPrueba");
         $prueba = $this->prueba_model->getByID($idPrueba);
+        $nadadores = $this->nadador_model->getAll();
         $prueba = $prueba->result();
 
-        $resultados = $this->resultado_model->obtenerResultadoPorPrueba($prueba[0]);
+        echo '<li class="list-group-item li-contenido nombres">Nadadores clasificados:</li>';
+        $hayResultados = false;
+        foreach ($nadadores as $nadador)
+        {
+            $resultados = $this->resultado_model->obtenerResultadoPorPruebaYNadador($prueba[0], $nadador->DNI);
+
+            if (count($resultados) != 0)
+            {
+                $hayResultados = true;
+                $resultado = $this->obtenerMejorTiempo($resultados);
+                
+                if ($this->timeToSeconds($resultado->TiempoTotal) <=  $this->timeToSeconds("00:06:00"))
+                {
+                    $nadador = $this->nadador_model->getByID($resultado->DNI);
+                    echo '<li class="list-group-item li-contenido">'.$resultado->DNI.' | '.$nadador[0]->Apellido.', '.$nadador[0]->Nombre.'<p>Tiempo: '.$resultado->TiempoTotal.'</p></li>';
+                }
+            }
+        }
+        if (!$hayResultados)
+        {
+            echo '<li class="list-group-item li-contenido">No hay resultados</p></li>';
+        }
+
+/*         $resultados = $this->resultado_model->obtenerResultadoPorPruebaYNadador($prueba[0]);
 
         if (count($resultados) == 0)
         {
@@ -66,7 +90,7 @@ class Clasificacion extends CI_Controller {
         else
         {
             echo '<li class="list-group-item li-contenido nombres">Nadadores clasificados:</li>';
-            
+
             foreach ($resultados as $resultado)
             {
                 if ($this->timeToSeconds($resultado->TiempoTotal) <=  $this->timeToSeconds("00:06:00"))
@@ -75,8 +99,30 @@ class Clasificacion extends CI_Controller {
                     echo '<li class="list-group-item li-contenido">'.$resultado->DNI.' | '.$nadador[0]->Apellido.', '.$nadador[0]->Nombre.'<p>Tiempo: '.$resultado->TiempoTotal.'</p></li>';
                 }
             }
-        }
+        } */
     }
+
+    function clasificados($idPrueba)
+    {
+        $data['idPrueba'] = $idPrueba;
+        $this->load->view("headers");
+        $this->load->view("clasificados", $data);
+    }
+
+    
+	function obtenerMejorTiempo($resultados)
+	{
+		$mejorResultado = $resultados[0];
+
+		foreach ($resultados as $resultado)
+		{
+			if ($this->timeToSeconds($mejorResultado->TiempoTotal) >= $this->timeToSeconds($resultado->TiempoTotal))
+			{
+				$mejorResultado = $resultado;
+			}
+		}
+		return $mejorResultado;	
+	}
 
     function timeToSeconds($time) {
 		$valor = explode(":", $time);
