@@ -101,17 +101,17 @@ function createChart() {
 </script>
 <div id="contenido">
 
-    <h4>Nadador: <?php echo $nadador->Apellido.', '.$nadador->Nombre.' (DNI: '.$nadador->DNI.')' ?></h4>
+    <h4> <?php echo $nadador->Apellido.', '.$nadador->Nombre ?></h4> 
     <h5> <?php if ($prueba->EntrenamientoID == null) {echo 'Campeonato: ';  } else { echo 'Entrenamiento: '; }
          echo $evento->nombre; ?> </h5>
     <br>
-    <h6> <?php echo 'Distancia: '.$prueba->Distancia.' m'; ?> </h6>
-    <h6> <?php echo 'Tamaño pileta: '.$prueba->Tamanio.' m'; ?> </h6>
-    <h6> <?php echo 'Estilo: '.$prueba->Nombre; ?> </h6>
+    <h6> <?php echo 'Recorrido de '.$prueba->Distancia.'m '.$prueba->Nombre .' en pileta de '.$prueba->Tamanio.'m'; ?> </h6>
     <br>
-    <h6> <?php echo 'Resultado de la fecha: '.$resultado->Fecha; ?> </h6>
-    <?php foreach($parciales as $parcial) { ?>
-        <li class="list-group-item"><?php echo $parcial->Tiempo; ?></li>
+    <h6> <?php echo 'Realizado el día: '.$resultado->Fecha; ?> </h6>
+    <h6> <?php echo 'Tiempo Total: '.$resultado->TiempoTotal; ?> </h6>
+    <br>
+    <?php for ($i = 0; $i < count($parciales); $i++) { ?>
+        <li class="list-group-item"><?php echo 'Tiempo en '.$prueba->Tamanio*($i+1).'m: '.$parciales[$i]->Tiempo; ?></li>
     <?php } ?>
  
 

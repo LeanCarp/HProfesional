@@ -154,6 +154,9 @@ margin:auto;
 		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>configuracion">Configuración</a>
 		  </li>
+			<li class="nav-item">
+		    <a class="nav-link" href="<?php echo base_url(); ?>auth/change_password">Usuario</a>
+		  	</li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>auth/logout">Salir</a>
 		  </li>
@@ -181,9 +184,6 @@ margin:auto;
 			  <li class="nav-item nav-izq-item">
 			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>tipoCampeonato">Tipo de campeonato</a>
 			  </li>
-				<li class="nav-item nav-izq-item">
-		    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>auth/change_password">Usuario</a>
-		  	</li>
 				<li class="nav-item nav-izq-item">
 			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>club">Clubes</a>
 			  </li>
