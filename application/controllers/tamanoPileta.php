@@ -20,8 +20,9 @@ class TamanoPileta extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('tamaniopileta');
-			$crud->columns('Tamaño');
-			$crud->fields('Tamaño');
+			$crud->columns('Tamanio');
+			$crud->fields('Tamanio');
+			$crud->display_as('Tamanio', 'Tamaño');
 			//$crud->unset_add();
 			//$crud->unset_delete();
 			//$crud->unset_read();

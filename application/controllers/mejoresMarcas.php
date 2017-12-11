@@ -144,13 +144,11 @@ class MejoresMarcas extends CI_Controller {
 
 	function mostrar($ident)
 	{
-		$parcial = $this->parcial_model->getByID($ident);
-
-		$resultado = $this->resultado_model->getByID($parcial[0]->ResultadoID);
+		$resultado = $this->resultado_model->getByID($ident);
 
 		$nadador = $this->nadador_model->getByID($resultado[0]->DNI);
 
-		$parciales = $this->parcial_model->getParcialesPorResultado($parcial[0]->ResultadoID);
+		$parciales = $this->parcial_model->getParcialesPorResultado($resultado[0]->ID);
 
 		$prueba = $this->prueba_model->getPruebaConDatos($resultado[0]->PruebaID);
 

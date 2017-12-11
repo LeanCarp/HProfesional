@@ -75,12 +75,16 @@ var contador = 1;
 	}
 
 	.nav-izq{
-		margin-top:297px;
+		margin-top:257px;
 		left: -100%;
 		position: absolute;
 		z-index: 4;
 		width: 80%;
 		height: 100%;
+	}
+
+	.nav-izq:hover{
+		color: #3D8BCD;
 	}
 
 	.nav-izq ul{
@@ -95,10 +99,6 @@ var contador = 1;
 	}
 
 	.nav-link: hover{
-		color: #3D8BCD;
-	}
-
-	.nav-izq-link: hover{
 		color: #3D8BCD;
 	}
 
@@ -146,9 +146,6 @@ margin:auto;
 		    <a class="nav-link" href="<?php echo base_url(); ?>">Inicio</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="#">Usuario</a>
-		  </li>
-		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>cronometro">Cronómetro</a>
 		  </li>
 		  <li class="nav-item">
@@ -184,6 +181,9 @@ margin:auto;
 			  <li class="nav-item nav-izq-item">
 			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>tipoCampeonato">Tipo de campeonato</a>
 			  </li>
+				<li class="nav-item nav-izq-item">
+		    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>auth/change_password">Usuario</a>
+		  	</li>
 				<li class="nav-item nav-izq-item">
 			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>club">Clubes</a>
 			  </li>

@@ -78,6 +78,14 @@ var contador = 1;
 	min-height: 100vh;
 }
 
+.nav-izq-item{
+	border-bottom: 1px solid rgba(255,255,255, .3);
+}
+
+.nav-izq:hover{
+	color:black;
+}
+
 @media screen and (max-width:800px){
 	.div-top{
 		left: -100%;
@@ -97,7 +105,7 @@ var contador = 1;
 	}
 
 	.nav-izq{
-		margin-top:254px;
+		margin-top:212px;
 		left: -100%;
 		position: absolute;
 		z-index: 6;
@@ -117,19 +125,31 @@ var contador = 1;
 	}
 
 	.menu-bar{
-		display: block;
-		width: 100%;
-		background: gray;
+		display: flex;
+		justify-content: space-between;
+		background: black;
 		border-bottom: 1px solid rgba(255,255,255, .3);
+		color: white;
 	}
+		.menu-bar p{
+			margin: 0;
+			padding: 10px;
+		}
+		.menu-bar a{
+			margin: 0;
+			padding: 10px;
+		}
+		.menu-bar a:hover{
+			background: #3D8BCD;
+		}
 
-	.menu-bar .bt-menu{
+	/* .menu-bar .bt-menu{
 		display: block;
 		padding: 10px;
 		background: black;
 		text-decoration: none;
 		color: white;
-	}
+	} */
 
 	.container{
 		position: relative;
@@ -150,16 +170,14 @@ var contador = 1;
 
 <body>
 	<div class="menu-bar">
-		<a href="#" class="bt-menu">Menú</a>
+        <p>Menú</p>
+		<a href="#" class="bt-menu"><img src="<?php echo base_url(); ?>assets/imgs/menu.png" alt=""></a>
 	</div>
 
 	<div class="div-top">
 		<ul class="nav nav-arriba">
 		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>">Inicio</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="<?php echo base_url(); ?>auth/change_password">Usuario</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>cronometro">Cronómetro</a>
@@ -196,9 +214,9 @@ var contador = 1;
 				<li class="nav-item nav-izq-item">
 					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>mejoresMarcas">Marcas</a>
 				</li>
-				<li class="nav-item nav-izq-item">
+<!-- 				<li class="nav-item nav-izq-item">
 					<a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>clasificacion">Clasificación</a>
-				</li>
+				</li> -->
 			</ul>
 		</div>		
 		<div class="col-md-9 contenido-principal">

@@ -26,13 +26,15 @@ html, body, .contenido-principal{
 	background: black;
 }
 
+.nav-izq-link:hover{
+	color: black;
+}
+
 .nav-izq-item{
 	background: #3D8BCD;
 }
 
-.nav-izq-link:hover{
-	color:black;
-}
+
 
 .container{
 	margin: 0;

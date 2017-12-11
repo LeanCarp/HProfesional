@@ -155,7 +155,7 @@ class Auth extends CI_Controller {
 			);
 
 			// render
-			$this->load->view('headers');
+			$this->load->view('headersConfiguracion');
 			$this->_render_page('auth/change_password', $this->data);
 		}
 		else

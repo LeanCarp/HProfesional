@@ -1,0 +1,110 @@
+.nav-movil{
+    display: none;
+}
+
+.nav-arriba-lista{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    background: black;
+}
+        .nav-arriba-lista li{
+            list-style: none;
+            padding: 10px;
+        }
+        .nav-arriba-lista li a{
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+        }
+        .nav-arriba-lista li a:hover{
+            color: #3D8BCD;
+        }
+
+.contenedor{
+    min-height: 100vh;
+    display: flex;
+}
+
+.contenido{
+    margin-top: 40px;
+}
+
+.naveg-izquierda{
+    padding: 0;
+    min-height: 100vh;
+    background: #3D8BCD;
+}
+
+.nav-izquierda-lista{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+        .nav-izquierda-lista li{
+            list-style: none;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255, .3);
+        }
+        .nav-izquierda-lista li a{
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+        }
+        .nav-izquierda-lista li a:hover{
+            color: black;
+        }
+
+@media screen and (max-width:800px){
+    .nav-movil{
+        display: flex;
+        justify-content: space-between;
+        background: black;
+        border-bottom: 1px solid rgba(255,255,255, .3);
+        z-index: 6;
+    }
+            .nav-movil p{
+                padding: 10px;
+                margin: 0;
+                color: white;
+            }
+
+            .nav-movil a{
+                padding: 10px;
+                margin: 0;
+                color: white;
+                text-decoration: none;
+            }
+
+            .nav-movil a:hover{
+                background: #3D8BCD;
+            }
+
+    .naveg-arriba{
+        width: 100%;
+        margin-top:405px;
+        position: absolute;
+        /* left: -100%; */
+		z-index: 6;
+    }
+
+    .nav-arriba-lista{
+        display: flex;
+        flex-direction: column;
+    }
+        .nav-arriba-lista li{
+            border-bottom: 1px solid rgba(255,255,255, .3);
+        }
+
+    .naveg-izquierda{
+        /* left: -100%; */
+        position: absolute;
+        background: black;
+        z-index: 6;
+    }
+
+    .nav-izquierda-lista li a:hover{
+        color: #3D8BCD;
+    }
+}

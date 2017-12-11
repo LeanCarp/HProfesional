@@ -16,8 +16,8 @@
 	background: #3D8BCD;
 }
 
-.nav-izq-link:hover{
-	color:black;
+.nav-izq-item{
+	border-bottom: 1px solid rgba(255,255,255, .3);
 }
 
 .container{

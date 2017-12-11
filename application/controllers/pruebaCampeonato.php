@@ -21,8 +21,8 @@ class PruebaCampeonato extends CI_Controller {
 			$crud->set_language('spanish');
 			$crud->set_table('prueba');
 			// Agrega acción.
+			$crud->add_action('Clasificación', base_url().'assets/imgs/clasifIcon.png', 'clasificacion/clasificados');
 			$crud->add_action('Cronometrar', base_url().'assets/imgs/relojIcon.png', 'cronometro/Campeonato');
-			$crud->add_action('Clasificación', '<', 'clasificacion/clasificados');
 			//
 			$crud->where('CampeonatoID', $ident);
 			$crud->columns('TiempoMin', 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID');
