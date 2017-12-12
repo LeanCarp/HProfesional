@@ -25,7 +25,7 @@ class nadador_model extends CI_Model{
 		$this->db->from('nadador');
 		$this->db->where('DNI', $id);
 		$query = $this->db->get();
-		return $query->result();
+		return $query->result()[0];
 	}
 
 	function getAll(){

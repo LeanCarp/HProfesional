@@ -37,6 +37,7 @@ class Grafica extends CI_Controller {
 			/* $data['categorias'] = $this->categoria_model->getAll();
 			$data['entrenamientos'] = $this->entrenamiento_model->getAll(); */
 			$output['nadadores'] = $this->nadador_model->getAll();
+			$output['estilos'] = $this->estilo_model->getAllOficiales();
 
 
 	    	$this->load->view('headers', $output);
@@ -58,9 +59,10 @@ class Grafica extends CI_Controller {
 		$fromHere= new DateTime('2016-11-20');
 		$toHere= new DateTime('2019-11-20');
 
-		$estilo="Mariposa";
-		//$estilo = $this->input->post('estilo');
+		//$estilo="Mariposa";
+		$estilo = $this->input->post('estilo');
 		
+
 		//$fromHere= new DateTime($fromHere);
 		//$toHere= new DateTime($toHere);
 		//$distancia=100;
@@ -75,7 +77,10 @@ class Grafica extends CI_Controller {
 		else
 		{
 			$datos=$this->InicializarArray((int)$distancia/(int)$tamañoPileta,(int)$tamañoPileta);
-			
+			$nadador=$this->nadador_model->getByID($id);
+
+			$datos['titulo']=$nadador->Apellido. ' '.$nadador->Nombre.' en '.$distancia.'m '.$estilo;
+
 			$resultado=0;
 			$parcial=0;
 			$numeroResultado=0;
@@ -146,7 +151,7 @@ class Grafica extends CI_Controller {
 
 		$datos=$this->InicializarArray(count($parciales),$tamanio);
 		
-		$datos['categoriasMetros'][0]["name"]=$fecha;
+		$datos['categoriasMetros'][0]["name"]="";
 		for ($i = 0; $i < count($parciales); $i++)
 		{		
 

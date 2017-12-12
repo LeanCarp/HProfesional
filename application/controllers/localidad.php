@@ -21,7 +21,8 @@ class localidad extends CI_Controller {
 			$crud->set_language('spanish');
 			$crud->set_table('localidad');
 			$crud->columns('Ciudad');
-            $crud->fields('Ciudad');
+			$crud->fields('Ciudad');
+			$crud->set_subject('Localidad');
             
 			$crud->unset_export();
 			$crud->unset_print();

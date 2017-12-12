@@ -43,6 +43,7 @@ class Prueba extends CI_Controller {
 			$crud->display_as('EntrenamientoID','Entrenamiento');
 			$crud->display_as('CampeonatoID','Campeonato');
 
+			$crud->set_subject('Prueba');
 			//$crud->unset_add();
 			//$crud->unset_delete();
 			//$crud->unset_read();

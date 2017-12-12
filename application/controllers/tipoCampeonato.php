@@ -26,7 +26,7 @@ class TipoCampeonato extends CI_Controller {
 			$crud->unset_export();
 			$crud->unset_print();
 
-			
+			$crud->set_subject('Tipo de Campeonato');
 			/* Generamos la tabla */
 			$output = (array)$crud->render();
 			//Se carga el titulo a la vista.

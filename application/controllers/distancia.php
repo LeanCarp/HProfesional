@@ -28,6 +28,7 @@ class Distancia extends CI_Controller {
 			//$crud->unset_edit_fields('DNI');
 			$crud->unset_export();
 			$crud->unset_print();
+			$crud->set_subject('Distancia');
 			//$crud->unset_add();
 			//$crud->unset_operations();
 
@@ -35,6 +36,7 @@ class Distancia extends CI_Controller {
 			$output = (array)$crud->render();
 			//Se carga el titulo a la vista.
 			$output['titulo']="Distancias";
+			
 
 
 			$this->load->view('headersConfiguracion');

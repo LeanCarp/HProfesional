@@ -31,6 +31,7 @@ class TamanoPileta extends CI_Controller {
 			$crud->unset_print();
 			//$crud->unset_add();
 			//$crud->unset_operations();
+			$crud->set_subject('Tamaño de Pileta');
 
 
 			/* Generamos la tabla */

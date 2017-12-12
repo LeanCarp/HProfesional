@@ -35,6 +35,7 @@ class Nadador extends CI_Controller {
 			$crud->callback_column('Categoria' ,array($this,'obtenerCategoria'));
 
 			$crud->unset_edit_fields('DNI');
+			$crud->set_subject('Nadador');
 
 
 

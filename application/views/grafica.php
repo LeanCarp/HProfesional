@@ -9,6 +9,7 @@
         var distancia = $("#selectDistancia option:selected").val();
         var pileta = $("#selectTamañoPileta option:selected").val();
         var nadador = $("#selectNadador option:selected").val();
+        var estilo = $("#selectEstilo option:selected").val();
         var fecha1 =  $("#fecha1").val();
         var fecha2 = $("#fecha2").val();
 
@@ -16,6 +17,7 @@
                     "distancia" : distancia,
                     "pileta" : pileta,
                     "nadador" : nadador,
+                    "estilo" : estilo,
                     "fecha1" : fecha1,
                     "fecha2" : fecha2,
             };
@@ -146,6 +148,11 @@
             <select name="selectNadador" id="selectNadador">
                 <?php foreach($nadadores as $row) { ?>
                     <option value="<?= $row->DNI ?>"><?= $row->Nombre." " ?><?= $row->Apellido ?></option>
+                <?php } ?>
+            </select>
+            <select name="selectEstilo" id="selectEstilo">
+                <?php foreach($estilos as $row) { ?>
+                    <option value="<?= $row->Nombre ?>"><?= $row->Nombre ?></option>
                 <?php } ?>
             </select>
 

@@ -24,6 +24,8 @@ function cargarGrafica()
    var parciales =<?php echo json_encode($parciales); ?>;
     var fecha= '<?php echo $resultado->Fecha; ?>';
     var tamanio='<?php echo $prueba->Tamanio; ?>';
+    
+    
 
     var parametros = {
                 "fecha" : fecha,
@@ -40,7 +42,8 @@ function cargarGrafica()
                         dataChart = msg;
                         //Si hay algun dato, se habilita la var que permite exportar a pdf.
                      
-                            
+                            //Se agrega el 20em para que le de altura a la grafica.
+                            $("#chart").css("height","20em");
                             createChart();
                             $("#chart").show();
                             $("#resultados").html("");
@@ -58,7 +61,7 @@ function createChart() {
             },
     
             title: {
-                text: dataChart.titulo
+                text:'<?php echo $nadador->Apellido.' '.$nadador->Nombre. ' en '. $prueba->Distancia.'m '.$prueba->Nombre; ?>'
             },
             legend: {
                 position: "bottom"
@@ -101,17 +104,17 @@ function createChart() {
 </script>
 <div id="contenido">
 
-    <h4>Nadador: <?php echo $nadador->Apellido.', '.$nadador->Nombre.' (DNI: '.$nadador->DNI.')' ?></h4>
+    <h4> <?php echo $nadador->Apellido.', '.$nadador->Nombre ?></h4> 
     <h5> <?php if ($prueba->EntrenamientoID == null) {echo 'Campeonato: ';  } else { echo 'Entrenamiento: '; }
          echo $evento->nombre; ?> </h5>
     <br>
-    <h6> <?php echo 'Distancia: '.$prueba->Distancia.' m'; ?> </h6>
-    <h6> <?php echo 'Tamaño pileta: '.$prueba->Tamanio.' m'; ?> </h6>
-    <h6> <?php echo 'Estilo: '.$prueba->Nombre; ?> </h6>
+    <h6> <?php echo 'Recorrido de '.$prueba->Distancia.'m '.$prueba->Nombre .' en pileta de '.$prueba->Tamanio.'m'; ?> </h6>
+    <h6> <?php setlocale(LC_TIME, 'spanish'); echo 'Realizado el día '.strftime("%A %d de %B del %Y", strtotime($resultado->Fecha)); ?> </h6>
     <br>
-    <h6> <?php echo 'Resultado de la fecha: '.$resultado->Fecha; ?> </h6>
-    <?php foreach($parciales as $parcial) { ?>
-        <li class="list-group-item"><?php echo $parcial->Tiempo; ?></li>
+    <h6> <?php echo 'Tiempo Total: '.$resultado->TiempoTotal; ?> </h6>
+    <br>
+    <?php for ($i = 0; $i < count($parciales); $i++) { ?>
+        <li class="list-group-item"><?php echo 'Tiempo en '.$prueba->Tamanio*($i+1).'m: '.$parciales[$i]->Tiempo; ?></li>
     <?php } ?>
  
 

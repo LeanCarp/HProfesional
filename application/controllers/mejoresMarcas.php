@@ -72,7 +72,8 @@ class MejoresMarcas extends CI_Controller {
 				}
 				else
 				{
-					$resultado = $this->obtenerMejorTiempo($resultados);
+					
+					$resultado = $this->obtenerMejorTiempo($resultados);		
 					echo '<li class="list-group-item li-contenido">'.$resultado->TiempoTotal.'<a class="botonDetalle" href="mejoresMarcas/mostrar/'.$resultado->ID.'">></a></li>';
 				}
 			}
@@ -108,6 +109,7 @@ class MejoresMarcas extends CI_Controller {
 				}
 
 			}
+			die;
 			if (count($mejoresResultados) == 0)
 			{
 				echo '<li class="list-group-item li-contenido nombres">No hay récord</li>';
@@ -164,7 +166,7 @@ class MejoresMarcas extends CI_Controller {
 			$evento = $this->campeonato_model->getByID($prueba[0]->CampeonatoID);
 		}
 
-		$data['nadador'] = $nadador[0];
+		$data['nadador'] = $nadador;
 		$data['parciales'] = $parciales;
 		$data['resultado'] = $resultado[0];
 		$data['prueba'] = $prueba[0];
