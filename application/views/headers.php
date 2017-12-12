@@ -155,7 +155,20 @@ var contador = 1;
 		position: relative;
 		z-index: 1;
 	}
+
+	#imagen{
+	width: 40px;
+	height: 40px;
+	display:block;
+	margin-left: 5px;
+	}
 }
+
+#imagen{
+	width: 40px;
+	display:block;
+	margin-left: 5px;
+	}
 
 @media screen and (min-width: 800px) {
     .nav-izq{
@@ -170,7 +183,7 @@ var contador = 1;
 
 <body>
 	<div class="menu-bar">
-        <p>Menú</p>
+	<img id="imagen" src="<?= base_url(); ?>assets/imgs/iconNadador.png">
 		<a href="#" class="bt-menu"><img src="<?php echo base_url(); ?>assets/imgs/menu.png" alt=""></a>
 	</div>
 

@@ -94,9 +94,9 @@
 <script src="<?= base_url(); ?>/assets/js/cronometro.js"></script>
 
 		<div onload="configurando()">
-			<!-- <div>
-				<a href="<?php echo base_url(); ?>cronometro/insercionManual" class="btn-primary" style="padding: 5px; text-decoration: none;">Ingresar tiempo manualmente</a>
-			</div> -->	
+			<div>
+				<a href="<?php echo base_url(); ?>cronometro/cronometroManual" class="btn-primary" style="padding: 5px; text-decoration: none;">Ingresar tiempo manualmente</a>
+			</div>	
 			<div class="configuracion">
 					<div class="selects" style="text-align: center;">
 						<h3 style="text-align: center;">Configuración del cronómetro:</h4>

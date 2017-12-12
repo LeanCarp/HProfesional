@@ -56,7 +56,8 @@ class Cronometro extends CI_Controller {
 	    }
 	}
 
-	function cronometroConfig(){
+	/// LO COMENTADO -PODRÍA- SER BORRADO
+/* 	function cronometroConfig(){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
@@ -123,7 +124,7 @@ class Cronometro extends CI_Controller {
 		{
 			echo '<option value="0">Seleccione una prueba</option>';
 		}
-	}
+	} */
 
 	public function cantidadParciales($idPrueba)
 	{
@@ -284,14 +285,15 @@ class Cronometro extends CI_Controller {
 	
 	}
 
-/* 	public function insercionManual(){
+	public function insercionManual($ident){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
         else
         {     	
-			$crud = new grocery_CRUD();
+			$valor = explode('-',$ident);
+/* 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('resultado');
 			$crud->set_subject('resultado');
@@ -304,14 +306,41 @@ class Cronometro extends CI_Controller {
 			$crud->display_as('PruebaID','Prueba');
 			$crud->display_as('DNI','Nadador');
 
-			//$crud->unset_add();
-			//$crud->unset_operations();
+			$output = $crud->render(); */
+			
+			/* $data['estilos'] = $this->estilo_model->getAll();
+			$data['distancias'] = $this->distanciaTotal_model->getAll();
+			$data['piletas'] = $this->tamanoPileta_model->getAll();
+			$data['categorias'] = $this->categoria_model->getAll();
+			$data['entrenamientos'] = $this->entrenamiento_model->getAll();*/
+			$data['nadadores'] = $this->nadador_model->getAll();
 
+			$data['idPrueba'] = $valor[0];
+			$data['cantParciales'] = $valor[1];
 
-	    	$output = $crud->render();
 			$this->load->view('headers');
-			$this->load->view('cronometroManual', $output);
+			$this->load->view('cronometroManualCamp', $data);
+		}
 
-	} */
+	}
+
+	function cronometroManual(){
+		if (!$this->ion_auth->logged_in())
+		{
+			redirect('auth/login');
+		}
+        else
+        { 			
+			$data['estilos'] = $this->estilo_model->getAll();
+			$data['distancias'] = $this->distanciaTotal_model->getAll();
+			$data['piletas'] = $this->tamanoPileta_model->getAll();
+			$data['categorias'] = $this->categoria_model->getAll();
+			$data['entrenamientos'] = $this->entrenamiento_model->getAll();
+			$data['nadadores'] = $this->nadador_model->getAll();
+
+			$this->load->view('headers');
+			$this->load->view('cronometroManual', $data);
+		}
+	}
 
 }

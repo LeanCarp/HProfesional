@@ -35,6 +35,7 @@ var contador = 1;
 				});
 			}
 	});
+	
 
 /* 	$(document).scroll(function() {
 			$(".div-top").animate({
@@ -44,6 +45,29 @@ var contador = 1;
 	}); */
 
 });
+
+/* $( window ).resize(function() {
+  if ($(window).width() > 768) {
+				/* $(".div-top").animate({
+					left: '0'
+				});
+				$(".nav-izq").animate({
+					left: '0'
+				});
+				$(".div-top").css({'left':'0'});
+				$(".nav-izq").css({'left':'0'});
+				contador = 0;
+  }
+  else {
+				contador = 1;
+				$(".div-top").animate({
+					left: '-100%'
+				});
+				$(".nav-izq").animate({
+					left: '-100%'
+				});
+	}
+});  */
 
 </script>
 
@@ -55,6 +79,10 @@ var contador = 1;
 
 #imagen{
 	width: 40px;
+	}
+
+	.nav-izq-item{
+		border-bottom: 1px solid rgba(255,255,255, .3);
 	}
 @media screen and (max-width:800px){
 	.div-top{
@@ -75,7 +103,7 @@ var contador = 1;
 	}
 
 	.nav-izq{
-		margin-top:257px;
+		margin-top:207px;
 		left: -100%;
 		position: absolute;
 		z-index: 4;
@@ -103,19 +131,23 @@ var contador = 1;
 	}
 
 	.menu-bar{
-		display: block;
-		width: 100%;
-		background: gray;
-		border-bottom: 1px solid rgba(255,255,255, .3);
-	}
-
-	.menu-bar .bt-menu{
-		display: block;
-		padding: 10px;
+		display: flex;
+		justify-content: space-between;
 		background: black;
-		text-decoration: none;
+		border-bottom: 1px solid rgba(255,255,255, .3);
 		color: white;
 	}
+		.menu-bar p{
+			margin: 0;
+			padding: 10px;
+		}
+		.menu-bar a{
+			margin: 0;
+			padding: 10px;
+		}
+		.menu-bar a:hover{
+			background: #3D8BCD;
+		}
 
 	.container{
 		position: relative;
@@ -123,10 +155,10 @@ var contador = 1;
 	}
 
 	#imagen{
-	width: 75px;
-	height: 50px;
+	width: 40px;
+	height: 40px;
 	display:block;
-margin:auto;
+	margin-left: 5px;
 	}
 }
 </style>
@@ -134,14 +166,12 @@ margin:auto;
 </head>
 <body>
 	<div class="menu-bar">
-		<a href="#" class="bt-menu">Menú</a>
+	<img id="imagen" src="<?= base_url(); ?>assets/imgs/iconNadador.png">
+		<a href="#" class="bt-menu"><img src="<?php echo base_url(); ?>assets/imgs/menu.png" alt=""></a>
 	</div>
 
 	<div class="div-top">
 		<ul class="nav nav-arriba">
-			<li class="">
-				<img id="imagen" src="<?= base_url(); ?>assets/wiki.png">
-		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>">Inicio</a>
 		  </li>
