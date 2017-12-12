@@ -166,7 +166,7 @@ class MejoresMarcas extends CI_Controller {
 			$evento = $this->campeonato_model->getByID($prueba[0]->CampeonatoID);
 		}
 
-		$data['nadador'] = $nadador[0];
+		$data['nadador'] = $nadador;
 		$data['parciales'] = $parciales;
 		$data['resultado'] = $resultado[0];
 		$data['prueba'] = $prueba[0];
