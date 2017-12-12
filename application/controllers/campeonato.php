@@ -25,7 +25,7 @@ class Campeonato extends CI_Controller {
 			//$crud->add_action('<+>', '+','pruebaCampeonato/index');
 			$crud->add_action('Pruebas', base_url().'assets/imgs/pruebaIcon.png', 'pruebaCampeonato/index');
 
-			$crud->set_subject('campeonato');
+			$crud->set_subject('Campeonato');
 			$crud->columns('nombre','ClubID','inicio','fin');
 			$crud->fields('ClubID','nombre','inicio','fin',  'TipoCampeonatoID', 'color');
 
@@ -42,6 +42,7 @@ class Campeonato extends CI_Controller {
 			$crud->display_as('fin','Fecha fin');
 			$crud->display_as('nombre','Título');
 			$crud->display_as('ClubID','Club');
+			
 
 		/* Generamos la tabla */
 		$output = (array)$crud->render();

@@ -45,7 +45,7 @@ class PruebaCampeonato extends CI_Controller {
 			$crud->display_as('tamaniopiletaID','Tamaño de pileta');
 			$crud->display_as('EstiloID','Estilo');
 			$crud->display_as('DistanciaID','Distancia');
-
+			$crud->set_subject('Prueba');
 
 			$crud->unset_export();
 			$crud->unset_print();

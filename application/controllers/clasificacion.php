@@ -125,7 +125,7 @@ class Clasificacion extends CI_Controller {
 	}
 
     function timeToSeconds($time) {
-		$valor = explode(":", $time);
+        $valor = explode(":", $time);
 		return intval($valor[0]) * 60 + intval($valor[1]) + intval($valor[2]) * 0.01;
 	}
 

@@ -25,7 +25,7 @@ class club extends CI_Controller {
             
             $crud->set_relation('localidadID','localidad','Ciudad');
             $crud->display_as('localidadID','Localidad');
-
+			$crud->set_subject('Club');
 			$crud->unset_export();
 			$crud->unset_print();
 

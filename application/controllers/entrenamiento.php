@@ -20,15 +20,15 @@ class Entrenamiento extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_language('spanish');
 			$crud->set_table('entrenamiento');
-			$crud->columns('inicio','fin', 'nombre');
-			$crud->fields('inicio','fin', 'nombre', 'TipoEntrenamientoID','color');
+			$crud->columns('nombre','inicio','fin');
+			$crud->fields('nombre','inicio','fin', 'TipoEntrenamientoID','color');
 			
 			//$nombreEntrenamiento=$crud->get_edit_field_value('Nombre');
 
 			//$crud->add_action('<+>', '+','pruebaEntrenamiento/index');
 			$crud->add_action('Pruebas', base_url().'assets/imgs/pruebaIcon.png', 'pruebaEntrenamiento/index');
 
-			$crud->set_subject('Nombre');
+			$crud->set_subject('Entrenamiento');
 			//$crud->unset_add();
 			//$crud->unset_delete();
 			//$crud->unset_read();

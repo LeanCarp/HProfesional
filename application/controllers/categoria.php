@@ -36,7 +36,7 @@ class Categoria extends CI_Controller {
 			$crud->unset_print();
 			//$crud->unset_add();
 			//$crud->unset_operations();
-
+			$crud->set_subject('Categoría');
 
 			/* Generamos la tabla */
 			$output = (array)$crud->render();

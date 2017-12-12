@@ -36,7 +36,7 @@ class Estilo extends CI_Controller {
 			//$crud->set_relation('TipoEntrenamientoID','tipoEntrenamiento','ID');
 			//$crud->unset_add();
 			//$crud->unset_operations();
-
+			$crud->set_subject('Estilo');
 
 			/* Generamos la tabla */
 			$output = (array)$crud->render();

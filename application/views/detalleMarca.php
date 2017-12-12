@@ -107,7 +107,7 @@ function createChart() {
     <br>
     <h6> <?php echo 'Recorrido de '.$prueba->Distancia.'m '.$prueba->Nombre .' en pileta de '.$prueba->Tamanio.'m'; ?> </h6>
     <br>
-    <h6> <?php echo 'Realizado el día: '.$resultado->Fecha; ?> </h6>
+    <h6> <?php setlocale(LC_TIME, 'spanish'); echo 'Realizado el día '.strftime("%A %d de %B del %Y", strtotime($resultado->Fecha)); ?> </h6>
     <h6> <?php echo 'Tiempo Total: '.$resultado->TiempoTotal; ?> </h6>
     <br>
     <?php for ($i = 0; $i < count($parciales); $i++) { ?>

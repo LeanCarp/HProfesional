@@ -47,7 +47,7 @@ class PruebaEntrenamiento extends CI_Controller {
 			$crud->display_as('DistanciaID','Distancia');
 			$crud->display_as('tamaniopiletaID','Tamaño de pileta');
 			// $crud->display_as('EntrenamientoID','Entrenamiento');
-
+			$crud->set_subject('Prueba');
 			//$crud->unset_add();
 			//$crud->unset_delete();
 			//$crud->unset_read();

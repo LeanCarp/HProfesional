@@ -32,6 +32,7 @@ class TipoEntrenamiento extends CI_Controller {
 			//$crud->display_as('TipoEntrenamientoID','Tipo');
 			//$crud->unset_add();
 			//$crud->unset_operations();
+			$crud->set_subject('Tipo de Entrenamiento');
 
 
 			/* Generamos la tabla */
