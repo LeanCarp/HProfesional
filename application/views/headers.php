@@ -180,7 +180,8 @@ $(document).ready(function () {
 
 <body>
 	<div class="menu-bar">
-	<img id="imagen" src="<?= base_url(); ?>assets/imgs/iconNadador.png">
+	<a class="navbar-brand"  href="<?php echo base_url(); ?>">
+	<img id="imagen" src="<?= base_url(); ?>assets/imgs/iconNadador.png"></a>
 		<a href="#" class="bt-menu"><img src="<?php echo base_url(); ?>assets/imgs/menu.png" alt=""></a>
 	</div>
 

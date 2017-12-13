@@ -20,9 +20,15 @@ class ListarAsistencia extends CI_Controller {
 		}
         else
         {
+			 //KENDO UI    
+			 $output = [];
+			 $output['css_files'][] = base_url().'assets/css/kendo.common.min.css';
+			 $output['css_files'][] = base_url().'assets/css/kendo.default.min.css"';
+			 $output['css_files'][] = base_url().'assets/css/kendo.default.mobile.min.css';
+			 $output['js_files'][] = base_url().'assets/js/kendo.js';
 
-			$this->load->view('headers');
-			$this->load->view('listarAsistencia');
+			$this->load->view('headers', $output);
+			$this->load->view('listarAsistencia', $output);
 		}
 	}
 

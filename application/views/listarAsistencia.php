@@ -21,7 +21,21 @@ function realizarProceso(){
                 }
         });
 }
+
+function pdfExport(idName,fileName){ 
+    kendo.drawing.drawDOM($('#'+idName)).then(function (group) {
+        kendo.drawing.pdf.saveAs(group,fileName+'.pdf');
+    });    
+}
+
 </script>
+
+<?php foreach($css_files as $file): ?>
+<link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+<?php endforeach; ?>
+<?php foreach($js_files as $file): ?>
+<script src="<?php echo $file; ?>"></script>
+<?php endforeach; ?>
 
 <style>
 	.contenedor{
@@ -58,23 +72,24 @@ function realizarProceso(){
 			</div>
 
 			<div>
-				<input type="button" class="btnFiltrar" id="Filtrar" value="Filtrar" onclick="realizarProceso()">
+				<input type="button" class="btnFiltrar" id="Filtrar" value="Listar" onclick="realizarProceso()">
 			</div>
 		</div>
 		
-		<div id="output" style="margin-top: 25px;">
+		<div id="contenido">
+			<br>
+			<h4> <?php echo 'Asistencia del dia: ' ?></h4> 
+			<br>					
 
+			<div id="output" style="margin-top: 25px;"> </div>
+
+			
 		</div>
-
-		<!-- <?php echo form_submit('submit', 'Filtrar', 'class="btn-primary"'); ?> -->
+		
+		
 		<?php echo form_close(); ?>
+		<button onclick="pdfExport('contenido', 'Asistencia de la fecha')" style="margin-top: 10px;">Exportar a PDF</button>
 
-		<!-- <div class="">
-			<h2>Listar asistencia:</h2>
-			<div class="">	
-				<?php echo $output; ?>
-			</div>
-		</div> -->
 	</div>
 </body>
 </html>

@@ -31,14 +31,14 @@
 		<h2>Gestión de Asistencias:</h2>
 
 		<div class="contenedor">
-		<div>
+	<!--	<div>
 			<label>Entrenamiento: </label>
 			<select name="selectEntrenamiento">
 				<?php foreach($entrenamientos->result() as $entrenamiento) { ?>
 					<option value="<?= $entrenamiento->ID ?>"><?= $entrenamiento->nombre ?></option>
 				<?php } ?>
 			</select>
-		</div>
+		</div>-->
 		<div>
 			<label>Fecha: </label> <input id="fecha" name="fecha" type="date" value="<?php echo date("Y-m-d");?>">
 		</div>
