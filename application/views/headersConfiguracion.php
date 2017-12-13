@@ -12,7 +12,6 @@
 $(document).ready(function () {
 var contador = 1;
 
-//function main(){
 	$(".menu-bar").click(function (){
 			if (contador == 1)
 			{
@@ -35,39 +34,30 @@ var contador = 1;
 				});
 			}
 	});
-	
 
-/* 	$(document).scroll(function() {
-			$(".div-top").animate({
-				left: '-100%'
-			});
-			contador = 1;
-	}); */
-
+$( window ).resize(function() {
+			if ($(window).width() > 800) {
+						$(".div-top").animate({
+							left: '0'
+						});
+						$(".nav-izq").animate({
+							left: '0'
+						});
+						/* $(".div-top").css({'left':'0'});
+						$(".nav-izq").css({'left':'0'}); */
+						contador = 0;
+			}
+			else {
+						contador = 1;
+						$(".div-top").animate({
+							left: '-100%'
+						});
+						$(".nav-izq").animate({
+							left: '-100%'
+						});
+			}
+		}); 
 });
-
-/* $( window ).resize(function() {
-  if ($(window).width() > 768) {
-				/* $(".div-top").animate({
-					left: '0'
-				});
-				$(".nav-izq").animate({
-					left: '0'
-				});
-				$(".div-top").css({'left':'0'});
-				$(".nav-izq").css({'left':'0'});
-				contador = 0;
-  }
-  else {
-				contador = 1;
-				$(".div-top").animate({
-					left: '-100%'
-				});
-				$(".nav-izq").animate({
-					left: '-100%'
-				});
-	}
-});  */
 
 </script>
 
@@ -112,8 +102,12 @@ var contador = 1;
 	}
 
 	.nav-izq:hover{
-		color: #3D8BCD;
+		color: black;
 	}
+
+	.nav-link:hover{
+	color: black;
+}
 
 	.nav-izq ul{
 		display: flex;
@@ -123,11 +117,10 @@ var contador = 1;
 	.nav-izq ul li{
 		display: block;
 		border-bottom: 1px solid rgba(255,255,255, .3);
-		background: black;
 	}
 
 	.nav-link: hover{
-		color: #3D8BCD;
+		color: black;
 	}
 
 	.menu-bar{
@@ -160,6 +153,14 @@ var contador = 1;
 	display:block;
 	margin-left: 5px;
 	}
+
+	.div-top{
+		background: #3D8BCD;
+	}
+
+	.nav-izq-link{
+		background: #3D8BCD;
+	}
 }
 </style>
 	
@@ -184,9 +185,6 @@ var contador = 1;
 		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>configuracion">Configuración</a>
 		  </li>
-			<li class="nav-item">
-		    <a class="nav-link" href="<?php echo base_url(); ?>auth/change_password">Usuario</a>
-		  	</li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="<?php echo base_url(); ?>auth/logout">Salir</a>
 		  </li>
@@ -195,7 +193,6 @@ var contador = 1;
 	<div class="container row">
 		<div class="nav-izq col-md-3">
 			<ul class="nav flex-column">
-			  </li>
 			  <li class="nav-item nav-izq-item">
 			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>categoria">Categorías</a>
 			  </li>
@@ -214,6 +211,9 @@ var contador = 1;
 			  <li class="nav-item nav-izq-item">
 			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>tipoCampeonato">Tipo de campeonato</a>
 			  </li>
+				<li class="nav-item nav-izq-item">
+		    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>auth/change_password">Usuario</a>
+		  	</li>
 				<li class="nav-item nav-izq-item">
 			    <a class="nav-link nav-izq-link" href="<?php echo base_url(); ?>club">Clubes</a>
 			  </li>

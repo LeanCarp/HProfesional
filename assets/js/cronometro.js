@@ -22,6 +22,10 @@ function inicio () {
 		}
 		else
 		{
+			$("#competidores div").each(function (){
+				this.childNodes[3].disabled=false;
+			});
+			
 			control = setInterval(cronometro,10);
 			document.getElementById("inicio").disabled = true;
 			document.getElementById("parar").disabled = false;
@@ -268,6 +272,7 @@ function agregarNadador() {
 		inputParcial.readOnly  = true;
 		inputParcial.setAttribute('onclick', 'inputar(this);');
 		inputParcial.setAttribute('style', 'margin-bottom: 15px;');
+		inputParcial.setAttribute("disabled", true);
 		divNadador.appendChild(inputParcial);
 
 		for (i=2; i <= cantParciales; i++)

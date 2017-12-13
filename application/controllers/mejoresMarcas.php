@@ -109,7 +109,6 @@ class MejoresMarcas extends CI_Controller {
 				}
 
 			}
-			die;
 			if (count($mejoresResultados) == 0)
 			{
 				echo '<li class="list-group-item li-contenido nombres">No hay récord</li>';
@@ -118,7 +117,7 @@ class MejoresMarcas extends CI_Controller {
 			{
 				$record = $this->obtenerMejorTiempo($mejoresResultados);
 				$nadador = $this->nadador_model->getByID($record->DNI);
-				echo '<li class="list-group-item li-contenido nombres">'.$nadador[0]->Apellido.', '.$nadador[0]->Nombre.'</li>';
+				echo '<li class="list-group-item li-contenido nombres">'.$nadador->Apellido.', '.$nadador->Nombre.'</li>';
 				echo '<li class="list-group-item li-contenido">'.$record->TiempoTotal.'<a class="botonDetalle" href="mejoresMarcas/mostrar/'.$record->ID.'">></a></li>';
 			}		
 		}

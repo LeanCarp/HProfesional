@@ -71,7 +71,6 @@
 
 
         <div class="configuracion">
-				
         </div>
 
 		<div id="contenedor">		
@@ -84,6 +83,8 @@
 				</select>	
 				
 				<input type="button" class="btn-primary" id="agregarNadador" value="Agregar" onclick="agregarNadador()">
+				<input type="button" class="btn-danger" id="limpiar" value="Limpiar" onclick="limpiar();">
+
 			</div>
 			<?php echo form_open("cronometro/guardarCampeonato", "id='formCronometroManual'");  ?>	
 			<input name="inputPrueba" id="inputPrueba" value="<?php echo $idPrueba ?>" type="text" hidden>

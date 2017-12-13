@@ -72,7 +72,7 @@ class Clasificacion extends CI_Controller {
                 if ($this->timeToSeconds($resultado->TiempoTotal) <=  $this->timeToSeconds("00:06:00"))
                 {
                     $nadador = $this->nadador_model->getByID($resultado->DNI);
-                    echo '<li class="list-group-item li-contenido">'.$resultado->DNI.' | '.$nadador[0]->Apellido.', '.$nadador[0]->Nombre.'<p>Tiempo: '.$resultado->TiempoTotal.'</p></li>';
+                    echo '<li class="list-group-item li-contenido">'.$resultado->DNI.' | '.$nadador->Apellido.', '.$nadador->Nombre.'<p>Tiempo: '.$resultado->TiempoTotal.'</p></li>';
                 }
             }
         }

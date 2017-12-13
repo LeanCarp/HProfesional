@@ -9,6 +9,10 @@ function inicio () {
 		}
 		else
 		{
+			$("#competidores div").each(function (){
+				this.childNodes[3].disabled=false;
+			});
+
 			control = setInterval(cronometro,10);
 			document.getElementById("inicio").disabled = true;
 			document.getElementById("parar").disabled = false;
@@ -36,12 +40,12 @@ function reinicio () {
 	document.getElementById("continuar").disabled = true;
 	document.getElementById("reinicio").disabled = true;
 
-	$("#competidores div").each(
+	$("#competidores div input").each(
 		function () {
-			divPadre = document.getElementById("competidores");
-			eliminarNadador(this.lastChild);
-		}
-	)
+			if (this.type != "button"){
+				this.value = "";
+			}
+	});
 }
 function cronometro () {
 	if (centesimas < 99) {
@@ -214,6 +218,7 @@ function agregarNadador() {
 		inputParcial.readOnly  = true;
 		inputParcial.setAttribute('onclick', 'inputar(this);');
 		inputParcial.setAttribute('style', 'margin-bottom: 15px;');
+		inputParcial.setAttribute("disabled", true);
 		divNadador.appendChild(inputParcial);
 
 		for (i=2; i <= cantParciales; i++)

@@ -144,7 +144,6 @@
 						<!-- <label>Cantidad de parciales: </label> --> <input id="cantidadParciales" value="" hidden>	
 					</div> <!-- div selects -->
 			</div> <!-- div configurando -->
-
 			<div class="nadadores">
 					<label>Nadadores: </label>
 					<select name="selectNadadores" id="selectNadadores">
@@ -153,6 +152,7 @@
 						<?php } ?>
 					</select>	
 					<input type="button" class="btn-primary" id="agregarNadador" value="Agregar" onclick="agregarNadador()">
+					<input type="button" class="btn-danger" id="limpiar" value="Limpiar" onclick="limpiar();">
 			</div> <!-- div nadadores -->
 
 			<?php echo form_open("cronometro/guardarEntrenamiento", 'id="formCronometroManual"');  ?>			

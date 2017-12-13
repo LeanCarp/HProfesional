@@ -15,9 +15,8 @@
 <script>
 
 $(document).ready(function () {
-var contador = 1;
+	var contador = 1;
 
-//function main(){
 	$(".menu-bar").click(function (){
 			if (contador == 1)
 			{
@@ -42,27 +41,27 @@ var contador = 1;
 	});
 
 	$( window ).resize(function() {
-  if ($(window).width() > 800) {
-				/* $(".div-top").animate({
-					left: '0'
-				});
-				$(".nav-izq").animate({
-					left: '0'
-				}); */
-				$(".div-top").css({'left':'0'});
-				$(".nav-izq").css({'left':'0'});
-				contador = 0;
-  }
-  else {
-				contador = 1;
-				$(".div-top").animate({
-					left: '-100%'
-				});
-				$(".nav-izq").animate({
-					left: '-100%'
-				});
-  } 
-});
+		if ($(window).width() > 800) {
+						$(".div-top").animate({
+							left: '0'
+						});
+						$(".nav-izq").animate({
+							left: '0'
+						});
+						/* $(".div-top").css({'left':'0'});
+						$(".nav-izq").css({'left':'0'}); */
+						contador = 0;
+		}
+		else {
+						contador = 1;
+						$(".div-top").animate({
+							left: '-100%'
+						});
+						$(".nav-izq").animate({
+							left: '-100%'
+						});
+		} 
+	});
 
 });
 
@@ -82,9 +81,13 @@ var contador = 1;
 	border-bottom: 1px solid rgba(255,255,255, .3);
 }
 
-.nav-izq:hover{
+/* .nav-izq:hover{
 	color:black;
 }
+
+.nav-link:hover{
+	color: black;
+} */
 
 @media screen and (max-width:800px){
 	.div-top{
@@ -121,7 +124,6 @@ var contador = 1;
 	.nav-izq ul li{
 		display: block;
 		border-bottom: 1px solid rgba(255,255,255, .3);
-		background: black;
 	}
 
 	.menu-bar{
@@ -143,14 +145,6 @@ var contador = 1;
 			background: #3D8BCD;
 		}
 
-	/* .menu-bar .bt-menu{
-		display: block;
-		padding: 10px;
-		background: black;
-		text-decoration: none;
-		color: white;
-	} */
-
 	.container{
 		position: relative;
 		z-index: 1;
@@ -162,6 +156,18 @@ var contador = 1;
 	display:block;
 	margin-left: 5px;
 	}
+
+	.div-top{
+		background: #3D8BCD;
+	}
+
+	.nav-link:hover{
+		color: black;
+	}
+
+	.nav-izq-link{
+		background: #3D8BCD;
+	}
 }
 
 #imagen{
@@ -170,15 +176,6 @@ var contador = 1;
 	margin-left: 5px;
 	}
 
-@media screen and (min-width: 800px) {
-    .nav-izq{
-			left: 0px;
-		}
-
-		.div-top{
-			left: 0px;
-		}
-}
 </style>
 
 <body>

@@ -29,6 +29,8 @@ class ListarAsistencia extends CI_Controller {
 	function probador() {
 		$fecha = $this->input->post("fecha");
 		$turno = $this->input->post("turno");
+
+		
 		if ($fecha == null)
 		{
 			echo '<li class="list-group-item li-contenido">Seleccione una fecha y un turno</li>';
@@ -36,8 +38,7 @@ class ListarAsistencia extends CI_Controller {
 		else
 		{
 			$data = $this->asistencia_model->getAsistenciaPorFechaYTurno($fecha, $turno);
-
-			if (empty($data))
+			if (count($data) == 0)
 			{
 				echo '<li class="list-group-item li-contenido">No se registraron asistencias</li>';
 			}
@@ -51,7 +52,7 @@ class ListarAsistencia extends CI_Controller {
 					$query = $this->db->get();
 					$query = $query->result();
 	
-					if (empty($query))
+					if (count($query) == 0)
 					{
 						echo '<li class="list-group-item li-contenido">No se registraron asistencias</li>';
 					}
@@ -59,7 +60,7 @@ class ListarAsistencia extends CI_Controller {
 					{
 						foreach($query as $row){
 							$query2 = $this->nadador_model->getByID($row->NadadorID);
-							echo '<li class="list-group-item li-contenido">'. $row->NadadorID .' | '. $query2[0]->Apellido .', '. $query2[0]->Nombre .' </li>';
+							echo '<li class="list-group-item li-contenido">'. $row->NadadorID .' | '. $query2->Apellido .', '. $query2->Nombre .' </li>';
 						}
 					}
 				}

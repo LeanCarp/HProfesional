@@ -35,7 +35,7 @@ class resultado_model extends CI_Model{
 
 	function obtenerResultadosPorNadadorYPruebaCampeonato($id, $Estilo, $Sexo, $Categoria, $Pileta, $Distancia)
 	{
-		$this->db->select('a.ID, a.TiempoTotal');
+		$this->db->select('a.ID, a.DNI, a.TiempoTotal');
 		$this->db->from('resultado a');
 		$this->db->join('prueba b', 'a.PruebaID=b.ID');
 		$this->db->where('b.EstiloID', $Estilo);
@@ -51,7 +51,7 @@ class resultado_model extends CI_Model{
 
 	function obtenerResultadosPorNadadorYPruebaEntrenamiento($id, $Estilo, $Sexo, $Categoria, $Pileta, $Distancia)
 	{
-		$this->db->select('a.ID, a.TiempoTotal');
+		$this->db->select('a.ID, a.DNI, a.TiempoTotal');
 		$this->db->from('resultado a');
 		$this->db->join('prueba b', 'a.PruebaID=b.ID','left');
 		$this->db->where('b.EstiloID', $Estilo);
