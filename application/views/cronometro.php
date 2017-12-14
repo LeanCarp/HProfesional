@@ -32,6 +32,18 @@
 	margin-top: 70px;
 }
 
+.btnEliminar{
+	color: white;
+	background: #ba2020;
+	border-radius: 5px;
+	width: 50%;
+	margin: auto;
+}
+
+.btnEliminar:hover{
+	background: #ff1a1a;
+}
+
 @media screen and (max-width:800px){
 	.nadadores{
 		margin-top: 10px;

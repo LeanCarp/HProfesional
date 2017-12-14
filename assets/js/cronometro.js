@@ -126,6 +126,9 @@ function SecondsToTime(seconds){
 function inputar(e) {
 	var cantParciales = document.getElementById("cantidadParciales").value;
 
+	var inputTiempoTotal = document.getElementById(e.id.substring(0, e.id.length-1)+'tt');
+	inputTiempoTotal.innerHTML = "Tiempo total: "+minutos.toString()+':'+segundos.toString()+':'+centesimas.toString();
+
 	var inputAnterior = document.getElementById(e.id.substring(0, e.id.length-1)+'t');
 	var siguienteDiv = parseInt(e.id.substring(e.id.length-1, e.id.length))+1;
 	var inputSiguiente = document.getElementById(e.id.substring(0, e.id.length-1)+(siguienteDiv.toString()));
@@ -252,12 +255,18 @@ function agregarNadador() {
 			titulo.setAttribute("id", "titulo");
 			titulo.innerHTML=pro2;
 			titulo.value=pro2;
+
+		var inputTiempoTotal = document.createElement("h6");
+			inputTiempoTotal.setAttribute("id", pro+'tt');
+			inputTiempoTotal.innerHTML="Tiempo total: 00:00:00";
+
 		var inputSubmit = document.createElement("input");
 			inputSubmit.setAttribute("type", "button");
 			inputSubmit.setAttribute("id", pro+0);
 			inputSubmit.setAttribute("onclick", "eliminarNadador(this);");
 			inputSubmit.setAttribute("value", "Eliminar");
-			inputSubmit.setAttribute("style", "background: #ba2020; color: white; width:50%; margin: 0 auto; font-size: 17px;");
+			inputSubmit.className += "btnEliminar";
+			//inputSubmit.setAttribute("style", "background: #ba2020; color: white; width:50%; margin: 0 auto; font-size: 17px;");
 
 
 		divNadador.className = 'box1';
@@ -288,7 +297,8 @@ function agregarNadador() {
 			inputParcial.setAttribute("disabled", true);
 			divNadador.appendChild(inputParcial);
 		}
-
+		
+		divNadador.appendChild(inputTiempoTotal);
 		divNadador.appendChild(inputSubmit);
 
 		divPadre = document.getElementById("competidores");
