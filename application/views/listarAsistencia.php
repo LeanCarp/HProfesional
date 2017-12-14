@@ -4,6 +4,7 @@
 
 <script type="text/javascript">
 function realizarProceso(){
+		document.getElementById("contenido").hidden = false;
 		var fecha = document.getElementById("fecha").value;
 		var turno = document.getElementById("selectTurno").value;
 
@@ -76,20 +77,17 @@ function pdfExport(idName,fileName){
 			</div>
 		</div>
 		
-		<div id="contenido">
+		<div id="contenido" hidden>
 			<br>
-			<h4> <?php echo 'Asistencia del dia: ' ?></h4> 
-			<br>					
+			<h4> <?php echo 'Asistencia del dia: ' ?></h4> 					
 
-			<div id="output" style="margin-top: 25px;"> </div>
+			<div id="output" style="margin-top: 25px;"></div>
 
-			
+			<button id="botonExportar" onclick="pdfExport('contenido', 'Asistencia de la fecha')" style="margin-top: 10px;">Exportar a PDF</button>
 		</div>
 		
 		
 		<?php echo form_close(); ?>
-		<button onclick="pdfExport('contenido', 'Asistencia de la fecha')" style="margin-top: 10px;">Exportar a PDF</button>
-
 	</div>
 </body>
 </html>

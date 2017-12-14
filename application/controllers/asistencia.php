@@ -6,6 +6,7 @@ class Asistencia extends CI_Controller {
 		$this->load->database();
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
+		$this->load->helper('date');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
 		$this->load->model('nadador_model');
 		$this->load->model('entrenamiento_model');
@@ -36,7 +37,7 @@ class Asistencia extends CI_Controller {
 		$nadadores = $this->input->post('checkeds');
 
 
-		$data = array('Mañana' => $turno, 'Fecha' => $fecha, 'EntrenamientoID' => $entrenamiento, 'CampeonatoID' => null);
+		$data = array('Mañana' => $turno, 'Fecha' => $fecha, 'EntrenamientoID' => 11, 'CampeonatoID' => null);
 		$asistencia_id = $this->asistencia_model->insertarAsistencia($data);
 
  		foreach ($nadadores as $nadador)
@@ -49,5 +50,30 @@ class Asistencia extends CI_Controller {
 
 		$this->load->view('headers');
 		$this->load->view('mensaje', $data);
+	}
+
+	function validarAsistencia()
+	{
+		$turno = $this->input->post('turno');
+		$fecha = date($this->input->post('fecha'));
+		//$nadadores = $this->input->post('nadadores');
+
+		/* $fecha = date("2010-12-13");
+		$turno = 0; */
+
+		$this->db->select('*');
+		$this->db->from('asistencia');
+		$this->db->where('Fecha', $fecha);
+		$this->db->where('Mañana', $turno);
+		$query = $this->db->get();
+		$asistencia = $query->result();
+		$data['valido'] = 'true';
+
+		if (count($asistencia) == 0)
+		{
+			$data['valido'] = 'false';
+		}
+
+		echo json_encode($data);
 	}
 }

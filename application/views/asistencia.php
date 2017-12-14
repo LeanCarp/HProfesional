@@ -44,7 +44,7 @@
 		</div>
 		<div>
 			<label>Turno: </label>
-			<select name="selectTurno">
+			<select id="selectTurno" name="selectTurno">
 				<option value="1">Mañana</option>
 				<option value="0">Tarde</option>
 			</select>
@@ -86,29 +86,65 @@
 	<input type="submit" value="Guardar" id="botonGuardar">
 
 	<script> /* Script que controla los datos antes de hacer un Submit */
+		function validarAsistencia()
+		{
+			var nadadores = [];
+			$('#listaNadadores input:checked').each(function () {
+				nadadores.push($(this).val());
+			});
+			var turno = $("#selectTurno option:selected").val();
+			var fecha = $("#fecha").val();
+
+			var parametros = {
+					"turno" : turno,
+					"fecha" : fecha,
+					"nadadores" : nadadores
+			};
+
+			$.ajax({
+					data:  parametros,
+					url:   '<?php echo base_url(); ?>asistencia/validarAsistencia',
+					type:  'post',
+					dataType: 'json',
+					success:  function (data) {
+						if (data.valido == 'true')
+						{
+							alert("Ya se registró asistencia para esa fecha");
+						}
+						else
+						{
+							$("#formAsistencia").submit(); 
+						}
+					}
+			});
+		}
+
+
 		$("#botonGuardar").click(function(event){
-		event.preventDefault();
-		var valido = false;
-		$("#listaNadadores li input").each(
-		function () {
-			if( $(this).prop('checked') ) {
-				valido = true;
+			event.preventDefault();
+
+			var validar = false;
+			$("#listaNadadores li input").each(
+			function () {
+				if( $(this).prop('checked') ) {
+					validar = true;
+				}
+			});
+
+			if ($("#fecha").val() == "")
+			{
+				validar = false;
 			}
-		});
 
-		if ($("#fecha").val() == "")
-		{
-			valido = false;
-		}
+			if (validar)
+			{
+				validarAsistencia();
+			}
+			else
+			{
+				alert("Datos incorrectos o selección vacía");
+			}
 
-		if (valido)
-		{
-			$("#formAsistencia").submit();
-		}
-		else
-		{
-			alert("Datos incorrectos o selección vacía");
-		}
 		});
 	</script>
 
