@@ -129,6 +129,12 @@ $( window ).resize(function() {
 		background: black;
 		border-bottom: 1px solid rgba(255,255,255, .3);
 		color: white;
+		position: sticky; /*Fixed ya que queremos que la posición sea en relación al navegador*/
+		top: 0; /*El valor 0 indica que va a quedar arriba de todo*/
+		left: 0; /*Para que el menu se ubique siempre en la parte izquierda de la pantalla*/
+		width: 100%; /*100% para que ocupe todo el ancho del navegador*/
+		padding: 10px 5px 10px 5px; 
+		z-index: 10000;  
 	}
 		.menu-bar p{
 			margin: 0;
