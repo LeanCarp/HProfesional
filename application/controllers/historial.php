@@ -46,10 +46,11 @@ class historial extends CI_Controller {
     {
         $this->load->model('entrenamiento_model');
        
-        // Our Start, ID and End Dates
+        $id = $this->input->get('id');
+       /* // Our Start, ID and End Dates
         $start = $this->input->get("start");
         $end = $this->input->get("end");
-        $idPrueba = $this->input->get('id');
+       
 
         $startdt = new DateTime('now'); // setup a local datetime
         $startdt->setTimestamp($start); // Set the date based on timestamp
@@ -57,9 +58,9 @@ class historial extends CI_Controller {
    
         $enddt = new DateTime('now'); // setup a local datetime
         $enddt->setTimestamp($end); // Set the date based on timestamp
-        $end_format = $enddt->format('Y-m-d H:i:s');
+        $end_format = $enddt->format('Y-m-d H:i:s');*/
        
-       $events = $this->entrenamiento_model->getEntrenamientosUsuario($idPrueba);
+       $events = $this->entrenamiento_model->getEntrenamientosUsuario($id);
         
        $data_events = array();
    

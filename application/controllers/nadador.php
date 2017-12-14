@@ -59,7 +59,7 @@ class Nadador extends CI_Controller {
 	}
 
 	function CalculaEdad( $fecha ) {
-		list($Y,$m,$d) = explode("-",$fecha);
+		list($d,$m,$Y) = explode("/",$fecha);
 		return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
 	}
 }

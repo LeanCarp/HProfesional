@@ -37,7 +37,7 @@ class Asistencia extends CI_Controller {
 		$nadadores = $this->input->post('checkeds');
 
 
-		$data = array('Mañana' => $turno, 'Fecha' => $fecha, 'EntrenamientoID' => null, 'CampeonatoID' => null);
+		$data = array('Mañana' => $turno, 'Fecha' => $fecha, 'EntrenamientoID' => $entrenamiento, 'CampeonatoID' => null);
 		$asistencia_id = $this->asistencia_model->insertarAsistencia($data);
 
  		foreach ($nadadores as $nadador)
