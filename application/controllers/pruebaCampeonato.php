@@ -57,7 +57,7 @@ class PruebaCampeonato extends CI_Controller {
 
 			$output = (array)$crud->render();
 			//Se carga el titulo a la vista.
-			$output['titulo']='pruebas del campeonato: ' .$titulo;
+			$output['titulo']='pruebas del campeonato ' .$titulo;
 			$this->load->view('headers');
 			$this->load->view('gestion', $output);
 		}

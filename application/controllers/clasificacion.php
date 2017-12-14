@@ -62,14 +62,15 @@ class Clasificacion extends CI_Controller {
         $hayResultados = false;
         foreach ($nadadores as $nadador)
         {
+           
             $resultados = $this->resultado_model->obtenerResultadoPorPruebaYNadador($prueba[0], $nadador->DNI);
 
-            if (count($resultados) != 0)
+            if (count($resultados)!=0)
             {
+                
                 $hayResultados = true;
                 $resultado = $this->obtenerMejorTiempo($resultados);
-                
-                if ($this->timeToSeconds($resultado->TiempoTotal) <=  $this->timeToSeconds("00:06:00"))
+                if ($this->timeToSeconds($resultado->TiempoTotal) <=  $this->timeToSeconds($prueba[0]->TiempoMin))
                 {
                     $nadador = $this->nadador_model->getByID($resultado->DNI);
                     echo '<li class="list-group-item li-contenido">'.$resultado->DNI.' | '.$nadador->Apellido.', '.$nadador->Nombre.'<p>Tiempo: '.$resultado->TiempoTotal.'</p></li>';
@@ -126,7 +127,7 @@ class Clasificacion extends CI_Controller {
 
     function timeToSeconds($time) {
         $valor = explode(":", $time);
-		return intval($valor[0]) * 60 + intval($valor[1]) + intval($valor[2]) * 0.01;
+        return intval($valor[0]) * 60 + intval($valor[1]) + intval($valor[2]) * 0.01;
 	}
 
 }

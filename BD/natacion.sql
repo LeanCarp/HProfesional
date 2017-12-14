@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2017 a las 21:53:46
+-- Tiempo de generación: 14-12-2017 a las 15:34:57
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 7.1.1
 
@@ -51,7 +51,32 @@ INSERT INTO `asistencia` (`ID`, `Mañana`, `Fecha`, `EntrenamientoID`, `Campeona
 (10, 0, '2017-11-03', 7, NULL),
 (11, 1, '2017-11-03', 7, NULL),
 (12, 1, '2017-11-03', 7, NULL),
-(13, 1, '2017-11-03', 7, NULL);
+(13, 1, '2017-11-03', 7, NULL),
+(14, 1, '2017-11-27', 11, NULL),
+(15, 1, '2017-11-27', 1, NULL),
+(16, 1, '2017-11-27', 1, NULL),
+(18, 1, '0000-00-00', 1, NULL),
+(19, 1, '2017-11-27', 9, NULL),
+(20, 1, '2017-11-27', 11, NULL),
+(21, 1, '2017-11-27', 11, NULL),
+(22, 1, '2017-11-28', 4, NULL),
+(23, 1, '2017-11-28', 6, NULL),
+(24, 1, '2017-11-28', 6, NULL),
+(25, 1, '2017-11-22', 6, NULL),
+(26, 1, '2017-11-28', 1, NULL),
+(27, 1, '2017-11-14', 6, NULL),
+(28, 0, '2017-11-28', 1, NULL),
+(29, 1, '2017-11-28', 2, NULL),
+(30, 1, '2017-11-28', 11, NULL),
+(31, 1, '2017-11-30', 7, NULL),
+(32, 1, '2017-11-28', 9, NULL),
+(33, 1, '2017-11-28', 1, NULL),
+(34, 1, '2017-11-28', 1, NULL),
+(35, 1, '2017-11-28', 7, NULL),
+(36, 0, '2017-12-13', 1, NULL),
+(37, 0, '2017-12-12', 1, NULL),
+(38, 1, '2017-12-13', 1, NULL),
+(39, 1, '2017-12-13', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -98,7 +123,8 @@ CREATE TABLE `categoria` (
 
 INSERT INTO `categoria` (`ID`, `EdadMinima`, `EdadMaxima`, `Nombre`) VALUES
 (1, 12, 12, 'Infantil'),
-(2, 12, 16, 'Juvenil');
+(2, 12, 16, 'Juvenil'),
+(3, 19, 24, 'Master');
 
 -- --------------------------------------------------------
 
@@ -256,7 +282,59 @@ INSERT INTO `lineaasistencia` (`ID`, `AsistenciaID`, `NadadorID`) VALUES
 (29, 12, 36101748),
 (30, 12, 38570363),
 (31, 13, 36101748),
-(32, 13, 38570363);
+(32, 13, 38570363),
+(33, 14, 38570658),
+(34, 19, 38570485),
+(36, 20, 38570485),
+(38, 21, 38570368),
+(39, 22, 36101748),
+(41, 23, 38570658),
+(42, 24, 38570485),
+(43, 25, 38570485),
+(44, 26, 38570485),
+(45, 27, 36101748),
+(47, 28, 36101748),
+(49, 29, 36101748),
+(51, 30, 36101748),
+(53, 31, 36101748),
+(55, 32, 36101748),
+(57, 33, 36101748),
+(58, 33, 36101749),
+(59, 33, 38570363),
+(60, 33, 38570368),
+(61, 33, 38570485),
+(62, 33, 38570658),
+(63, 34, 36101748),
+(64, 34, 36101749),
+(65, 34, 38570363),
+(66, 34, 38570368),
+(67, 34, 38570485),
+(68, 34, 38570658),
+(69, 35, 36101748),
+(70, 36, 36101748),
+(71, 36, 36101749),
+(72, 36, 38570363),
+(73, 36, 38570368),
+(74, 36, 38570485),
+(75, 36, 38570658),
+(76, 37, 36101748),
+(77, 37, 36101749),
+(78, 37, 38570363),
+(79, 37, 38570368),
+(80, 37, 38570485),
+(81, 37, 38570658),
+(82, 38, 36101748),
+(83, 38, 36101749),
+(84, 38, 38570363),
+(85, 38, 38570368),
+(86, 38, 38570485),
+(87, 38, 38570658),
+(88, 39, 36101748),
+(89, 39, 36101749),
+(90, 39, 38570363),
+(91, 39, 38570368),
+(92, 39, 38570485),
+(93, 39, 38570658);
 
 -- --------------------------------------------------------
 
@@ -326,7 +404,7 @@ CREATE TABLE `nadador` (
 --
 
 INSERT INTO `nadador` (`DNI`, `Apellido`, `Nombre`, `Sexo`, `FechaNacimiento`, `activo`) VALUES
-(36101748, 'Cuba', 'Juan Pablo', 1, '1991-08-31', 0),
+(36101748, 'Cuba', 'Juan Pablo', 1, '1991-08-31', 1),
 (36101749, 'Cuba', 'Javier', 1, '1997-11-22', 0),
 (38570363, 'Cuba', 'Martin', 1, '1995-01-03', 1),
 (38570368, 'Gomez', 'Dr.', 1, '1995-03-15', 1),
@@ -342,7 +420,7 @@ INSERT INTO `nadador` (`DNI`, `Apellido`, `Nombre`, `Sexo`, `FechaNacimiento`, `
 CREATE TABLE `parcial` (
   `ID` int(11) NOT NULL,
   `ResultadoID` int(11) NOT NULL,
-  `Tiempo` time NOT NULL
+  `Tiempo` varchar(10) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
@@ -373,7 +451,59 @@ INSERT INTO `parcial` (`ID`, `ResultadoID`, `Tiempo`) VALUES
 (21, 8, '00:00:00'),
 (22, 8, '00:00:00'),
 (23, 8, '00:03:29'),
-(24, 8, '00:00:00');
+(24, 8, '00:00:00'),
+(25, 9, '00:00:00'),
+(26, 9, '00:02:59'),
+(27, 9, '00:00:00'),
+(28, 9, '00:05:24'),
+(29, 10, '00:01:01'),
+(30, 10, '00:02:45'),
+(31, 10, '00:03:59'),
+(32, 10, '00:04:51'),
+(33, 11, '00:00:00'),
+(34, 11, '00:00:00'),
+(35, 11, '00:06:29'),
+(36, 11, '00:14:34'),
+(37, 12, '00:00:00'),
+(38, 12, '00:01:08'),
+(49, 18, '00:00:00'),
+(50, 18, '00:00:00'),
+(51, 18, '00:03:29'),
+(52, 18, '00:02:57'),
+(53, 20, '00:00:00'),
+(54, 20, '00:00:00'),
+(55, 20, '00:03:29'),
+(56, 20, '00:02:57'),
+(57, 21, '00:02:70'),
+(58, 21, '00:01:69'),
+(59, 21, '00:03:29'),
+(60, 21, '00:02:57'),
+(61, 22, '00:02:40'),
+(62, 22, '00:01:6'),
+(63, 22, '00:00:72'),
+(64, 22, '00:00:68'),
+(65, 23, '00:00:89'),
+(66, 23, '00:01:51'),
+(67, 24, '00:04:41'),
+(68, 24, '00:04:96'),
+(69, 24, '00:05:49'),
+(70, 24, '00:08:62'),
+(71, 25, '00:05:78'),
+(72, 25, '00:04:39'),
+(73, 25, '00:06:54'),
+(74, 25, '00:10:1'),
+(75, 26, '00:05:48'),
+(76, 26, '00:01:85'),
+(77, 26, '00:01:34'),
+(78, 26, '00:03:75'),
+(79, 27, '00:03:87'),
+(80, 27, '00:04:4'),
+(81, 27, '00:01:99'),
+(82, 27, '00:03:16'),
+(83, 28, '00:05:42'),
+(84, 28, '00:05:38'),
+(85, 29, '00:05:59'),
+(86, 29, '00:02:99');
 
 -- --------------------------------------------------------
 
@@ -398,7 +528,7 @@ CREATE TABLE `profesor` (
 
 CREATE TABLE `prueba` (
   `ID` int(11) NOT NULL,
-  `TiempoMin` int(11) DEFAULT NULL,
+  `TiempoMin` time DEFAULT NULL,
   `Masculino` tinyint(1) DEFAULT NULL,
   `CantidadSeries` int(11) NOT NULL,
   `CategoriaID` int(11) DEFAULT NULL,
@@ -414,14 +544,44 @@ CREATE TABLE `prueba` (
 --
 
 INSERT INTO `prueba` (`ID`, `TiempoMin`, `Masculino`, `CantidadSeries`, `CategoriaID`, `DistanciaID`, `EstiloID`, `EntrenamientoID`, `CampeonatoID`, `tamaniopiletaID`) VALUES
-(1, 60, 1, 1, 1, 2, 1, 1, NULL, 2),
-(3, 10, 1, 1, 1, 3, 1, 4, NULL, 2),
-(4, 15, 1, 6, 1, 3, 1, NULL, 2, 2),
-(5, NULL, 1, 3, 1, 1, 1, 1, NULL, 1),
+(1, '00:11:00', 1, 1, 1, 2, 1, 1, NULL, 2),
+(3, '00:11:10', 1, 1, 1, 3, 1, 4, NULL, 2),
+(4, '00:18:15', 1, 6, 1, 2, 1, NULL, 2, 2),
+(5, '00:18:15', 1, 3, 1, 1, 1, 1, NULL, 1),
 (6, NULL, 1, 5, 1, 2, 1, 1, NULL, 1),
-(7, NULL, 1, 5, 1, 2, 1, 1, NULL, 1),
+(7, '00:12:15', 1, 5, 1, 2, 1, 1, NULL, 1),
 (8, NULL, 1, 10, 1, 3, 1, 1, NULL, 1),
-(9, NULL, 1, 4, 2, 3, 1, NULL, 7, 1);
+(9, NULL, 1, 4, 2, 3, 1, NULL, 7, 1),
+(10, '00:12:15', 1, 2, 1, 3, 1, 11, NULL, 2),
+(11, NULL, 1, 2, 1, 3, 1, 11, NULL, 2),
+(12, NULL, 1, 2, 1, 3, 1, 11, NULL, 2),
+(13, NULL, 1, 5, 1, 1, 1, 11, NULL, 1),
+(14, '00:12:15', 1, 4, 1, 1, 1, 11, NULL, 1),
+(15, NULL, 1, 4, 1, 1, 1, 11, NULL, 1),
+(16, NULL, 1, 4, 1, 1, 1, 11, NULL, 1),
+(17, NULL, 1, 4, 1, 1, 1, 11, NULL, 1),
+(18, NULL, 1, 4, 1, 1, 1, 11, NULL, 1),
+(19, NULL, 1, 4, 1, 1, 1, 11, NULL, 1),
+(20, NULL, 1, 4, 1, 1, 1, 11, NULL, 1),
+(21, NULL, 1, 4, 1, 1, 1, 11, NULL, 1),
+(22, NULL, 1, 4, 1, 1, 1, 11, NULL, 1),
+(23, NULL, 1, 4, 1, 1, 1, 11, NULL, 1),
+(24, NULL, 1, 5, 2, 1, 1, 11, NULL, 1),
+(25, NULL, 1, 5, 2, 1, 1, 11, NULL, 1),
+(26, NULL, 1, 5, 2, 1, 1, 11, NULL, 1),
+(27, NULL, 1, 5, 2, 1, 1, 11, NULL, 1),
+(28, NULL, 1, 5, 2, 1, 1, 11, NULL, 1),
+(29, NULL, 1, 5, 2, 1, 1, 11, NULL, 1),
+(30, NULL, 1, 5, 2, 1, 1, 11, NULL, 1),
+(31, NULL, 1, 4, 1, 2, 1, 11, NULL, 1),
+(32, NULL, 1, 4, 1, 2, 1, 11, NULL, 1),
+(33, NULL, 1, 4, 1, 2, 1, 11, NULL, 1),
+(34, NULL, 1, 4, 1, 2, 1, 11, NULL, 1),
+(35, NULL, 1, 2, 1, 2, 1, 1, NULL, 1),
+(37, NULL, 1, 9, 1, 2, 1, NULL, 2, 1),
+(38, NULL, 1, 1, 2, 2, 1, 4, NULL, 1),
+(39, NULL, 1, 2, 1, 2, 1, 10, NULL, 1),
+(40, NULL, 1, 1, 1, 2, 1, 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -433,22 +593,39 @@ CREATE TABLE `resultado` (
   `ID` int(11) NOT NULL,
   `DNI` int(11) NOT NULL,
   `PruebaID` int(11) NOT NULL,
-  `Fecha` date NOT NULL
+  `Fecha` date NOT NULL,
+  `TiempoTotal` varchar(10) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `resultado`
 --
 
-INSERT INTO `resultado` (`ID`, `DNI`, `PruebaID`, `Fecha`) VALUES
-(1, 36101748, 6, '2017-01-27'),
-(2, 38570363, 6, '2018-10-27'),
-(3, 38570368, 6, '2017-10-27'),
-(4, 36101748, 7, '2022-10-27'),
-(5, 38570363, 6, '2017-10-10'),
-(6, 38570368, 6, '2017-10-27'),
-(7, 36101748, 8, '2017-10-27'),
-(8, 38570368, 4, '2017-11-29');
+INSERT INTO `resultado` (`ID`, `DNI`, `PruebaID`, `Fecha`, `TiempoTotal`) VALUES
+(1, 36101748, 6, '2017-01-27', '00:01:00'),
+(2, 38570363, 6, '2018-10-27', '00:03:44'),
+(3, 38570368, 6, '2017-10-27', '00:02:94'),
+(4, 36101748, 7, '2022-10-27', '00:04:02'),
+(5, 38570363, 6, '2017-10-10', '00:02:15'),
+(6, 38570368, 6, '2017-10-27', '00:03:26'),
+(7, 36101748, 8, '2017-10-27', '00:02:67'),
+(8, 38570368, 4, '2017-11-29', '00:03:12'),
+(9, 38570658, 10, '2017-11-23', '00:04:57'),
+(10, 38570658, 11, '2017-11-23', '00:05:88'),
+(11, 38570658, 12, '2017-11-24', '00:02:22'),
+(12, 38570658, 13, '2017-11-29', '00:06:58'),
+(18, 38570658, 31, '2017-11-29', '00:08:25'),
+(19, 38570658, 32, '2017-11-29', '00:07:25'),
+(20, 38570658, 33, '2017-11-29', '00:05:25'),
+(21, 38570658, 34, '2017-11-29', '00:06:25'),
+(22, 36101748, 35, '2017-11-30', '00:04:86'),
+(23, 36101748, 4, '2017-12-06', '00:10:56'),
+(24, 38570363, 38, '2017-12-06', '00:23:48'),
+(25, 38570363, 39, '2017-12-06', '00:26:72'),
+(26, 36101748, 40, '2017-12-11', '00:12:42'),
+(27, 38570363, 40, '2017-12-11', '00:13:06'),
+(28, 38570363, 4, '2017-12-14', '00:10:80'),
+(29, 38570363, 4, '2017-12-14', '00:08:58');
 
 -- --------------------------------------------------------
 
@@ -538,7 +715,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1510853496, 1, 'Admin', 'istrator', 'ADMIN', '0');
+(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, '8n2SQSjiiVMHhB2rQnojY.', 1268889823, 1513260036, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+(2, '', 'leandro', '', NULL, '', NULL, NULL, NULL, NULL, 0, NULL, NULL, 'leandro', 'lonardi', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -736,7 +914,7 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT de la tabla `campeonato`
 --
@@ -746,7 +924,7 @@ ALTER TABLE `campeonato`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `club`
 --
@@ -776,7 +954,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT de la tabla `lineaasistencia`
 --
 ALTER TABLE `lineaasistencia`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 --
 -- AUTO_INCREMENT de la tabla `localidad`
 --
@@ -801,7 +979,7 @@ ALTER TABLE `nadador`
 -- AUTO_INCREMENT de la tabla `parcial`
 --
 ALTER TABLE `parcial`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT de la tabla `profesor`
 --
@@ -811,12 +989,12 @@ ALTER TABLE `profesor`
 -- AUTO_INCREMENT de la tabla `prueba`
 --
 ALTER TABLE `prueba`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT de la tabla `resultado`
 --
 ALTER TABLE `resultado`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT de la tabla `tamaniopileta`
 --
@@ -836,7 +1014,7 @@ ALTER TABLE `tipoentrenamiento`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `users_groups`
 --
@@ -876,7 +1054,7 @@ ALTER TABLE `entrenamiento`
 -- Filtros para la tabla `lineaasistencia`
 --
 ALTER TABLE `lineaasistencia`
-  ADD CONSTRAINT `asistencia1` FOREIGN KEY (`AsistenciaID`) REFERENCES `asistencia` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `asis` FOREIGN KEY (`AsistenciaID`) REFERENCES `asistencia` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `nadador` FOREIGN KEY (`NadadorID`) REFERENCES `nadador` (`DNI`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
