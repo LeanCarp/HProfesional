@@ -127,8 +127,8 @@
 							<option value="2">Femenino</option>
 						</select>
 
-					<!-- 	<label>Series: </label> -->
-						<input type="number" id="inputSeries" name="inputSeries" value="0">
+						<!-- 	<label>Series: </label> -->
+						<!-- <input type="number" id="inputSeries" name="inputSeries" value="0"> -->
 
 						<!-- <label>Categoría: </label> -->
 						<select id="selectCategoria" name="selectCategoria">

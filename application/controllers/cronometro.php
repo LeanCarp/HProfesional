@@ -56,76 +56,6 @@ class Cronometro extends CI_Controller {
 	    }
 	}
 
-	/// LO COMENTADO -PODRÍA- SER BORRADO
-/* 	function cronometroConfig(){
-		if (!$this->ion_auth->logged_in())
-		{
-			redirect('auth/login');
-		}
-        else
-        {
-			$this->load->view('headers');
-	    	$this->load->view('cronometroConfig');
-	    }
-	}
-
-	public function llenarEventos()
-	{
-		$eventoSeleccionado = $this->input->post('eventoSeleccionado');
-		if ($eventoSeleccionado <> 0)
-		{
-			if($eventoSeleccionado == 2) 
-			{
-				$eventos = $this->entrenamiento_model->getAll();
-			}
-			else if ($eventoSeleccionado == 1)
-			{
-				$eventos = $this->campeonato_model->getAll();
-			}
-
-			// Valor por defecto.
-			echo '<option value="0">Seleccione entrenamiento/campeonato</option>';
-			
-			foreach($eventos->result() as $fila)
-			{
-				echo '<option value="'. $fila->ID .'">'. $fila->nombre .'</option>';
-			} 
-		}
-		else 
-		{
-            echo '<option value="0">Seleccione entrenamiento/campeonato</option>';
-        }
-	}
-
-	public function llenarPruebas()
-	{
-		$eventoSeleccionado = $this->input->post('eventoSeleccionado');
-		$eventoSeleccionado2 = $this->input->post('eventoSeleccionado2');
-
-		if($eventoSeleccionado <> 0) 
-		{
-			if ($eventoSeleccionado2 == 1)
-			{
-				$pruebas = $this->prueba_model->getPruebaCampeonato($eventoSeleccionado);
-			}
-			else
-			{
-				$pruebas = $this->prueba_model->getPruebaEntrenamiento($eventoSeleccionado);
-			}
-			// Valor por defecto.
-			echo '<option value="0">Seleccione una prueba</option>';
-
-			foreach($pruebas->result() as $fila)
-			{
-				echo '<option value="'. $fila->ID .'">'. $fila->ID .' '. $fila->DistanciaID .'</option>';
-			}
-		}
-		else
-		{
-			echo '<option value="0">Seleccione una prueba</option>';
-		}
-	} */
-
 	public function cantidadParciales($idPrueba)
 	{
 		if($idPrueba <> 0) {
@@ -195,12 +125,12 @@ class Cronometro extends CI_Controller {
 		{
 			$sexo = 0;
 		}
-		$series = $this->input->post('inputSerie');
+		/* $series = $this->input->post('inputSerie'); */
 		$categoria = $this->input->post('inputCategoria');
 		$pileta = $this->input->post('inputPileta');
 		$distancia = $this->input->post('inputDistancia');
 		$estilo = $this->input->post('inputEstilo');
-		if ($entrenamiento == 0 || $sexo == 0 || $series == 0 || $categoria == 0 || $pileta == 0 || $distancia == 0 || $estilo == 0)
+		if ($entrenamiento == 0 || $sexo == 0 || /* $series == 0 ||  */$categoria == 0 || $pileta == 0 || $distancia == 0 || $estilo == 0)
 		{
 			$data['mensaje'] = "Debe configurar de manera completa el entrenamiento";
 			$this->load->view('headers');
@@ -209,7 +139,7 @@ class Cronometro extends CI_Controller {
 		}
 		else
 		{
-			$data = array('Masculino' => $sexo, 'CantidadSeries' => $series, 'CategoriaID' => $categoria, 
+			$data = array('Masculino' => $sexo, /* 'CantidadSeries' => $series, */ 'CategoriaID' => $categoria, 
 			'DistanciaID' => $distancia, 'EstiloID' => $estilo, 'EntrenamientoID' => $entrenamiento, 'tamaniopiletaID' => $pileta);
 			$this->db->insert('prueba', $data);
 			$idPrueba = $this->db->insert_id();
@@ -235,16 +165,6 @@ class Cronometro extends CI_Controller {
 					{
 						$parcial = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
 						$this->db->insert('parcial', $parcial);
-						/* if (empty($valor[$i]))
-						{
-							$data = array('ResultadoID' => $idResultado, 'Tiempo' => "00:00:00");
-							$this->db->insert('parcial', $data);
-						}
-						else
-						{
-							$data = array('ResultadoID' => $idResultado, 'Tiempo' => $valor[$i]);
-							$this->db->insert('parcial', $data);
-						} */
 					}
 					$data['mensaje'] = "Parciales guardados correctamente";
 				}
@@ -293,26 +213,6 @@ class Cronometro extends CI_Controller {
         else
         {     	
 			$valor = explode('-',$ident);
-/* 			$crud = new grocery_CRUD();
-			$crud->set_language('spanish');
-			$crud->set_table('resultado');
-			$crud->set_subject('resultado');
-			$crud->columns('DNI', 'Tiempo', 'Fecha');
-			$crud->fields('DNI', 'PruebaID', 'Tiempo', 'Fecha');
-			$crud->unset_export();
-			$crud->unset_print();
-			$crud->set_relation('PruebaID','prueba','ID');
-			$crud->set_relation('DNI','nadador','{DNI} | {Nombre}');
-			$crud->display_as('PruebaID','Prueba');
-			$crud->display_as('DNI','Nadador');
-
-			$output = $crud->render(); */
-			
-			/* $data['estilos'] = $this->estilo_model->getAll();
-			$data['distancias'] = $this->distanciaTotal_model->getAll();
-			$data['piletas'] = $this->tamanoPileta_model->getAll();
-			$data['categorias'] = $this->categoria_model->getAll();
-			$data['entrenamientos'] = $this->entrenamiento_model->getAll();*/
 			$data['nadadores'] = $this->nadador_model->getAll();
 
 			$data['idPrueba'] = $valor[0];
