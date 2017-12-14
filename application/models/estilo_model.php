@@ -35,7 +35,7 @@ class estilo_model extends CI_Model{
 	function getAllOficiales(){
 		$this->load->database();
 		$this->db->from('estilo');
-		$this->db->where('Entrenamiento',0);
+		$this->db->where('Entrenamiento',1);
 		$query = $this->db->get();
 		return $query->result();
 	}

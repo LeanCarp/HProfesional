@@ -29,7 +29,7 @@ class Nadador extends CI_Controller {
 									array('1' => 'Masculino', '0' => 'Femenino'));
 									
 			$crud->display_as('FechaNacimiento','Fecha de Nacimiento');
-			$crud->field_type('FechaNacimiento', 'integer');
+			//$crud->field_type('FechaNacimiento', 'integer');
 			//$crud->callback_column ( 'Edad' ,  $this->CalculaEdad("1995-01-03")) ;
 			$crud->callback_column('Edad' ,array($this,'obtenerEdad'));
 			$crud->callback_column('Categoria' ,array($this,'obtenerCategoria'));
