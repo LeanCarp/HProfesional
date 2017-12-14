@@ -138,7 +138,7 @@ $(document).ready(function () {
 		top: 0; /*El valor 0 indica que va a quedar arriba de todo*/
 		left: 0; /*Para que el menu se ubique siempre en la parte izquierda de la pantalla*/
 		width: 100%; /*100% para que ocupe todo el ancho del navegador*/
-		padding: 10px 5px 10px 5px; 
+		/* padding: 5px 5px 5px 5px;  */
 		z-index: 10000;    
 	}
 		.menu-bar p{
@@ -148,6 +148,12 @@ $(document).ready(function () {
 		.menu-bar a{
 			margin: 0;
 			padding: 10px;
+		}
+
+		.menu-bar img{
+			height: 30px;
+			padding-top: 5px;
+			margin-top: 5px;
 		}
 		.menu-bar a:hover{
 			background: #3D8BCD;

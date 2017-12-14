@@ -8,6 +8,9 @@ function realizarProceso(){
 		var fecha = document.getElementById("fecha").value;
 		var turno = document.getElementById("selectTurno").value;
 
+		var titulo = document.getElementById("tituloAsist");
+		titulo.innerHTML = "Asistencia del dia: "+fecha;
+
 		var parametros = {
 				"fecha" : fecha,
 				"turno" : turno
@@ -23,9 +26,10 @@ function realizarProceso(){
         });
 }
 
-function pdfExport(idName,fileName){ 
+function pdfExport(idName){ 
+	fileName = document.getElementById("tituloAsist").innerHTML;
     kendo.drawing.drawDOM($('#'+idName)).then(function (group) {
-        kendo.drawing.pdf.saveAs(group,fileName+'.pdf');
+		kendo.drawing.pdf.saveAs(group,fileName+'.pdf');
     });    
 }
 
@@ -76,18 +80,19 @@ function pdfExport(idName,fileName){
 				<input type="button" class="btnFiltrar" id="Filtrar" value="Listar" onclick="realizarProceso()">
 			</div>
 		</div>
+		<?php echo form_close(); ?>
 		
 		<div id="contenido" hidden>
 			<br>
-			<h4> <?php echo 'Asistencia del dia: ' ?></h4> 					
+			<h4 id="tituloAsist"></h4> 					
 
 			<div id="output" style="margin-top: 25px;"></div>
 
-			<button id="botonExportar" onclick="pdfExport('contenido', 'Asistencia de la fecha')" style="margin-top: 10px;">Exportar a PDF</button>
+			<button id="botonExportar" onclick="pdfExport('contenido')" style="margin-top: 10px;">Exportar a PDF</button>
 		</div>
 		
 		
-		<?php echo form_close(); ?>
+		
 	</div>
 </body>
 </html>

@@ -223,16 +223,11 @@ function agregarNadador() {
 		var idSeleccionado = document.getElementById("selectNadadores");
 
 		var cantParciales = document.getElementById("cantidadParciales").value;
-		console.log(cantParciales);
 		
 
 		//idSeleccionado.remove(idSeleccionado.selectedIndex);
 		var pro = idSeleccionado.options[idSeleccionado.selectedIndex].value;
 		var pro2 = idSeleccionado.options[idSeleccionado.selectedIndex].text;
-		console.log(pro);
-		console.log(pro2);
-
-	
 
 		var divNadador = document.createElement("div");
 		divNadador.setAttribute("id", pro);
@@ -277,7 +272,6 @@ function agregarNadador() {
 		inputParcial.setAttribute('name', 'inputs[]');
 		inputParcial.setAttribute('id', pro+1);
 		//inputParcial.setAttribute('value', '0:0:0');
-		console.log(inputParcial.id);
 		inputParcial.readOnly  = true;
 		inputParcial.setAttribute('onclick', 'inputar(this);');
 		inputParcial.setAttribute('style', 'margin-bottom: 15px;');
