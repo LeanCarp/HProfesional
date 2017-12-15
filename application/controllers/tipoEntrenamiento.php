@@ -23,7 +23,7 @@ class TipoEntrenamiento extends CI_Controller {
 		$crud->fields('Nombre');
 		//$crud->unset_add();
 		//$crud->unset_delete();
-		//$crud->unset_read();
+		$crud->unset_read();
 		//$crud->unset_edit_fields('DNI');
 		$crud->unset_export();
 		$crud->unset_print();

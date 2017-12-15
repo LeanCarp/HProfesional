@@ -31,7 +31,7 @@ class Nadador extends CI_Controller {
 		//$crud->callback_column ( 'Edad' ,  $this->CalculaEdad("1995-01-03")) ;
 		$crud->callback_column('Edad' ,array($this,'obtenerEdad'));
 		$crud->callback_column('Categoria' ,array($this,'obtenerCategoria'));
-
+		$crud->unset_read();
 		$crud->unset_edit_fields('DNI');
 		$crud->set_subject('Nadador');
 
@@ -48,7 +48,7 @@ class Nadador extends CI_Controller {
 	{
 		return $this->CalculaEdad($row->FechaNacimiento);
 	}
-	
+
 	public function obtenerCategoria($value, $row)
 	{
 		$this->load->model('categoria_model');

@@ -35,7 +35,7 @@ class PruebaEntrenamiento extends CI_Controller {
 		$crud->display_as('Masculino','Sexo');
 		$crud->field_type('Masculino','true_false',
 								array('1' => 'Masculino', '0' => 'Femenino'));
-		$crud->display_as('CantidadSeries','N° Serie');
+		$crud->display_as('CantidadSeries','Repeticiones');
 		$crud->field_type('CantidadSeries','dropdown',
 								array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'));
 		$crud->display_as('CategoriaID','Categoria');
@@ -47,8 +47,8 @@ class PruebaEntrenamiento extends CI_Controller {
 		$crud->set_subject('Prueba');
 		//$crud->unset_add();
 		//$crud->unset_delete();
-		//$crud->unset_read();
-		//$crud->unset_edit_fields('DNI');
+		$crud->unset_read();
+		$crud->unset_edit_fields('TiempoMin');
 		$crud->unset_export();
 		$crud->unset_print();
 		//$crud->unset_add();

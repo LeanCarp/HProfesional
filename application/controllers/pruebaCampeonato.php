@@ -48,6 +48,7 @@ class PruebaCampeonato extends CI_Controller {
 
 		$crud->unset_export();
 		$crud->unset_print();
+		$crud->unset_read();
 		//$crud->unset_add();
 		//$crud->unset_operations();
 

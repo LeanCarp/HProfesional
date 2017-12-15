@@ -25,6 +25,7 @@ class localidad extends CI_Controller {
 		
 		$crud->unset_export();
 		$crud->unset_print();
+		$crud->unset_read();
 
 		/* Generamos la tabla */
 		$output = (array)$crud->render();

@@ -19,7 +19,7 @@ class Entrenamiento extends CI_Controller {
 		$crud = new grocery_CRUD();
 		$crud->set_language('spanish');
 		$crud->set_table('entrenamiento');
-		$crud->columns('nombre','inicio','fin');
+		$crud->columns('nombre','inicio','fin', 'TipoEntrenamientoID');
 		$crud->fields('nombre','inicio','fin', 'TipoEntrenamientoID','color');
 		
 		//$nombreEntrenamiento=$crud->get_edit_field_value('Nombre');
@@ -30,7 +30,7 @@ class Entrenamiento extends CI_Controller {
 		$crud->set_subject('Entrenamiento');
 		//$crud->unset_add();
 		//$crud->unset_delete();
-		//$crud->unset_read();
+		$crud->unset_read();
 		//$crud->unset_edit_fields('DNI');
 		$crud->set_relation('TipoEntrenamientoID','tipoentrenamiento','{nombre}');
 		$crud->display_as('TipoEntrenamientoID','Tipo');

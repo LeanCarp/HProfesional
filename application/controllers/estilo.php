@@ -28,7 +28,7 @@ class Estilo extends CI_Controller {
 								array('1' => 'Oficial', '0' => 'Entrenamiento'));
 		//$crud->unset_add();
 		//$crud->unset_delete();
-		//$crud->unset_read();
+		$crud->unset_read();
 		//$crud->unset_edit_fields('DNI');
 		$crud->unset_export();
 		$crud->unset_print();
