@@ -8,38 +8,37 @@ class Ejercicio extends CI_Controller {
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
-	}
-
-	function index(){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
-        else
-        {
-			$crud = new grocery_CRUD();
-			$crud->set_language('spanish');
-			$crud->set_table('ejercicio');
-			$crud->columns('TiempoTotal');
-			$crud->fields('TiempoTotal', 'EntrenamientoID');
-			//$crud->set_relation('EntrenamientoID','entrenamiento','ID');
-			//$crud->unset_add();
-			//$crud->unset_delete();
-			//$crud->unset_read();
-			//$crud->unset_edit_fields('DNI');
-			$crud->unset_export();
-			$crud->unset_print();
-			//$crud->unset_add();
-			//$crud->unset_operations();
+	}
+
+	function index(){
+
+		$crud = new grocery_CRUD();
+		$crud->set_language('spanish');
+		$crud->set_table('ejercicio');
+		$crud->columns('TiempoTotal');
+		$crud->fields('TiempoTotal', 'EntrenamientoID');
+		//$crud->set_relation('EntrenamientoID','entrenamiento','ID');
+		//$crud->unset_add();
+		//$crud->unset_delete();
+		//$crud->unset_read();
+		//$crud->unset_edit_fields('DNI');
+		$crud->unset_export();
+		$crud->unset_print();
+		//$crud->unset_add();
+		//$crud->unset_operations();
 
 
-			/* Generamos la tabla */
-	    	$output = (array)$crud->render();
-			//Se carga el titulo a la vista.
-			$output['titulo']='Ejercicios';
-			$this->load->view('headers');
-			$this->load->view('gestion', $output);
-		}
+		/* Generamos la tabla */
+		$output = (array)$crud->render();
+		//Se carga el titulo a la vista.
+		$output['titulo']='Ejercicios';
+		$this->load->view('headers');
+		$this->load->view('gestion', $output);
+		
 	}
 
 }

@@ -7,37 +7,35 @@ class historial extends CI_Controller {
 		$this->load->database();
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
-		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
+        $this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
+        if (!$this->ion_auth->logged_in())
+		{
+			redirect('auth/login');
+		}
 	}
 
 
 	public function index()
 	{
-		if (!$this->ion_auth->logged_in())
-		{
-			redirect('auth/login');
-		}
-        else
-        {
-			
-	    	$output = [];
+					
+        $output = [];
 
-			$output['css_files'][] = base_url().'assets/fullcalendar.min.css';
-	    	$output['js_files'][] = base_url().'assets/jquery.min.js';
-          	$output['js_files'][] = base_url().'assets/moment-with-locales.min.js';	
-			$output['js_files'][] = base_url().'assets/fullcalendar.min.js';
-			$output['js_files'][] = base_url().'assets/fullcalendar-locale-es.js';
-            $output['js_files'][] = base_url().'assets/inicializarcalendarHistorial.js';
-            
+        $output['css_files'][] = base_url().'assets/fullcalendar.min.css';
+        $output['js_files'][] = base_url().'assets/jquery.min.js';
+        $output['js_files'][] = base_url().'assets/moment-with-locales.min.js';	
+        $output['js_files'][] = base_url().'assets/fullcalendar.min.js';
+        $output['js_files'][] = base_url().'assets/fullcalendar-locale-es.js';
+        $output['js_files'][] = base_url().'assets/inicializarcalendarHistorial.js';
+        
 
-            $this->load->database();
-			$this->db->select('DNI, Apellido, Nombre');
-			$this->db->from('nadador');
-			$output['nadadores'] = $this->db->get();
+        $this->load->database();
+        $this->db->select('DNI, Apellido, Nombre');
+        $this->db->from('nadador');
+        $output['nadadores'] = $this->db->get();
 
-	    	$this->load->view('headers', $output);
-	    	$this->load->view('historial', $output);
-	    }
+        $this->load->view('headers', $output);
+        $this->load->view('historial', $output);
+	    
 	}
 
 

@@ -7,35 +7,34 @@ class GestionUsuario extends CI_Controller {
 		$this->load->database();
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
-		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
-	}
-
-	function index(){
-		if (!$this->ion_auth->logged_in())
+        $this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
+        if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
-        else
-        {
-            $user = $this->ion_auth->user()->row();
+	}
 
-            $crud = new grocery_CRUD();
-        	$crud->set_language('spanish');
-            $crud->set_table('users');
-            $crud->columns('username', 'first_name', 'last_name');
-            $crud->fields('username', 'first_name', 'last_name', 'password', 'email');  
-            $crud->where('id', $user->id);  
-            $crud->unset_add();
-            $crud->unset_delete();
-            $crud->field_type('password', 'invisible');
-           // $crud->field_type('', 'invisible');
+	function index(){
 
-            $output = (array)$crud->render();
-			$output['titulo']="Usuarios";
-            
-            $this->load->view('headers');
-            $this->load->view('gestion', $output);
-        }
+        $user = $this->ion_auth->user()->row();
+
+        $crud = new grocery_CRUD();
+        $crud->set_language('spanish');
+        $crud->set_table('users');
+        $crud->columns('username', 'first_name', 'last_name');
+        $crud->fields('username', 'first_name', 'last_name', 'password', 'email');  
+        $crud->where('id', $user->id);  
+        $crud->unset_add();
+        $crud->unset_delete();
+        $crud->field_type('password', 'invisible');
+        // $crud->field_type('', 'invisible');
+
+        $output = (array)$crud->render();
+        $output['titulo']="Usuarios";
+        
+        $this->load->view('headers');
+        $this->load->view('gestion', $output);
+        
 	}
 
 }

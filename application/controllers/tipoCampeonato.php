@@ -8,34 +8,33 @@ class TipoCampeonato extends CI_Controller {
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
-	}
-
-	function index(){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
-        else
-        {
-			$crud = new grocery_CRUD();
-			$crud->set_language('spanish');
-			$crud->set_table('tipocampeonato');
-			$crud->columns('Tipo');
-			$crud->fields('Tipo');
+	}
 
-			$crud->unset_export();
-			$crud->unset_print();
+	function index(){
+		
+		$crud = new grocery_CRUD();
+		$crud->set_language('spanish');
+		$crud->set_table('tipocampeonato');
+		$crud->columns('Tipo');
+		$crud->fields('Tipo');
 
-			$crud->set_subject('Tipo de Campeonato');
-			/* Generamos la tabla */
-			$output = (array)$crud->render();
-			//Se carga el titulo a la vista.
-			$output['titulo']="Tipo de Campeonatos";
+		$crud->unset_export();
+		$crud->unset_print();
+
+		$crud->set_subject('Tipo de Campeonato');
+		/* Generamos la tabla */
+		$output = (array)$crud->render();
+		//Se carga el titulo a la vista.
+		$output['titulo']="Tipo de Campeonatos";
 
 
-			$this->load->view('headersConfiguracion');
-			$this->load->view('gestion', $output);
-		}
+		$this->load->view('headersConfiguracion');
+		$this->load->view('gestion', $output);
+		
 	}
 
 }

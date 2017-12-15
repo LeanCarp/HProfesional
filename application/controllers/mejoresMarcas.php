@@ -7,7 +7,11 @@ class MejoresMarcas extends CI_Controller {
 		$this->load->database();
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
-        $this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
+		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
+		if (!$this->ion_auth->logged_in())
+		{
+			redirect('auth/login');
+		}
         $this->load->model('categoria_model');
 		$this->load->model('estilo_model');
 		$this->load->model('nadador_model');
@@ -20,22 +24,16 @@ class MejoresMarcas extends CI_Controller {
 	}
 
 	function index(){
-		if (!$this->ion_auth->logged_in())
-		{
-			redirect('auth/login');
-		}
-        else
-        {
-			$data['estilos'] = $this->estilo_model->getAll();
-			$data['distancias'] = $this->distanciaTotal_model->getAll();
-			$data['piletas'] = $this->tamanoPileta_model->getAll();
-			$data['categorias'] = $this->categoria_model->getAll();
-			$data['nadadores'] = $this->nadador_model->getAll();
+		
+		$data['estilos'] = $this->estilo_model->getAll();
+		$data['distancias'] = $this->distanciaTotal_model->getAll();
+		$data['piletas'] = $this->tamanoPileta_model->getAll();
+		$data['categorias'] = $this->categoria_model->getAll();
+		$data['nadadores'] = $this->nadador_model->getAll();
 
-			$this->load->view('headers');
-			$this->load->view('mejoresMarcas', $data);
-		}
-
+		$this->load->view('headers');
+		$this->load->view('mejoresMarcas', $data);
+		
 	}
 
 	function ObtenerMarcasPor()

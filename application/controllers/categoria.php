@@ -8,46 +8,45 @@ class Categoria extends CI_Controller {
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
-	}
-
-	function index(){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
-        else
-        {
-			$crud = new grocery_CRUD();
-			$crud->set_language('spanish');
-			$crud->set_table('categoria');
-			$crud->columns('Nombre', 'EdadMinima', 'EdadMaxima');
-			$crud->fields('Nombre','EdadMinima', 'EdadMaxima');
-			$crud->display_as('EdadMinima','Edad Mínima');
-			$crud->display_as('EdadMaxima','Edad Máxima');
-			$crud->field_type('EdadMinima','dropdown',
-			array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50'));
-			$crud->field_type('EdadMaxima','dropdown',
-									array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50'));
-			//$crud->unset_add();
-			//$crud->unset_delete();
-			//$crud->unset_read();
-			//$crud->unset_edit_fields('DNI');
-			$crud->unset_export();
-			$crud->unset_print();
-			//$crud->unset_add();
-			//$crud->unset_operations();
-			$crud->set_subject('Categoría');
+	}
 
-			/* Generamos la tabla */
-			$output = (array)$crud->render();
-			//Se carga el titulo a la vista.
-			$output['titulo']="Categorias";
+	function index(){
+		
+		$crud = new grocery_CRUD();
+		$crud->set_language('spanish');
+		$crud->set_table('categoria');
+		$crud->columns('Nombre', 'EdadMinima', 'EdadMaxima');
+		$crud->fields('Nombre','EdadMinima', 'EdadMaxima');
+		$crud->display_as('EdadMinima','Edad Mínima');
+		$crud->display_as('EdadMaxima','Edad Máxima');
+		$crud->field_type('EdadMinima','dropdown',
+		array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50'));
+		$crud->field_type('EdadMaxima','dropdown',
+								array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50'));
+		//$crud->unset_add();
+		//$crud->unset_delete();
+		//$crud->unset_read();
+		//$crud->unset_edit_fields('DNI');
+		$crud->unset_export();
+		$crud->unset_print();
+		//$crud->unset_add();
+		//$crud->unset_operations();
+		$crud->set_subject('Categoría');
+
+		/* Generamos la tabla */
+		$output = (array)$crud->render();
+		//Se carga el titulo a la vista.
+		$output['titulo']="Categorias";
 
 
-			$this->load->view('headersConfiguracion');
-			$this->load->view('gestion', $output);
+		$this->load->view('headersConfiguracion');
+		$this->load->view('gestion', $output);
 
-		}
+		
 	}
 
 }

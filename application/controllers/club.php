@@ -8,36 +8,35 @@ class club extends CI_Controller {
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
-	}
-
-	function index(){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
-        else
-        {
-			$crud = new grocery_CRUD();
-			$crud->set_language('spanish');
-			$crud->set_table('club');
-			$crud->columns('Nombre', 'localidadID');
-            $crud->fields('Nombre', 'localidadID');
-            
-            $crud->set_relation('localidadID','localidad','Ciudad');
-            $crud->display_as('localidadID','Localidad');
-			$crud->set_subject('Club');
-			$crud->unset_export();
-			$crud->unset_print();
+	}
 
-			/* Generamos la tabla */
-			$output = (array)$crud->render();
-			//Se carga el titulo a la vista.
-			$output['titulo']="Clubes";
+	function index(){
+		
+		$crud = new grocery_CRUD();
+		$crud->set_language('spanish');
+		$crud->set_table('club');
+		$crud->columns('Nombre', 'localidadID');
+		$crud->fields('Nombre', 'localidadID');
+		
+		$crud->set_relation('localidadID','localidad','Ciudad');
+		$crud->display_as('localidadID','Localidad');
+		$crud->set_subject('Club');
+		$crud->unset_export();
+		$crud->unset_print();
+
+		/* Generamos la tabla */
+		$output = (array)$crud->render();
+		//Se carga el titulo a la vista.
+		$output['titulo']="Clubes";
 
 
-			$this->load->view('headersConfiguracion');
-			$this->load->view('gestion', $output);
-		}
+		$this->load->view('headersConfiguracion');
+		$this->load->view('gestion', $output);
+		
 	}
 
 }

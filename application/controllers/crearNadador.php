@@ -8,6 +8,10 @@ class CrearNadador extends CI_Controller {
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
+		if (!$this->ion_auth->logged_in())
+		{
+			redirect('auth/login');
+		}
 		$this->load->model('nadador_model');
 	}
 

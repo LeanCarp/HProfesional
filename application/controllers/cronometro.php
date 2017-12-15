@@ -18,42 +18,36 @@ class Cronometro extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->helper('date');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
-	}
-
-	function index(){
-    	if (!$this->ion_auth->logged_in())
-		{
-			redirect('auth/login');
-		}
-        else
-        {
-			$data['estilos'] = $this->estilo_model->getAll();
-			$data['distancias'] = $this->distanciaTotal_model->getAll();
-			$data['piletas'] = $this->tamanoPileta_model->getAll();
-			$data['categorias'] = $this->categoria_model->getAll();
-			$data['entrenamientos'] = $this->entrenamiento_model->getAll();
-			$data['nadadores'] = $this->nadador_model->getAll();
-
-	    	$this->load->view('headers');
-	    	$this->load->view('cronometro', $data);
-		}
-	}
-
-	function Campeonato($ident){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
-        else
-        {
-			$data['idPrueba'] = $ident;
-			$data['cantParciales'] = $this->cantidadParciales($ident);
-			$data['nadadores'] = $this->nadador_model->getAll();
-			
+	}
 
-			$this->load->view('headers');
-	    	$this->load->view('cronometroCampeonato', $data);
-	    }
+	function index(){
+    
+		$data['estilos'] = $this->estilo_model->getAll();
+		$data['distancias'] = $this->distanciaTotal_model->getAll();
+		$data['piletas'] = $this->tamanoPileta_model->getAll();
+		$data['categorias'] = $this->categoria_model->getAll();
+		$data['entrenamientos'] = $this->entrenamiento_model->getAll();
+		$data['nadadores'] = $this->nadador_model->getAll();
+
+		$this->load->view('headers');
+		$this->load->view('cronometro', $data);
+		
+	}
+
+	function Campeonato($ident){
+
+		$data['idPrueba'] = $ident;
+		$data['cantParciales'] = $this->cantidadParciales($ident);
+		$data['nadadores'] = $this->nadador_model->getAll();
+		
+
+		$this->load->view('headers');
+		$this->load->view('cronometroCampeonato', $data);
+	    
 	}
 
 	public function cantidadParciales($idPrueba)

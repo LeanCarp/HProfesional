@@ -7,6 +7,10 @@ class Clasificacion extends CI_Controller {
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
         $this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
+        if (!$this->ion_auth->logged_in())
+		{
+			redirect('auth/login');
+		}
         $this->load->model('resultado_model');
         $this->load->model('campeonato_model');
         $this->load->model('prueba_model');
@@ -14,17 +18,12 @@ class Clasificacion extends CI_Controller {
 	}
 
 	function index(){
-		if (!$this->ion_auth->logged_in())
-		{
-			redirect('auth/login');
-		}
-        else
-        {
-            $output['campeonatos'] = $this->campeonato_model->getAll();
 
-			$this->load->view('headers');
-			$this->load->view('clasificacion', $output);
-		}
+        $output['campeonatos'] = $this->campeonato_model->getAll();
+
+        $this->load->view('headers');
+        $this->load->view('clasificacion', $output);
+		
     }
     
     function obtenerPruebas()

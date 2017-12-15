@@ -10,26 +10,25 @@ class ListarAsistencia extends CI_Controller {
 		$this->load->model("nadador_model");
 		$this->load->helper('url');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
-	}
-
-	#or !$this->acl->tienePermisoAcceso('Aplicacion Web Natacion ')
-	function index(){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
-        else
-        {
-			 //KENDO UI    
-			 $output = [];
-			 $output['css_files'][] = base_url().'assets/css/kendo.common.min.css';
-			 $output['css_files'][] = base_url().'assets/css/kendo.default.min.css"';
-			 $output['css_files'][] = base_url().'assets/css/kendo.default.mobile.min.css';
-			 $output['js_files'][] = base_url().'assets/js/kendo.js';
+	}
 
-			$this->load->view('headers', $output);
-			$this->load->view('listarAsistencia', $output);
-		}
+	#or !$this->acl->tienePermisoAcceso('Aplicacion Web Natacion ')
+	function index(){
+		
+		//KENDO UI    
+		$output = [];
+		$output['css_files'][] = base_url().'assets/css/kendo.common.min.css';
+		$output['css_files'][] = base_url().'assets/css/kendo.default.min.css"';
+		$output['css_files'][] = base_url().'assets/css/kendo.default.mobile.min.css';
+		$output['js_files'][] = base_url().'assets/js/kendo.js';
+
+		$this->load->view('headers', $output);
+		$this->load->view('listarAsistencia', $output);
+		
 	}
 
 	function probador() {

@@ -8,49 +8,48 @@ class Campeonato extends CI_Controller {
 		$this->load->library(array('ion_auth','grocery_crud'));
 		$this->load->helper('url');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
-	}
-
-	#or !$this->acl->tienePermisoAcceso('Aplicacion Web Natacion ')
-	function index(){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
-        else
-        {     	
-			$crud = new grocery_CRUD();
-			$crud->set_language('spanish');
-			$crud->set_table('campeonato');
+	}
 
-			//$crud->add_action('<+>', '+','pruebaCampeonato/index');
-			$crud->add_action('Pruebas', base_url().'assets/imgs/pruebaIcon.png', 'pruebaCampeonato/index');
+	#or !$this->acl->tienePermisoAcceso('Aplicacion Web Natacion ')
+	function index(){
+	  	
+		$crud = new grocery_CRUD();
+		$crud->set_language('spanish');
+		$crud->set_table('campeonato');
 
-			$crud->set_subject('Campeonato');
-			$crud->columns('nombre','ClubID','inicio','fin');
-			$crud->fields('ClubID','nombre','inicio','fin',  'TipoCampeonatoID', 'color');
+		//$crud->add_action('<+>', '+','pruebaCampeonato/index');
+		$crud->add_action('Pruebas', base_url().'assets/imgs/pruebaIcon.png', 'pruebaCampeonato/index');
 
-			$crud->display_as('inicio','Fecha de Inicio');
-			$crud->display_as('fin','Fecha de Fin');
-			$crud->field_type('color','dropdown',
-										array('blue' => 'azul', 'pink' => 'rosado','yellow' => 'amarillo' , 'black' => 'negro'));
+		$crud->set_subject('Campeonato');
+		$crud->columns('nombre','ClubID','inicio','fin');
+		$crud->fields('ClubID','nombre','inicio','fin',  'TipoCampeonatoID', 'color');
+
+		$crud->display_as('inicio','Fecha de Inicio');
+		$crud->display_as('fin','Fecha de Fin');
+		$crud->field_type('color','dropdown',
+									array('blue' => 'azul', 'pink' => 'rosado','yellow' => 'amarillo' , 'black' => 'negro'));
 
 
-			$crud->set_relation('TipoCampeonatoID','tipocampeonato','Tipo');
-			$crud->set_relation('ClubID','club','Nombre');
-			$crud->display_as('TipoCampeonatoID','Tipo');
-			$crud->display_as('inicio','Fecha inicio');
-			$crud->display_as('fin','Fecha fin');
-			$crud->display_as('nombre','Título');
-			$crud->display_as('ClubID','Club');
-			
+		$crud->set_relation('TipoCampeonatoID','tipocampeonato','Tipo');
+		$crud->set_relation('ClubID','club','Nombre');
+		$crud->display_as('TipoCampeonatoID','Tipo');
+		$crud->display_as('inicio','Fecha inicio');
+		$crud->display_as('fin','Fecha fin');
+		$crud->display_as('nombre','Título');
+		$crud->display_as('ClubID','Club');
+		
 
-		/* Generamos la tabla */
-		$output = (array)$crud->render();
-		//Se carga el titulo a la vista.
-		$output['titulo']='Campeonatos';
-		$this->load->view('headers');
-		$this->load->view('gestion', $output);
-		}
+	/* Generamos la tabla */
+	$output = (array)$crud->render();
+	//Se carga el titulo a la vista.
+	$output['titulo']='Campeonatos';
+	$this->load->view('headers');
+	$this->load->view('gestion', $output);
+		
 	}
 
 }

@@ -150,6 +150,7 @@
                     <option value="<?= $row->DNI ?>"><?= $row->Nombre." " ?><?= $row->Apellido ?></option>
                 <?php } ?>
             </select>
+            <label>Estilo: </label>
             <select name="selectEstilo" id="selectEstilo">
                 <?php foreach($estilos as $row) { ?>
                     <option value="<?= $row->Nombre ?>"><?= $row->Nombre ?></option>

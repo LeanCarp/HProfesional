@@ -8,6 +8,10 @@ class Asistencia extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->helper('date');
 		$this->load->helper('form'); // Viene por defecto con CI. Crear formularios con ese helper.
+		if (!$this->ion_auth->logged_in())
+		{
+			redirect('auth/login');
+		}
 		$this->load->model('nadador_model');
 		$this->load->model('entrenamiento_model');
 		$this->load->model('asistencia_model');
@@ -15,18 +19,12 @@ class Asistencia extends CI_Controller {
 	}
 
 	function index(){
-		if (!$this->ion_auth->logged_in())
-		{
-			redirect('auth/login');
-		}
-        else
-        {
+
 			$data['nadadores'] = $this->nadador_model->getAll();
 			$data['entrenamientos'] = $this->entrenamiento_model->getAll();
 			
 			$this->load->view('headers');
 			$this->load->view('asistencia', $data);
-		}
 	}
 
 	public function Hacerlo(){

@@ -13,36 +13,35 @@ class Grafica extends CI_Controller {
 		$this->load->model('distanciaTotal_model');
 		$this->load->model('tamanoPileta_model');
 		$this->load->model('estilo_model');
-	}
-	
-	public function index()
-	{
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login');
 		}
-        else
-        {
-        
-            //KENDO UI    
-	    	$output = [];
-            $output['css_files'][] = base_url().'assets/css/kendo.common.min.css';
-            $output['css_files'][] = base_url().'assets/css/kendo.default.min.css"';
-            $output['css_files'][] = base_url().'assets/css/kendo.default.mobile.min.css';
-			$output['js_files'][] = base_url().'assets/js/kendo.js';
+       
+	}
+	
+	public function index()
+	{
 			
-			//$data['estilos'] = $this->estilo_model->getAll();
-			$output['distancias'] = $this->distanciaTotal_model->getAll();
-			$output['piletas'] = $this->tamanoPileta_model->getAll();
-			/* $data['categorias'] = $this->categoria_model->getAll();
-			$data['entrenamientos'] = $this->entrenamiento_model->getAll(); */
-			$output['nadadores'] = $this->nadador_model->getAll();
-			$output['estilos'] = $this->estilo_model->getAllOficiales();
+		//KENDO UI    
+		$output = [];
+		$output['css_files'][] = base_url().'assets/css/kendo.common.min.css';
+		$output['css_files'][] = base_url().'assets/css/kendo.default.min.css"';
+		$output['css_files'][] = base_url().'assets/css/kendo.default.mobile.min.css';
+		$output['js_files'][] = base_url().'assets/js/kendo.js';
+		
+		//$data['estilos'] = $this->estilo_model->getAll();
+		$output['distancias'] = $this->distanciaTotal_model->getAll();
+		$output['piletas'] = $this->tamanoPileta_model->getAll();
+		/* $data['categorias'] = $this->categoria_model->getAll();
+		$data['entrenamientos'] = $this->entrenamiento_model->getAll(); */
+		$output['nadadores'] = $this->nadador_model->getAll();
+		$output['estilos'] = $this->estilo_model->getAllOficiales();
 
 
-	    	$this->load->view('headers', $output);
-	    	$this->load->view('grafica', $output);
-	    }
+		$this->load->view('headers', $output);
+		$this->load->view('grafica', $output);
+	    
 	}
 
 	public function obtenerResultados()
