@@ -306,6 +306,24 @@ function agregarNadador() {
 	}
 }
 
+function obtenerNadadoresPorSexo(){
+	
+			sexo = $("#selectSexo option:selected").val();
+		
+			var parametros = {
+					"sexo" : sexo,
+			};
+		
+			$.ajax({
+					data:  parametros,
+					url:   'cronometro/obtenerNadadores',
+					type:  'post',
+					success:  function (response) {
+						$("#selectNadadores").html(response);
+					}
+			});
+		}
+
 $(document).on('change','#selectPileta',function(){
 	limpiar();
 });
@@ -321,15 +339,18 @@ $(document).ready(function() {
 						$("#inputEntrenamiento").val(valor)
                         });
                     });             
-                });
+				});
 
-$(document).ready(function() {                       
+$(document).ready(function() {
+
                 $("#selectSexo").change(function() {
 					$("#selectSexo option:selected").each(function() {
-						valor = $("#selectSexo option:selected").val()
-						$("#inputSexo").val(valor)
+						valor = $("#selectSexo option:selected").val();
+						$("#inputSexo").val(valor);
+						obtenerNadadoresPorSexo();
                         });
-                    });             
+					});
+					obtenerNadadoresPorSexo();           
                 });
 
 $(document).ready(function() {                       

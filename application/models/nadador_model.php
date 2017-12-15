@@ -41,6 +41,26 @@ class nadador_model extends CI_Model{
 		return $query;
 	}
 
+	function obtenerNadadoresMasculinos()
+	{
+		$this->db->select('*');
+		$this->db->from('nadador');
+		$this->db->where('Sexo', 1);
+		$this->db->where('activo', 0);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function obtenerNadadoresFemeninos()
+	{
+		$this->db->select('*');
+		$this->db->from('nadador');
+		$this->db->where('Sexo', 0);
+		$this->db->where('activo', 0);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 
 }
 

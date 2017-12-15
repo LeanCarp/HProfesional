@@ -31,15 +31,43 @@ class Cronometro extends CI_Controller {
 		$data['piletas'] = $this->tamanoPileta_model->getAll();
 		$data['categorias'] = $this->categoria_model->getAll();
 		$data['entrenamientos'] = $this->entrenamiento_model->getAll();
-		$data['nadadores'] = $this->nadador_model->getAll();
+		//$data['nadadores'] = $this->nadador_model->getAll();
 
 		$this->load->view('headers');
 		$this->load->view('cronometro', $data);
 		
 	}
 
-	function Campeonato($ident){
+	function obtenerNadadores()
+	{
+		$sexo = $this->input->post('sexo');
+		$nadadores;
+		switch ($sexo)
+		{
+			case 1:
+				$nadadores = $this->nadador_model->obtenerNadadoresMasculinos();
+				break;
+			case 2:
+				$nadadores = $this->nadador_model->obtenerNadadoresFemeninos();
+				break;
+			case 3:
+				$nadadores = $this->nadador_model->getAll();
+				break;
+		}
 
+		if (count($nadadores) == 0)
+		{
+			echo '<option id="0" value="0">No hay nadadores</option>';
+		}
+
+		foreach ($nadadores as $nadador)
+		{
+			echo '<option id="'.$nadador->DNI.'" value="'.$nadador->DNI.'">'.$nadador->Nombre.', '.$nadador->Apellido.'</option>';
+		}
+
+	}
+
+	function Campeonato($ident){
 		$data['idPrueba'] = $ident;
 		$data['cantParciales'] = $this->cantidadParciales($ident);
 		$data['nadadores'] = $this->nadador_model->getAll();
