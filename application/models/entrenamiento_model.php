@@ -59,6 +59,17 @@ class entrenamiento_model extends CI_Model{
 		return $query->result()[0]->nombre;
 
 	}
+
+	public function getByDia($fecha)
+	{
+		$this->load->database();
+		$this->db->select('a.ID, nombre');
+		$this->db->from('entrenamiento a'); 
+		$this->db->where('a.inicio <=',$fecha);
+		$this->db->where('a.fin >=',$fecha);    
+		$query = $this->db->get(); 
+		return $query->result();
+	}
 	
 
 }

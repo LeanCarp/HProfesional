@@ -30,19 +30,25 @@ class Asistencia extends CI_Controller {
 	public function Hacerlo(){
 		
 		$turno = $this->input->post('selectTurno');
-		$entrenamiento = $this->input->post('selectEntrenamiento');
 		$fecha = $this->input->post('fecha');
 		$nadadores = $this->input->post('checkeds');
 
-
-		$data = array('Mañana' => $turno, 'Fecha' => $fecha, 'EntrenamientoID' => $entrenamiento, 'CampeonatoID' => null);
-		$asistencia_id = $this->asistencia_model->insertarAsistencia($data);
-
- 		foreach ($nadadores as $nadador)
+		$entrenamientosDelDia=$this->entrenamiento_model->getByDia($fecha);
+		
+		$data=[];
+		foreach($entrenamientosDelDia as $entrenamiento)
 		{
-			$data = array('AsistenciaID' => $asistencia_id,'NadadorID' => $nadador);
-			$insert_id = $this->lineaAsistencia_model->insertarLineaAsistencia($data);
+			$data = array('Mañana' => $turno, 'Fecha' => $fecha, 'EntrenamientoID' => $entrenamiento->ID, 'CampeonatoID' => null);
+			$asistencia_id = $this->asistencia_model->insertarAsistencia($data);
+	
+			 foreach ($nadadores as $nadador)
+			{
+				$data = array('AsistenciaID' => $asistencia_id,'NadadorID' => $nadador);
+				$insert_id = $this->lineaAsistencia_model->insertarLineaAsistencia($data);
+			}
 		}
+
+		
 		
 		$data['mensaje'] = "Asistencia guardada correctamente.";
 
