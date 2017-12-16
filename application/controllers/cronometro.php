@@ -41,6 +41,7 @@ class Cronometro extends CI_Controller {
 	function obtenerNadadores()
 	{
 		$sexo = $this->input->post('sexo');
+		$categoria = $this->input->post('categoria');
 		$nadadores;
 		switch ($sexo)
 		{
@@ -60,11 +61,37 @@ class Cronometro extends CI_Controller {
 			echo '<option id="0" value="0">No hay nadadores</option>';
 		}
 
-		foreach ($nadadores as $nadador)
+		if ($categoria == 0)
 		{
-			echo '<option id="'.$nadador->DNI.'" value="'.$nadador->DNI.'">'.$nadador->Nombre.', '.$nadador->Apellido.'</option>';
+			foreach ($nadadores as $nadador)
+			{
+				echo '<option id="'.$nadador->DNI.'" value="'.$nadador->DNI.'">'.$nadador->Nombre.', '.$nadador->Apellido.'</option>';
+			}
+		}
+		else
+		{
+			$categ = $this->categoria_model->getByID($categoria);
+			$cont = 0;
+			foreach ($nadadores as $nadador)
+			{
+				$edadNadador = $this->CalculaEdad($nadador->FechaNacimiento);
+				if ($categ[0]->EdadMinima <= $edadNadador && $edadNadador <= $categ[0]->EdadMaxima)
+				{
+					$cont++;
+					echo '<option id="'.$nadador->DNI.'" value="'.$nadador->DNI.'">'.$nadador->Nombre.', '.$nadador->Apellido.'</option>';
+				}
+			}
+			if ($cont == 0)
+			{
+				echo '<option id="0" value="0">No hay nadadores</option>';
+			}
 		}
 
+	}
+
+	function CalculaEdad( $fecha ) {
+		list($Y,$m,$d) = explode("-",$fecha);
+		return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
 	}
 
 	function Campeonato($ident){

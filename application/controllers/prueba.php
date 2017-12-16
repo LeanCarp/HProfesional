@@ -27,10 +27,13 @@ class Prueba extends CI_Controller {
 		$crud->set_relation('EstiloID','estilo','{Nombre}');
 		$crud->set_relation('EntrenamientoID','entrenamiento','{Nombre}');
 		$crud->set_relation('CampeonatoID','campeonato','{Nombre}');
+
+		$crud->field_type('Sexo','dropdown',
+		array('m' => 'Masculino', 'f' => 'Femenino', 'a' => 'Mixto'));
 		
-		$crud->display_as('Masculino','Sexo');
-		$crud->field_type('Masculino','true_false',
-								array('1' => 'Masculino', '0' => 'Femenino'));
+		//$crud->display_as('Masculino','Sexo');
+		/* $crud->field_type('Masculino','true_false',
+								array('1' => 'Masculino', '0' => 'Femenino')); */
 		$crud->display_as('CantidadSeries','N° Serie');
 		$crud->field_type('CantidadSeries','dropdown',
 								array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'));

@@ -19,8 +19,8 @@ class PruebaEntrenamiento extends CI_Controller {
 		$crud = new grocery_CRUD();
 		$crud->set_language('spanish');
 		$crud->set_table('prueba');
-		$crud->columns( 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID');
-		$crud->fields( 'Masculino', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID', 'EntrenamientoID');
+		$crud->columns( 'Sexo', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID');
+		$crud->fields( 'Sexo', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID', 'EntrenamientoID');
 		// Agrega acción.
 		//$crud->add_action('<>', '+','cronometro/Entrenamiento');
 
@@ -32,9 +32,12 @@ class PruebaEntrenamiento extends CI_Controller {
 		$crud->field_type('EntrenamientoID', 'hidden', $idEntrenamiento);
 		$crud->field_type('CampeonatoID', 'hidden');
 		
-		$crud->display_as('Masculino','Sexo');
+		$crud->field_type('Sexo','dropdown',
+		array('m' => 'Masculino', 'f' => 'Femenino', 'a' => 'Mixto'));
+
+		/* $crud->display_as('Masculino','Sexo');
 		$crud->field_type('Masculino','true_false',
-								array('1' => 'Masculino', '0' => 'Femenino'));
+								array('1' => 'Masculino', '0' => 'Femenino')); */
 		$crud->display_as('CantidadSeries','Repeticiones');
 		$crud->field_type('CantidadSeries','dropdown',
 								array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'));

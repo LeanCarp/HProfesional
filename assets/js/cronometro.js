@@ -13,6 +13,10 @@ function inicio () {
 
 		}
 	)
+	if ($('#selectCategoria option:selected').val() == 0)
+	{
+		valido = true;
+	}
 
 	if (valido)
 	{
@@ -94,15 +98,13 @@ function cronometro () {
 }
 
 function limpiar() {
-	reinicio();
 	$("#competidores div").each(
 		function () {
 			divPadre = document.getElementById("competidores");
 			eliminarNadador(this.lastChild);
 		}
 	)
-
-	//reinicio();
+	reinicio();
 }
 
 function timeToSeconds(time) {
@@ -215,90 +217,103 @@ function agregarNadador() {
 			}
 		}
 	)
+	if ($('#selectCategoria option:selected').val() == 0)
+	{
+		valido = true;
+	}
 
 	if (valido)
 	{
 		//document.getElementById("botonGuardar").disabled = false;
-		document.getElementById("botonGuardar").hidden = false;
+		//document.getElementById("botonGuardar").hidden = false;
 		var idSeleccionado = document.getElementById("selectNadadores");
 
-		var cantParciales = document.getElementById("cantidadParciales").value;
-		
-
-		//idSeleccionado.remove(idSeleccionado.selectedIndex);
-		var pro = idSeleccionado.options[idSeleccionado.selectedIndex].value;
-		var pro2 = idSeleccionado.options[idSeleccionado.selectedIndex].text;
-
-		var divNadador = document.createElement("div");
-		divNadador.setAttribute("id", pro);
-		//var inputTotal = document.createElement("input");
-
-		var inputAnterior = document.createElement("input");
-			inputAnterior.setAttribute("name", "inputAnterior");
-			inputAnterior.setAttribute("type", "hidden");
-			inputAnterior.setAttribute("id", pro+'t');
-			inputAnterior.value = 0;
-			divNadador.appendChild(inputAnterior);
-
-		var inputResultado = document.createElement("input");
-			inputResultado.setAttribute("name", "inputFinal[]");
-			inputResultado.setAttribute("type", "hidden");
-			inputResultado.setAttribute("id", pro+0);
-			inputResultado.value = [];
-			divNadador.appendChild(inputResultado);
-		var titulo = document.createElement("h3");
-			titulo.setAttribute("id", "titulo");
-			titulo.innerHTML=pro2;
-			titulo.value=pro2;
-
-		var inputTiempoTotal = document.createElement("h6");
-			inputTiempoTotal.setAttribute("id", pro+'tt');
-			inputTiempoTotal.innerHTML="Tiempo total: 00:00:00";
-
-		var inputSubmit = document.createElement("input");
-			inputSubmit.setAttribute("type", "button");
-			inputSubmit.setAttribute("id", pro+0);
-			inputSubmit.setAttribute("onclick", "eliminarNadador(this);");
-			inputSubmit.setAttribute("value", "Eliminar");
-			inputSubmit.className += "btnEliminar";
-			//inputSubmit.setAttribute("style", "background: #ba2020; color: white; width:50%; margin: 0 auto; font-size: 17px;");
-
-
-		divNadador.className = 'box1';
-		divNadador.appendChild(titulo);
-		//divNadador.setAttribute('onclick', 'parcialito(this);');
-
-		var inputParcial = document.createElement("input");
-		inputParcial.setAttribute('name', 'inputs[]');
-		inputParcial.setAttribute('id', pro+1);
-		//inputParcial.setAttribute('value', '0:0:0');
-		inputParcial.readOnly  = true;
-		inputParcial.setAttribute('onclick', 'inputar(this);');
-		inputParcial.setAttribute('style', 'margin-bottom: 15px;');
-		inputParcial.setAttribute("disabled", true);
-		divNadador.appendChild(inputParcial);
-
-		for (i=2; i <= cantParciales; i++)
+		if (idSeleccionado.options[idSeleccionado.selectedIndex].value == 0)
 		{
+			alert("No hay nadadores para agregar");
+			//document.getElementById("botonGuardar").hidden = true;
+		}
+		else
+		{
+			document.getElementById("botonGuardar").hidden = false;
+			var cantParciales = document.getElementById("cantidadParciales").value;
+			
+
+			//idSeleccionado.remove(idSeleccionado.selectedIndex);
+			var pro = idSeleccionado.options[idSeleccionado.selectedIndex].value;
+			var pro2 = idSeleccionado.options[idSeleccionado.selectedIndex].text;
+
+			var divNadador = document.createElement("div");
+			divNadador.setAttribute("id", pro);
+			//var inputTotal = document.createElement("input");
+
+			var inputAnterior = document.createElement("input");
+				inputAnterior.setAttribute("name", "inputAnterior");
+				inputAnterior.setAttribute("type", "hidden");
+				inputAnterior.setAttribute("id", pro+'t');
+				inputAnterior.value = 0;
+				divNadador.appendChild(inputAnterior);
+
+			var inputResultado = document.createElement("input");
+				inputResultado.setAttribute("name", "inputFinal[]");
+				inputResultado.setAttribute("type", "hidden");
+				inputResultado.setAttribute("id", pro+0);
+				inputResultado.value = [];
+				divNadador.appendChild(inputResultado);
+			var titulo = document.createElement("h3");
+				titulo.setAttribute("id", "titulo");
+				titulo.innerHTML=pro2;
+				titulo.value=pro2;
+
+			var inputTiempoTotal = document.createElement("h6");
+				inputTiempoTotal.setAttribute("id", pro+'tt');
+				inputTiempoTotal.innerHTML="Tiempo total: 00:00:00";
+
+			var inputSubmit = document.createElement("input");
+				inputSubmit.setAttribute("type", "button");
+				inputSubmit.setAttribute("id", pro+0);
+				inputSubmit.setAttribute("onclick", "eliminarNadador(this);");
+				inputSubmit.setAttribute("value", "Eliminar");
+				inputSubmit.className += "btnEliminar";
+				//inputSubmit.setAttribute("style", "background: #ba2020; color: white; width:50%; margin: 0 auto; font-size: 17px;");
+
+
+			divNadador.className = 'box1';
+			divNadador.appendChild(titulo);
+			//divNadador.setAttribute('onclick', 'parcialito(this);');
+
 			var inputParcial = document.createElement("input");
 			inputParcial.setAttribute('name', 'inputs[]');
-			inputParcial.setAttribute('id', pro+i);
+			inputParcial.setAttribute('id', pro+1);
 			//inputParcial.setAttribute('value', '0:0:0');
-			console.log(inputParcial.id);
 			inputParcial.readOnly  = true;
 			inputParcial.setAttribute('onclick', 'inputar(this);');
 			inputParcial.setAttribute('style', 'margin-bottom: 15px;');
 			inputParcial.setAttribute("disabled", true);
 			divNadador.appendChild(inputParcial);
+
+			for (i=2; i <= cantParciales; i++)
+			{
+				var inputParcial = document.createElement("input");
+				inputParcial.setAttribute('name', 'inputs[]');
+				inputParcial.setAttribute('id', pro+i);
+				//inputParcial.setAttribute('value', '0:0:0');
+				console.log(inputParcial.id);
+				inputParcial.readOnly  = true;
+				inputParcial.setAttribute('onclick', 'inputar(this);');
+				inputParcial.setAttribute('style', 'margin-bottom: 15px;');
+				inputParcial.setAttribute("disabled", true);
+				divNadador.appendChild(inputParcial);
+			}
+			
+			divNadador.appendChild(inputTiempoTotal);
+			divNadador.appendChild(inputSubmit);
+
+			divPadre = document.getElementById("competidores");
+			divPadre.appendChild(divNadador);
+
+			idSeleccionado.remove(idSeleccionado.selectedIndex);
 		}
-		
-		divNadador.appendChild(inputTiempoTotal);
-		divNadador.appendChild(inputSubmit);
-
-		divPadre = document.getElementById("competidores");
-		divPadre.appendChild(divNadador);
-
-		idSeleccionado.remove(idSeleccionado.selectedIndex);
 	}
 	else
 	{
@@ -309,9 +324,11 @@ function agregarNadador() {
 function obtenerNadadoresPorSexo(){
 	
 			sexo = $("#selectSexo option:selected").val();
+			categoria = $("#selectCategoria option:selected").val();
 		
 			var parametros = {
 					"sexo" : sexo,
+					"categoria" : categoria
 			};
 		
 			$.ajax({
@@ -350,7 +367,7 @@ $(document).ready(function() {
 						obtenerNadadoresPorSexo();
                         });
 					});
-					obtenerNadadoresPorSexo();           
+					//obtenerNadadoresPorSexo();           
                 });
 
 $(document).ready(function() {                       
@@ -365,9 +382,11 @@ $(document).ready(function() {
                 $("#selectCategoria").change(function() {
 					$("#selectCategoria option:selected").each(function() {
 						valor = $("#selectCategoria option:selected").val()
-						$("#inputCategoria").val(valor)
+						$("#inputCategoria").val(valor);
+						obtenerNadadoresPorSexo();  
                         });
-                    });             
+					});  
+					//obtenerNadadoresPorSexo();     
                 });
 
 
