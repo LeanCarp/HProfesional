@@ -39,12 +39,17 @@ class resultado_model extends CI_Model{
 		$this->db->from('resultado a');
 		$this->db->join('prueba b', 'a.PruebaID=b.ID');
 		$this->db->where('b.EstiloID', $Estilo);
-		$this->db->where('b.Masculino', $Sexo);
 		$this->db->where('b.CategoriaID', $Categoria);
 		$this->db->where('b.tamaniopiletaID', $Pileta);
 		$this->db->where('b.DistanciaID', $Distancia);
 		$this->db->where('b.EntrenamientoID', null);
 		$this->db->where('a.DNI', $id);
+
+		if ($Sexo!='a')
+		{
+			$this->db->where('b.Sexo', $Sexo);
+		}
+
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
@@ -55,12 +60,19 @@ class resultado_model extends CI_Model{
 		$this->db->from('resultado a');
 		$this->db->join('prueba b', 'a.PruebaID=b.ID','left');
 		$this->db->where('b.EstiloID', $Estilo);
-		$this->db->where('b.Masculino', $Sexo);
 		$this->db->where('b.CategoriaID', $Categoria);
 		$this->db->where('b.tamaniopiletaID', $Pileta);
 		$this->db->where('b.DistanciaID', $Distancia);
 		$this->db->where('b.CampeonatoID', null);
 		$this->db->where('a.DNI', $id);
+
+		var_dump($Sexo);
+		var_dump($Sexo!='a');
+		if ($Sexo!='a')
+		{
+			$this->db->where('b.Sexo', $Sexo);
+		}
+
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
@@ -81,6 +93,7 @@ class resultado_model extends CI_Model{
 
 	function obtenerResultadoPorPruebaYNadador($prueba, $dni) // Para campeonatos
 	{
+		var_dump($prueba->$Sexo);
 		$this->db->select('*');
         $this->db->from('resultado a');
         $this->db->join('prueba b', 'b.ID=a.PruebaID');
@@ -89,6 +102,11 @@ class resultado_model extends CI_Model{
         $this->db->where('b.tamanioPiletaID', $prueba->tamaniopiletaID);
 		$this->db->where('b.DistanciaID', $prueba->DistanciaID);
 		$this->db->where('b.EntrenamientoID', null);
+		if ($prueba->$Sexo!='a')
+		{
+			$this->db->where('b.Sexo', $prueba->$Sexo);
+		}
+		
 		//$this->db->where('a.PruebaID', $prueba->ID);
 		$this->db->where('a.DNI', $dni);
 		$resultados = $this->db->get();
