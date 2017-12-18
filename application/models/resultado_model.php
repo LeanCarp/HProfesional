@@ -66,8 +66,7 @@ class resultado_model extends CI_Model{
 		$this->db->where('b.CampeonatoID', null);
 		$this->db->where('a.DNI', $id);
 
-		var_dump($Sexo);
-		var_dump($Sexo!='a');
+
 		if ($Sexo!='a')
 		{
 			$this->db->where('b.Sexo', $Sexo);
