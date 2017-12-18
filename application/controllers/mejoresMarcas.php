@@ -40,6 +40,17 @@ class MejoresMarcas extends CI_Controller {
 	{
 		$selectEstilo = $this->input->post("selectEstilo");
 		$selectSexo = $this->input->post("selectSexo");
+		switch ($selectSexo) {
+			case 1:
+				$selectSexo='m';
+				break;
+			case 2:
+				$selectSexo='f';
+				break;
+			case 3:
+				$selectSexo='a';
+				break;
+		}
 		$selectCategoria = $this->input->post("selectCategoria");
 		$selectPileta = $this->input->post("selectPileta");
 		$selectDistancia = $this->input->post("selectDistancia");

@@ -19,14 +19,13 @@ class PruebaEntrenamiento extends CI_Controller {
 		$crud = new grocery_CRUD();
 		$crud->set_language('spanish');
 		$crud->set_table('prueba');
-		$crud->columns( 'Sexo', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID');
-		$crud->fields( 'Sexo', 'CantidadSeries', 'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID', 'EntrenamientoID');
+		$crud->columns(  'EstiloID', 'DistanciaID', 'CantidadSeries','Sexo', 'CategoriaID');
+		$crud->fields( 'EstiloID', 'DistanciaID', 'CantidadSeries','Sexo', 'CategoriaID', 'EntrenamientoID');
 		// Agrega acción.
 		//$crud->add_action('<>', '+','cronometro/Entrenamiento');
 
 		$crud->where('EntrenamientoID', $idEntrenamiento);
 		$crud->set_relation('CategoriaID','categoria','{Nombre}');
-		$crud->set_relation('tamaniopiletaID','tamaniopileta','{Tamanio}');
 		$crud->set_relation('DistanciaID','distanciatotal','{Distancia}');
 		$crud->set_relation('EstiloID','estilo','{Nombre}');
 		$crud->field_type('EntrenamientoID', 'hidden', $idEntrenamiento);
@@ -45,7 +44,6 @@ class PruebaEntrenamiento extends CI_Controller {
 		//$crud->display_as('TamañoPiletaID','Tamaño de pileta');
 		$crud->display_as('EstiloID','Estilo');
 		$crud->display_as('DistanciaID','Distancia');
-		$crud->display_as('tamaniopiletaID','Tamaño de pileta');
 		// $crud->display_as('EntrenamientoID','Entrenamiento');
 		$crud->set_subject('Prueba');
 		//$crud->unset_add();

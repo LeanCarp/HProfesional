@@ -24,8 +24,13 @@ class PruebaCampeonato extends CI_Controller {
 		$crud->add_action('Cronometrar', base_url().'assets/imgs/relojIcon.png', 'cronometro/Campeonato');
 		//
 		$crud->where('CampeonatoID', $ident);
+<<<<<<< HEAD
 		$crud->columns('TiempoMin', 'Sexo', /* 'CantidadSeries',  */'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID');
 		$crud->fields('TiempoMin', 'Sexo', /* 'CantidadSeries',  */'CategoriaID', 'tamaniopiletaID', 'DistanciaID', 'EstiloID', 'CampeonatoID');
+=======
+		$crud->columns('EstiloID', 'DistanciaID', 'Sexo', 'CategoriaID', 'tamaniopiletaID','TiempoMin' );
+		$crud->fields('EstiloID', 'DistanciaID', 'Sexo', 'CategoriaID', 'tamaniopiletaID','TiempoMin', 'CampeonatoID');
+>>>>>>> af97c1e8188e6404ae938ea06d505862c1bdd577
 		$crud->set_relation('CategoriaID','categoria','{Nombre}');
 		$crud->set_relation('tamaniopiletaID','tamaniopileta','{Tamanio}');
 		$crud->set_relation('DistanciaID','distanciatotal','{Distancia}');
@@ -38,10 +43,17 @@ class PruebaCampeonato extends CI_Controller {
 		
 		/* $crud->display_as('Masculino','Sexo');
 		$crud->field_type('Masculino','true_false',
+<<<<<<< HEAD
 								array('1' => 'Masculino', '0' => 'Femenino')); */
 		/* $crud->display_as('CantidadSeries','N° Serie');
 		$crud->field_type('CantidadSeries','dropdown',
 								array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15')); */
+=======
+								array('1' => 'Masculino', '0' => 'Femenino')); SS
+		$crud->display_as('CantidadSeries','N° Serie');
+		$crud->field_type('CantidadSeries','dropdown',
+								array('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'));*/
+>>>>>>> af97c1e8188e6404ae938ea06d505862c1bdd577
 		$crud->display_as('TiempoMin','Tiempo Mínimo');
 		$crud->display_as('CategoriaID','Categoria');
 		$crud->display_as('tamaniopiletaID','Tamaño de pileta');

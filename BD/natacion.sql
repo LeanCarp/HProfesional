@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-12-2017 a las 22:28:54
+-- Tiempo de generación: 18-12-2017 a las 03:36:54
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 7.1.1
 
@@ -51,7 +51,9 @@ INSERT INTO `asistencia` (`ID`, `Mañana`, `Fecha`, `EntrenamientoID`, `Campeona
 (11, 1, '2017-12-26', 1, NULL),
 (12, 0, '2017-12-27', 3, NULL),
 (13, 0, '2017-12-28', 4, NULL),
-(14, 0, '2017-12-17', 3, NULL);
+(14, 0, '2017-12-17', 3, NULL),
+(15, 1, '2017-12-15', 2, NULL),
+(16, 1, '2017-12-16', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -256,7 +258,13 @@ INSERT INTO `lineaasistencia` (`ID`, `AsistenciaID`, `NadadorID`) VALUES
 (26, 13, 38570658),
 (27, 14, 36101748),
 (28, 14, 38570363),
-(29, 14, 38570658);
+(29, 14, 38570658),
+(30, 15, 36101748),
+(31, 15, 38570363),
+(32, 15, 38570658),
+(33, 16, 36101748),
+(34, 16, 38570363),
+(35, 16, 38570658);
 
 -- --------------------------------------------------------
 
@@ -390,24 +398,26 @@ CREATE TABLE `profesor` (
 CREATE TABLE `prueba` (
   `ID` int(11) NOT NULL,
   `TiempoMin` time DEFAULT NULL,
-  `Masculino` tinyint(1) DEFAULT NULL,
+  `Sexo` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `CategoriaID` int(11) DEFAULT NULL,
   `DistanciaID` int(11) NOT NULL,
   `EstiloID` int(11) NOT NULL,
   `EntrenamientoID` int(11) DEFAULT NULL,
   `CampeonatoID` int(11) DEFAULT NULL,
-  `tamaniopiletaID` int(11) NOT NULL
+  `tamaniopiletaID` int(11) NOT NULL,
+  `CantidadSeries` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `prueba`
 --
 
-INSERT INTO `prueba` (`ID`, `TiempoMin`, `Masculino`, `CategoriaID`, `DistanciaID`, `EstiloID`, `EntrenamientoID`, `CampeonatoID`, `tamaniopiletaID`) VALUES
-(1, NULL, 1, 1, 3, 1, 2, NULL, 1),
-(2, '01:10:00', 1, 1, 3, 1, NULL, 1, 1),
-(6, '01:10:00', 1, 3, 3, 2, NULL, 1, 1),
-(7, NULL, 1, 2, 3, 1, 2, NULL, 1);
+INSERT INTO `prueba` (`ID`, `TiempoMin`, `Sexo`, `CategoriaID`, `DistanciaID`, `EstiloID`, `EntrenamientoID`, `CampeonatoID`, `tamaniopiletaID`, `CantidadSeries`) VALUES
+(1, NULL, 'm', 1, 3, 1, 2, NULL, 1, NULL),
+(2, '01:10:00', 'm', 1, 3, 1, NULL, 1, 1, NULL),
+(6, '01:10:00', 'm', 3, 3, 2, NULL, 1, 1, NULL),
+(7, NULL, 'm', 2, 3, 1, 2, NULL, 1, NULL),
+(8, NULL, 'a', 1, 3, 2, 1, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -524,7 +534,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, '8n2SQSjiiVMHhB2rQnojY.', 1268889823, 1513283846, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, '8n2SQSjiiVMHhB2rQnojY.', 1268889823, 1513561846, 1, 'Admin', 'istrator', 'ADMIN', '0'),
 (2, '', 'leandro', '', NULL, '', NULL, NULL, NULL, NULL, 0, NULL, NULL, 'leandro', 'lonardi', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -723,7 +733,7 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `campeonato`
 --
@@ -763,7 +773,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT de la tabla `lineaasistencia`
 --
 ALTER TABLE `lineaasistencia`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT de la tabla `localidad`
 --
@@ -798,7 +808,7 @@ ALTER TABLE `profesor`
 -- AUTO_INCREMENT de la tabla `prueba`
 --
 ALTER TABLE `prueba`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `resultado`
 --
