@@ -20,7 +20,7 @@ class PruebaEntrenamiento extends CI_Controller {
 		$crud->set_language('spanish');
 		$crud->set_table('prueba');
 		$crud->columns(  'EstiloID', 'DistanciaID', 'CantidadSeries','Sexo', 'CategoriaID');
-		$crud->fields( 'EstiloID', 'DistanciaID', 'CantidadSeries','Sexo', 'CategoriaID', 'EntrenamientoID');
+		$crud->fields( 'EstiloID', 'DistanciaID', 'CantidadSeries','Sexo', 'CategoriaID', 'EntrenamientoID','tamaniopiletaID');
 		// Agrega acción.
 		//$crud->add_action('<>', '+','cronometro/Entrenamiento');
 
@@ -30,6 +30,7 @@ class PruebaEntrenamiento extends CI_Controller {
 		$crud->set_relation('EstiloID','estilo','{Nombre}');
 		$crud->field_type('EntrenamientoID', 'hidden', $idEntrenamiento);
 		$crud->field_type('CampeonatoID', 'hidden');
+		$crud->field_type('tamaniopiletaID', 'hidden', 1);
 		
 		$crud->field_type('Sexo','dropdown',
 		array('m' => 'Masculino', 'f' => 'Femenino', 'a' => 'Mixto'));
