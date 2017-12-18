@@ -188,14 +188,14 @@ class Cronometro extends CI_Controller {
 		$inputs = $this->input->post('inputFinal', true);
 		$entrenamiento = $this->input->post('inputEntrenamiento');
 		$sexo = $this->input->post('inputSexo');
-		if ($sexo == 1)
+		/* if ($sexo == 1)
 		{
 			$sexo = 1;
 		}
 		else if ($sexo == 2)
 		{
 			$sexo = 0;
-		}
+		} */
 		/* $series = $this->input->post('inputSerie'); */
 		$categoria = $this->input->post('inputCategoria');
 		$pileta = $this->input->post('inputPileta');
@@ -210,7 +210,7 @@ class Cronometro extends CI_Controller {
 		}
 		else
 		{
-			$data = array('Masculino' => $sexo, /* 'CantidadSeries' => $series, */ 'CategoriaID' => $categoria, 
+			$data = array('Sexo' => $sexo, /* 'CantidadSeries' => $series, */ 'CategoriaID' => $categoria, 
 			'DistanciaID' => $distancia, 'EstiloID' => $estilo, 'EntrenamientoID' => $entrenamiento, 'tamaniopiletaID' => $pileta);
 			$this->db->insert('prueba', $data);
 			$idPrueba = $this->db->insert_id();
