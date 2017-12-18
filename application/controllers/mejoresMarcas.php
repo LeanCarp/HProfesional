@@ -36,6 +36,35 @@ class MejoresMarcas extends CI_Controller {
 		
 	}
 
+	function obtenerNadadoresCampeonato($sexo, $categoria)
+	{
+		$nadadores = [];
+		switch ($sexo)
+		{
+			case 'm':
+				$nadadores = $this->nadador_model->obtenerNadadoresMasculinos();
+				break;
+			case 'f':
+				$nadadores = $this->nadador_model->obtenerNadadoresFemeninos();
+				break;
+			case 'a':
+				$nadadores = $this->nadador_model->getAll();
+				break;
+		}
+		$nadadoresCatalogados = [];
+		$categ = $this->categoria_model->getByID($categoria);
+		$cont = 0;
+		foreach ($nadadores as $nadador)
+		{
+			$edadNadador = $this->CalculaEdad($nadador->FechaNacimiento);
+			if ($categ[0]->EdadMinima <= $edadNadador && $edadNadador <= $categ[0]->EdadMaxima)
+			{
+				$nadadoresCatalogados[] = $nadador;
+			}
+		}
+		return $nadadoresCatalogados;
+	}
+
 	function ObtenerMarcasPor()
 	{
 		$selectEstilo = $this->input->post("selectEstilo");
@@ -57,7 +86,11 @@ class MejoresMarcas extends CI_Controller {
 		$selectListado = $this->input->post("selectListado");
 		$selectEvento = $this->input->post("selectEvento");
 		
-		$nadadores = $this->nadador_model->getAll();
+		$nadadores = $this->obtenerNadadoresCampeonato($selectSexo,$selectCategoria);
+		if (count($nadadores)==0)
+		{
+			echo '<li class="list-group-item li-contenido nombres">No hay nadadores que cumplan las condiciones</li>';
+		}
 
 		if ($selectListado == 1)
 		{
@@ -182,6 +215,11 @@ class MejoresMarcas extends CI_Controller {
 
 		$this->load->view('headers');
 		$this->load->view('detalleMarca', $data);
+	}
+
+	function CalculaEdad( $fecha ) {
+		list($Y,$m,$d) = explode("-",$fecha);
+		return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
 	}
 
 }
