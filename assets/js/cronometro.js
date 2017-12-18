@@ -217,10 +217,7 @@ function agregarNadador() {
 			}
 		}
 	)
-	if ($('#selectCategoria option:selected').val() == 0)
-	{
-		valido = true;
-	}
+
 
 	if (valido)
 	{

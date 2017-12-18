@@ -170,62 +170,70 @@ function agregarNadador() {
 
 	if (valido)
 	{
-		document.getElementById("botonGuardar").hidden = false;
 		var idSeleccionado = document.getElementById("selectNadadores");
-		var cantParciales = document.getElementById("cantidadParciales").value;
-		
-		var pro = idSeleccionado.options[idSeleccionado.selectedIndex].value;
-		var pro2 = idSeleccionado.options[idSeleccionado.selectedIndex].text;
-
-	
-
-		var divNadador = document.createElement("div");
-		divNadador.setAttribute("id", pro);
-
-		var inputResultado = document.createElement("input");
-			inputResultado.setAttribute("name", "inputFinal[]");
-			inputResultado.setAttribute("type", "hidden");
-			inputResultado.setAttribute("id", pro+'res');
-			inputResultado.value = [];
-			divNadador.appendChild(inputResultado);
-		var titulo = document.createElement("h3");
-			titulo.setAttribute("id", "titulo");
-			titulo.innerHTML=pro2;
-			titulo.value=pro2;
-		var inputSubmit = document.createElement("input");
-			inputSubmit.setAttribute("type", "button");
-			inputSubmit.setAttribute("id", pro+0);
-			inputSubmit.setAttribute("onclick", "eliminarNadador(this);");
-			inputSubmit.setAttribute("value", "Eliminar");
-			inputSubmit.setAttribute("style", "background: #ba2020; color: white; width:50%; margin: 0 auto; font-size: 17px;");
-
-
-		divNadador.className = 'box1';
-		divNadador.appendChild(titulo);
-
-		var inputParcial = document.createElement("input");
-		inputParcial.setAttribute('name', 'inputs[]');
-		inputParcial.setAttribute('id', pro+1);
-		inputParcial.setAttribute('value', 'mm:ss:cc');
-		inputParcial.setAttribute('style', 'margin-bottom: 15px;');
-		divNadador.appendChild(inputParcial);
-
-		for (i=2; i <= cantParciales; i++)
+		if (idSeleccionado.options[idSeleccionado.selectedIndex].value == 0)
 		{
+			alert("No hay nadadores para agregar");
+		}
+		else
+		{
+			document.getElementById("botonGuardar").hidden = false;
+			var idSeleccionado = document.getElementById("selectNadadores");
+			var cantParciales = document.getElementById("cantidadParciales").value;
+			
+			var pro = idSeleccionado.options[idSeleccionado.selectedIndex].value;
+			var pro2 = idSeleccionado.options[idSeleccionado.selectedIndex].text;
+
+		
+
+			var divNadador = document.createElement("div");
+			divNadador.setAttribute("id", pro);
+
+			var inputResultado = document.createElement("input");
+				inputResultado.setAttribute("name", "inputFinal[]");
+				inputResultado.setAttribute("type", "hidden");
+				inputResultado.setAttribute("id", pro+'res');
+				inputResultado.value = [];
+				divNadador.appendChild(inputResultado);
+			var titulo = document.createElement("h3");
+				titulo.setAttribute("id", "titulo");
+				titulo.innerHTML=pro2;
+				titulo.value=pro2;
+			var inputSubmit = document.createElement("input");
+				inputSubmit.setAttribute("type", "button");
+				inputSubmit.setAttribute("id", pro+0);
+				inputSubmit.setAttribute("onclick", "eliminarNadador(this);");
+				inputSubmit.setAttribute("value", "Eliminar");
+				inputSubmit.setAttribute("style", "background: #ba2020; color: white; width:50%; margin: 0 auto; font-size: 17px;");
+
+
+			divNadador.className = 'box1';
+			divNadador.appendChild(titulo);
+
 			var inputParcial = document.createElement("input");
 			inputParcial.setAttribute('name', 'inputs[]');
-            inputParcial.setAttribute('id', pro+i);
-            inputParcial.setAttribute('value', 'mm:ss:cc');
+			inputParcial.setAttribute('id', pro+1);
+			inputParcial.setAttribute('value', 'mm:ss:cc');
 			inputParcial.setAttribute('style', 'margin-bottom: 15px;');
 			divNadador.appendChild(inputParcial);
+
+			for (i=2; i <= cantParciales; i++)
+			{
+				var inputParcial = document.createElement("input");
+				inputParcial.setAttribute('name', 'inputs[]');
+				inputParcial.setAttribute('id', pro+i);
+				inputParcial.setAttribute('value', 'mm:ss:cc');
+				inputParcial.setAttribute('style', 'margin-bottom: 15px;');
+				divNadador.appendChild(inputParcial);
+			}
+
+			divNadador.appendChild(inputSubmit);
+
+			divPadre = document.getElementById("competidores");
+			divPadre.appendChild(divNadador);
+
+			idSeleccionado.remove(idSeleccionado.selectedIndex);
 		}
-
-		divNadador.appendChild(inputSubmit);
-
-		divPadre = document.getElementById("competidores");
-		divPadre.appendChild(divNadador);
-
-		idSeleccionado.remove(idSeleccionado.selectedIndex);
 	}
 	else
 	{

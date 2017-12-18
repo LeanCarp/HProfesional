@@ -93,7 +93,7 @@
 			
 			</div>	
 
-			<input id="botonGuardar" class="btn-primary" type="submit" value="Guardar" style="margin: 40px 0 20px;">
+			<input id="botonGuardar" class="btn-primary" type="submit" value="Guardar" style="margin: 40px 0 20px;" hidden>
 
 			<?php echo form_close();  ?>
 		</div>	

@@ -1,6 +1,28 @@
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="<?= base_url(); ?>/assets/js/cronometroManual.js"></script>
 
+<script>
+function obtenerNadadoresPorSexo(){
+	
+		sexo = $("#selectSexo option:selected").val();
+		categoria = $("#selectCategoria option:selected").val();
+	
+		var parametros = {
+				"sexo" : sexo,
+				"categoria" : categoria
+		};
+	
+		$.ajax({
+				data:  parametros,
+				url:   '<?= base_url(); ?>/cronometro/obtenerNadadores',
+				type:  'post',
+				success:  function (response) {
+					$("#selectNadadores").html(response);
+				}
+		});
+	}
+</script>
+
 <style type="text/css">
 .nadadores{
 	text-align: center;
@@ -105,6 +127,7 @@
 							<option value="0">Sexo</option>
 							<option value="1">Masculino</option>
 							<option value="2">Femenino</option>
+							<option value="3">Mixto</option>
 						</select>
 
 						<!-- 	<label>Series: </label> -->
@@ -147,9 +170,9 @@
 			<div class="nadadores">
 					<label>Nadadores: </label>
 					<select name="selectNadadores" id="selectNadadores">
-						<?php foreach($nadadores as $nadador) { ?>
+						<!-- <?php foreach($nadadores as $nadador) { ?>
 							<option id="<?= $nadador->DNI ?>" value="<?= $nadador->DNI ?>"><?= $nadador->Nombre ?> <?= $nadador->Apellido ?></option>
-						<?php } ?>
+						<?php } ?> -->
 					</select>	
 					<input type="button" class="btn-primary" id="agregarNadador" value="Agregar" onclick="agregarNadador()">
 					<input type="button" class="btn-danger" id="limpiar" value="Limpiar" onclick="limpiar();">

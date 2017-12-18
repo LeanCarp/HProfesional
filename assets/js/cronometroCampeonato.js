@@ -165,7 +165,7 @@ function eliminarNadador(input) {
 }
 
 function agregarNadador() {
-		document.getElementById("botonGuardar").disabled = false;
+		document.getElementById("botonGuardar").hidden = false;
 		var idSeleccionado = document.getElementById("selectNadadores");
 
 		var cantParciales = document.getElementById("cantidadParciales").value;

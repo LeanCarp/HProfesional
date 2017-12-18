@@ -60,14 +60,6 @@ class Cronometro extends CI_Controller {
 		{
 			echo '<option id="0" value="0">No hay nadadores</option>';
 		}
-
-		if ($categoria == 0)
-		{
-			foreach ($nadadores as $nadador)
-			{
-				echo '<option id="'.$nadador->DNI.'" value="'.$nadador->DNI.'">'.$nadador->Nombre.', '.$nadador->Apellido.'</option>';
-			}
-		}
 		else
 		{
 			$categ = $this->categoria_model->getByID($categoria);
@@ -86,7 +78,6 @@ class Cronometro extends CI_Controller {
 				echo '<option id="0" value="0">No hay nadadores</option>';
 			}
 		}
-
 	}
 
 	function CalculaEdad( $fecha ) {
@@ -94,10 +85,41 @@ class Cronometro extends CI_Controller {
 		return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
 	}
 
+	function obtenerNadadoresCampeonato($sexo, $categoria)
+	{
+		$nadadores = [];
+		switch ($sexo)
+		{
+			case 'm':
+				$nadadores = $this->nadador_model->obtenerNadadoresMasculinos();
+				break;
+			case 'f':
+				$nadadores = $this->nadador_model->obtenerNadadoresFemeninos();
+				break;
+			case 'a':
+				$nadadores = $this->nadador_model->getAll();
+				break;
+		}
+		$nadadoresCatalogados = [];
+		$categ = $this->categoria_model->getByID($categoria);
+		$cont = 0;
+		foreach ($nadadores as $nadador)
+		{
+			$edadNadador = $this->CalculaEdad($nadador->FechaNacimiento);
+			if ($categ[0]->EdadMinima <= $edadNadador && $edadNadador <= $categ[0]->EdadMaxima)
+			{
+				$nadadoresCatalogados[] = $nadador;
+			}
+		}
+		return $nadadoresCatalogados;
+	}
+
 	function Campeonato($ident){
 		$data['idPrueba'] = $ident;
+		$prueba = $this->prueba_model->getByID($ident)->result()[0];
 		$data['cantParciales'] = $this->cantidadParciales($ident);
-		$data['nadadores'] = $this->nadador_model->getAll();
+		//$data['nadadores'] = $this->nadador_model->getAll();
+		$data['nadadores'] = $this->obtenerNadadoresCampeonato($prueba->Sexo, $prueba->CategoriaID);
 		
 
 		$this->load->view('headers');
@@ -262,10 +284,11 @@ class Cronometro extends CI_Controller {
         else
         {     	
 			$valor = explode('-',$ident);
-			$data['nadadores'] = $this->nadador_model->getAll();
-
 			$data['idPrueba'] = $valor[0];
+			$prueba = $this->prueba_model->getByID($ident)->result()[0];
 			$data['cantParciales'] = $valor[1];
+			//$data['nadadores'] = $this->nadador_model->getAll();
+			$data['nadadores'] = $this->obtenerNadadoresCampeonato($prueba->Sexo, $prueba->CategoriaID);
 
 			$this->load->view('headers');
 			$this->load->view('cronometroManualCamp', $data);
@@ -285,7 +308,7 @@ class Cronometro extends CI_Controller {
 			$data['piletas'] = $this->tamanoPileta_model->getAll();
 			$data['categorias'] = $this->categoria_model->getAll();
 			$data['entrenamientos'] = $this->entrenamiento_model->getAll();
-			$data['nadadores'] = $this->nadador_model->getAll();
+			//$data['nadadores'] = $this->nadador_model->getAll();
 
 			$this->load->view('headers');
 			$this->load->view('cronometroManual', $data);
