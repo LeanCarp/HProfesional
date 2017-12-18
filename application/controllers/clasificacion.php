@@ -52,7 +52,7 @@ class Clasificacion extends CI_Controller {
 
     function obtenerClasificados()
     {
-        $idPrueba = $this->input->post("idPrueba");
+        $idPrueba = 11/* $this->input->post("idPrueba") */;
         $prueba = $this->prueba_model->getByID($idPrueba);
         $nadadores = $this->nadador_model->getAll();
         $prueba = $prueba->result();

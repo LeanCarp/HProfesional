@@ -92,7 +92,6 @@ class resultado_model extends CI_Model{
 
 	function obtenerResultadoPorPruebaYNadador($prueba, $dni) // Para campeonatos
 	{
-		var_dump($prueba->$Sexo);
 		$this->db->select('*');
         $this->db->from('resultado a');
         $this->db->join('prueba b', 'b.ID=a.PruebaID');
@@ -101,9 +100,9 @@ class resultado_model extends CI_Model{
         $this->db->where('b.tamanioPiletaID', $prueba->tamaniopiletaID);
 		$this->db->where('b.DistanciaID', $prueba->DistanciaID);
 		$this->db->where('b.EntrenamientoID', null);
-		if ($prueba->$Sexo!='a')
+		if ($prueba->Sexo != 'a')
 		{
-			$this->db->where('b.Sexo', $prueba->$Sexo);
+			$this->db->where('b.Sexo', $prueba->Sexo);
 		}
 		
 		//$this->db->where('a.PruebaID', $prueba->ID);
